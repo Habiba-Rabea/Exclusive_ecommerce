@@ -1,0 +1,141 @@
+.footer {
+  background-color: #000000;
+  color: #ffffff;
+  width: 100%;
+  padding: 60px 0 20px 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.footer-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px; 
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.footer-col {
+  flex: 1;
+  min-width: 160px;
+}
+.footer-logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.footer-col h4 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.footer-col p, .footer-col li {
+  font-size: 14px;
+  color: #f5f5f5;
+  margin-bottom: 10px;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-col a {
+  color: #f5f5f5;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-col a:hover {
+  color: #DB4444; 
+}
+.subscribe-input {
+  display: flex;
+  position: relative;
+  max-width: 200px;
+}
+.subscribe-input input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 8px 35px 8px 8px;
+  color: #fff;
+  border-radius: 4px;
+}
+.subscribe-input button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.subscribe-input button:hover {
+  transform: translateY(-50%) scale(1.1); 
+}
+.social-icons {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+.social-icons a {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+  text-decoration: none;
+}
+.social-icons a:hover {
+  color: #ffffff;
+  background-color: #DB4444; 
+  transform: translateY(-3px) scale(1.1); 
+  box-shadow: 0 4px 10px rgba(219, 68, 68, 0.4);
+}
+.social-icons a:active {
+  transform: translateY(-1px) scale(0.95); 
+}
+.download-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.qr-code img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+.app-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+}
+.app-buttons img {
+  height: 34px;
+  width: 104px;
+  display: block;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+.app-buttons img:hover {
+  opacity: 0.85; 
+}
+.app-subtitle {
+  opacity: 70%;
+  line-height: 18px;
+  font-weight: 500;
+  font-size: 12px;
+}
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 60px;
+  padding-top: 16px;
+  color: #555555;
+  font-size: 14px;
+}

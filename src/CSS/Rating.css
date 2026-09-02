@@ -1,0 +1,16 @@
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.starss {
+    display: flex;
+}
+
+.reviews-count {
+    color: #7D7D7D;
+    font-size: 14px;
+    font-weight: 600;
+}

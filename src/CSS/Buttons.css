@@ -13,8 +13,13 @@
 background-color: #000000;
 color: #fff;
 border: none;
-font-size: 14px;
+font-size: 16px;
 padding: 12px 20px;
 width: 100%;
 text-align: center;
+}
+
+.add-to-cart-btn .cart-icon {
+    margin-right: 10px; 
+    font-size: 18px;    
 }

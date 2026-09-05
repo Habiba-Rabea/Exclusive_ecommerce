@@ -5,6 +5,7 @@ import Cart from '../Pages/Cart/Cart.jsx';
 import Login from '../Pages/Auth/login.jsx';
 import Wishlist from '../Pages/Wishlist/wishlist.jsx';
 import Checkout from '../Pages/checkout/Checkout.jsx';
+import ProductDetails from '../Pages/Products/prodactdetails.jsx';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -13,6 +14,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/checkout" element={<Checkout />} />
+      <Route path="/product" element={<ProductDetails />} />
     </Routes>
 
   );

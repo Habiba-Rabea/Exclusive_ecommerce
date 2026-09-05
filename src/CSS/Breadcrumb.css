@@ -1,0 +1,25 @@
+.breadcrumb {
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.breadcrumb-link {
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+  color: #1c1c1c;
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 4px;
+  color: #6b7280;
+}
+
+.breadcrumb-current {
+  color: #1c1c1c;
+  font-weight: 500;
+}

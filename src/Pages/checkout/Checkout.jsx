@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import './checkout.css';
 
+import monitorImg from '../../assets/Images/wishlist/g27cq4-500x500 1.png';
+import gamepadRedImg from '../../assets/Images/wishlist/g92-2-500x500 1.png';
+
 const orderItems = [
   {
     id: 1,
     name: 'LCD Monitor',
     price: 650,
-    image: 'https://pngimg.com/d/monitor_PNG101646.png',
+    image: monitorImg,
   },
   {
     id: 2,
     name: 'H1 Gamepad',
     price: 1100,
-    image: 'https://pngimg.com/d/gamepad_PNG79.png',
+    image: gamepadRedImg,
   },
 ];
 

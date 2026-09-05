@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import './wishlist.css';
 
+// استيراد الصور بمساراتها الدقيقة من src/assets/Images/wishlist
+import bagImg from '../../assets/Images/wishlist/547953_9C2ST_8746_001_082_0000_Light-Gucci-Savoy-medium-duffle-bag 1.png';
+import jacketImg from '../../assets/Images/wishlist/698717_Z8A1X_3475_001_100_0000_Light-Reversible-quilted-satin-jacket 1.png';
+import coolerImg from '../../assets/Images/wishlist/gammaxx-l240-argb-1-500x500 1.png';
+import gamepadImg from '../../assets/Images/wishlist/GP11_PRD3 1.png';
+
+import laptopImg from '../../assets/Images/wishlist/ideapad-gaming-3i-01-500x500 1.png';
+import monitorImg from '../../assets/Images/wishlist/g27cq4-500x500 1.png';
+import gamepadRedImg from '../../assets/Images/wishlist/g92-2-500x500 1.png';
+import keyboardImg from '../../assets/Images/wishlist/ak-900-01-500x500 1 (1).png';
+
 const initialWishlist = [
   {
     id: 1,
@@ -8,7 +19,7 @@ const initialWishlist = [
     price: 960,
     originalPrice: 1160,
     discount: '-35%',
-    image: 'https://pngimg.com/d/bag_PNG10672.png',
+    image: bagImg,
   },
   {
     id: 2,
@@ -16,7 +27,7 @@ const initialWishlist = [
     price: 1960,
     originalPrice: null,
     discount: null,
-    image: 'https://pngimg.com/d/cooler_PNG101569.png',
+    image: coolerImg,
   },
   {
     id: 3,
@@ -24,7 +35,7 @@ const initialWishlist = [
     price: 550,
     originalPrice: null,
     discount: null,
-    image: 'https://pngimg.com/d/gamepad_PNG79.png',
+    image: gamepadImg,
   },
   {
     id: 4,
@@ -32,7 +43,7 @@ const initialWishlist = [
     price: 750,
     originalPrice: null,
     discount: null,
-    image: 'https://pngimg.com/d/jacket_PNG8050.png',
+    image: jacketImg,
   },
 ];
 
@@ -45,7 +56,7 @@ const justForYou = [
     discount: '-35%',
     rating: 5,
     reviews: 65,
-    image: 'https://pngimg.com/d/laptop_PNG5940.png',
+    image: laptopImg,
   },
   {
     id: 6,
@@ -55,7 +66,7 @@ const justForYou = [
     discount: null,
     rating: 5,
     reviews: 65,
-    image: 'https://pngimg.com/d/monitor_PNG101646.png',
+    image: monitorImg,
   },
   {
     id: 7,
@@ -65,7 +76,7 @@ const justForYou = [
     badge: 'NEW',
     rating: 5,
     reviews: 65,
-    image: 'https://pngimg.com/d/gamepad_PNG87.png',
+    image: gamepadRedImg,
   },
   {
     id: 8,
@@ -75,7 +86,7 @@ const justForYou = [
     discount: null,
     rating: 5,
     reviews: 65,
-    image: 'https://pngimg.com/d/keyboard_PNG101838.png',
+    image: keyboardImg,
   },
 ];
 

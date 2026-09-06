@@ -1,13 +1,9 @@
 import '../../../CSS/Buttons.css';
-
-function viewallproducts(){
-    return(
-        
-            <button className='view-all-products-btn'>
-                View All Products
-            </button>
-       
-    );
-
-}
-export default viewallproducts;
+const ViewAllProducts = ({ text = "Back to Home Page", onClick }) => {
+  return (
+    <button className="view-all-products-btn" onClick={onClick}>
+      {text}
+    </button>
+  );
+};
+export default ViewAllProducts;

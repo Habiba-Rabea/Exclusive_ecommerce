@@ -1,8 +1,7 @@
-
 import { Star } from "lucide-react";
 import '../../CSS/Rating.css';
 
-function RatingStars({ rating = 5, reviewsCount = 0 }) {
+function RatingStars({ rating, reviewsCount }) {
     const renderStars = () => {
         let stars = [];
         for (let i = 0; i < 5; i++) {
@@ -23,6 +22,7 @@ function RatingStars({ rating = 5, reviewsCount = 0 }) {
             <div className="starss">
                 {renderStars()}
             </div>
+         
             <span className="reviews-count">({reviewsCount})</span>
         </div>
     );

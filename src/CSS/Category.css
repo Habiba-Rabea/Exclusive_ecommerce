@@ -1,0 +1,39 @@
+.category-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.category-card {
+    width: 170px;
+    height: 145px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background-color: #FFFFFF;
+    color: #000000;
+    transition: all 0.3s ease; 
+}
+
+.category-card span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+
+.category-card-link:hover .category-card,
+.category-card:hover {
+    background-color: #DB4444; 
+    color: #FAFAFA;
+    border-color: transparent;
+}
+
+.category-card-link:hover .category-card svg,
+.category-card:hover svg {
+    stroke: #FAFAFA;
+}

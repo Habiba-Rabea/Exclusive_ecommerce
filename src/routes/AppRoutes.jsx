@@ -8,7 +8,7 @@ import Wishlist from '../Pages/Wishlist/wishlist.jsx';
 import Checkout from '../Pages/checkout/Checkout.jsx';
 import NotFound from '../Pages/Notfound/notfound.jsx';
 import Contact from '../Pages/Contact/contact.jsx';
-import ProductDetails from '../Pages/ProductDetails/ProductDetails.jsx';
+import ProductDetails from '../Pages/Products/prodactdetails.jsx';
 const AppRoutes = () => {
   return (
     <Routes>

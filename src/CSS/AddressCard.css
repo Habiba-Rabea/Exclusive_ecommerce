@@ -1,0 +1,66 @@
+.address-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+.address-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+.address-label {
+  font-weight: 600;
+  color: var(--black1);
+  font-size: 0.95rem;
+}
+.default-text {
+  color: #d99a4e;
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+.menu-icon {
+  color: var(--gray);
+  cursor: pointer;
+}
+.address-name {
+  font-weight: 500;
+  color: var(--black1);
+  margin: 0.3rem 0;
+}
+.address-details,
+.address-phone {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin: 0.2rem 0;
+}
+.address-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+.address-actions button {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+}
+.edit-btn {
+  color: #d99a4e;
+}
+.edit-btn:hover {
+  color: #ffa435;
+}
+.delete-btn {
+  color: var(--primaryRed);
+}
+.delete-btn:hover {
+  color: var(--hoverRed);
+}

@@ -1,19 +1,16 @@
 import { Link } from 'react-router-dom';
+import Breadcrumb from '../../Components/Common/Breadcrumb';
 export default function NotFound() {
   return (
     <section className="py-5 my-5">
       <div className="container">
         
-        <nav aria-label="breadcrumb" className="mb-5">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link to="/" className="text-decoration-none text-secondary">Home</Link>
-            </li>
-            <li className="breadcrumb-item active text-dark fw-500" aria-current="page">
-              404 Error
-            </li>
-          </ol>
-        </nav>
+        <div className="mb-5">
+            <Breadcrumb items={[
+                { name: "Home", link: "/" },
+                { name: "404 Error" }
+            ]}  />
+        </div>
 
         <div className="text-center py-4 py-md-5">
           <h1 className="fw-600 mb-4" style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)', letterSpacing: '2px' }}>

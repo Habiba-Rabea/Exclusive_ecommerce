@@ -1,0 +1,688 @@
+.story-container {
+    font-family: sans-serif;
+    padding: 40px 80px;
+}
+
+.story-breadcrumb {
+    font-size: 14px;
+    margin-bottom: 60px;
+    margin-top: 30px;
+}
+
+.story-breadcrumb a {
+    color: #7d7d7d;
+    text-decoration: none;
+}
+
+.story-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 90px;
+}
+
+.story-text-side {
+    flex: 1;
+}
+
+.story-text-side h1 {
+    font-size: 54px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    letter-spacing: 1.5px;
+}
+
+.story-text-side p {
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    margin-bottom: 24px;
+}
+
+.story-image-side {
+    flex: 1;
+}
+
+.story-image-side img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* ************************ */
+
+
+.state-container{
+    display:grid;
+    grid-template-columns: repeat(4,270px);
+    justify-content: center;
+    gap:30px;
+    padding: 50px 20px;
+    font-family:'Poppins', sans-serif;
+}
+
+.state-card{
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+
+.state-card .state-icon {
+    background-color: #000000;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 10px solid #c1c1c1;
+    transition: all 0.3s ease;
+}
+
+
+.state-card .state-icon .icon {
+    font-size: 30px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.state-card h2{
+    font-size: 30px;
+    margin:0;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color:#000000;
+    transition: all 0.3s ease;
+    
+}
+
+.state-card p{
+    font-size: 16px;
+    color:#000000;
+    margin:0;
+    transition: all 0.3s ease;
+}
+
+
+.state-card:hover{
+    background-color: #DB4444;
+    border-color: #DB4444;
+}
+
+.state-card:hover .state-icon {
+    background-color: #ffffff;
+    border: 8px solid #f29d9d; 
+}
+
+.state-card:hover .state-icon .icon{
+    color: #000000;
+}
+
+.state-card:hover h2{
+    color: #ffffff;
+}
+
+.state-card:hover p{
+    color: #ffffff;
+}
+
+
+/* ************************* */
+
+.team-sec{
+    padding: 80px 80px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+}
+
+.team-container{
+    display: grid;
+    grid-template-columns: repeat(3, 370px);
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.team-card{
+    display: flex;
+    flex-direction: column;
+}
+
+.team-card .team-image{
+    background-color: #f5f5f5;
+    width: 100%;
+    height: 440px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+
+.team-card .team-image img{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 100%;
+    width: auto;     
+    object-fit: contain;
+    object-position: bottom center;
+}
+
+.team-info{
+    text-align: left;
+}
+
+.team-info h3{
+    font-size: 25px;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.team-info p{
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.team-social{
+    display: flex;
+    gap: 10px;
+}
+
+.team-social a{
+    color: #000000;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.team-social a:hover{
+    color: #DB4444;
+}
+
+
+.team-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px; 
+    width: 100%;
+}
+
+.team-dots .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #b3b3b3;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.team-dots .dot-active {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #DB4444; 
+    border: 2px solid #ffffff; 
+    box-shadow: 0 0 0 2px #b3b3b3; 
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* ********************************** */
+
+.services-sec {
+    padding: 100px 20px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 88px;
+    max-width: 1200px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 270px;
+}
+
+
+.service-icon-outer {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(47, 46, 46, 0.25);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.service-icon-inner {
+    width: 58px;
+    height: 58px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.service-icon-inner .service-svg {
+    width: 28px;
+    height: 28px;
+    color: #ffffff;
+}
+
+.service-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.03em;
+}
+
+.service-card p {
+    font-size: 14px;
+    color: #000000;
+    margin: 0;
+    font-weight: 400;
+}
+
+
+/* ************************************** */
+
+.story-container {
+    font-family: sans-serif;
+    padding: 40px 80px;
+}
+
+.story-breadcrumb {
+    font-size: 14px;
+    margin-bottom: 60px;
+    margin-top: 30px;
+}
+
+.story-breadcrumb a {
+    color: #7d7d7d;
+    text-decoration: none;
+}
+
+.story-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 90px;
+}
+
+.story-text-side {
+    flex: 1;
+}
+
+.story-text-side h1 {
+    font-size: 54px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    letter-spacing: 1.5px;
+}
+
+.story-text-side p {
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    margin-bottom: 24px;
+}
+
+.story-image-side {
+    flex: 1;
+}
+
+.story-image-side img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.state-container {
+    display: grid;
+    grid-template-columns: repeat(4, 270px);
+    justify-content: center;
+    gap: 30px;
+    padding: 50px 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.state-card {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.state-card .state-icon {
+    background-color: #000000;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 10px solid #c1c1c1;
+    transition: all 0.3s ease;
+}
+
+.state-card .state-icon .icon {
+    font-size: 30px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.state-card h2 {
+    font-size: 30px;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #000000;
+    transition: all 0.3s ease;
+}
+
+.state-card p {
+    font-size: 16px;
+    color: #000000;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.state-card:hover {
+    background-color: #DB4444;
+    border-color: #DB4444;
+}
+
+.state-card:hover .state-icon {
+    background-color: #ffffff;
+    border: 8px solid #f29d9d; 
+}
+
+.state-card:hover .state-icon .icon {
+    color: #000000;
+}
+
+.state-card:hover h2 {
+    color: #ffffff;
+}
+
+.state-card:hover p {
+    color: #ffffff;
+}
+
+.team-sec {
+    padding: 80px 80px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+}
+
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(3, 370px);
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.team-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.team-card .team-image {
+    background-color: #f5f5f5;
+    width: 100%;
+    height: 440px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.team-card .team-image img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 100%;
+    width: auto;     
+    object-fit: contain;
+    object-position: bottom center;
+}
+
+.team-info {
+    text-align: left;
+}
+
+.team-info h3 {
+    font-size: 25px;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.team-info p {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.team-social {
+    display: flex;
+    gap: 10px;
+}
+
+.team-social a {
+    color: #000000;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.team-social a:hover {
+    color: #DB4444;
+}
+
+.team-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px; 
+    width: 100%;
+}
+
+.team-dots .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #b3b3b3;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.team-dots .dot-active {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #DB4444; 
+    border: 2px solid #ffffff; 
+    box-shadow: 0 0 0 2px #b3b3b3; 
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.services-sec {
+    padding: 100px 20px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 88px;
+    max-width: 1200px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 270px;
+}
+
+.service-icon-outer {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(47, 46, 46, 0.25);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.service-icon-inner {
+    width: 58px;
+    height: 58px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-icon-inner .service-svg {
+    width: 28px;
+    height: 28px;
+    color: #ffffff;
+}
+
+.service-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.03em;
+}
+
+.service-card p {
+    font-size: 14px;
+    color: #000000;
+    margin: 0;
+    font-weight: 400;
+}
+
+
+/* ****************************************** */
+@media screen and (max-width: 767px) {
+    .story-container {
+        padding: 20px 15px;
+    }
+    .story-content-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .story-text-side h1 {
+        font-size: 32px;
+    }
+    .state-container {
+        grid-template-columns: 300px;
+        padding: 30px 15px;
+    }
+    .team-container {
+        grid-template-columns: 300px;
+        gap: 25px;
+    }
+    .services-container {
+        flex-direction: column;
+        gap: 35px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .story-container {
+        padding: 30px 40px;
+    }
+    .story-content-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .state-container {
+        grid-template-columns: repeat(2, 270px);
+        gap: 20px;
+    }
+    .team-container {
+        grid-template-columns: repeat(2, 320px);
+        gap: 25px;
+    }
+    .services-container {
+        gap: 50px;
+    }
+}

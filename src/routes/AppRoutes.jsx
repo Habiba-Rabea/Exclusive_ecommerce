@@ -15,6 +15,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="cart" element={<Cart />} />
         <Route path="contact" element={<Contact />} />
         <Route path="wishlist" element={<Wishlist />} />

@@ -1,6 +1,6 @@
 .navbar-header {
   width: 100%;
-  font-family: 'sans-serif', 'Poppins';
+  font-family: 'Poppins', sans-serif;
   position: sticky;
   top: 0;
   z-index: 9999;
@@ -59,9 +59,8 @@
   color: #000000;
   font-weight: 400;
   position: relative;
-    padding-bottom: 4px;
+  padding-bottom: 4px;
 }
-
 
 .nav-link:hover::after,
 .nav-link.active::after {
@@ -104,13 +103,7 @@
   background: transparent;
   border: none;
   display: flex;
-}
-
-.icon-btn:hover svg {
-  fill: none;
-  stroke: #DB4444;
-  stroke-width: 2.5px;
-  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .action-link {
@@ -118,16 +111,14 @@
   display: flex;
 }
 
+
+.icon-btn:hover svg,
 .action-link:hover svg {
-    fill: none ;
+    fill: none;
     stroke: #DB4444;
     stroke-width: 2.5px;
     transition: all 0.2s ease;
 }
-
-
-/* ********************* */
-
 
 .menu-toggle-btn {
     display: none;
@@ -137,7 +128,7 @@
     color: #000000;
 }
 
-
+/* ********************* */
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .main-nav {
@@ -162,7 +153,6 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         border-radius: 8px;
         border: 1px solid #eee;
-        
         transform: translateY(-10px);
         opacity: 0;
         visibility: hidden;
@@ -191,6 +181,18 @@
         padding: 8px 0;
         font-size: 16px;
     }
+
+    .top-banner {
+        padding: 10px 15px;
+        padding-left: 15px;
+        font-size: 13px;
+        flex-wrap: wrap;
+    }
+
+    .banner-link {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 
 
@@ -198,7 +200,7 @@
     .main-nav {
         position: relative;
         padding: 12px 15px;
-         border-bottom: 2px solid #dbdada;
+        border-bottom: 2px solid #dbdada;
     }
 
     .menu-toggle-btn {
@@ -220,9 +222,8 @@
         border-radius: 8px;
         border: 1px solid #eee;
         transform: translateY(-10px);
-        opacity: 1; 
         visibility: hidden;
-        opacity: 0;
+        opacity: 0; 
         transition: all 0.3s ease-in-out;
         z-index: 1000;
         margin: 0;
@@ -249,8 +250,16 @@
         padding: 10px 0;
         font-size: 16px;
     }
-  fill: none;
-  stroke: #DB4444;
-  stroke-width: 2.5px;
-  transition: all 0.2s ease;
+
+    .top-banner {
+        padding: 10px 15px;
+        padding-left: 15px;
+        font-size: 13px;
+        flex-wrap: wrap;
+    }
+
+    .banner-link {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }

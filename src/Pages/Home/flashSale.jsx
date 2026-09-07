@@ -1,6 +1,7 @@
 import Timer from '../../Components/Common/SalesTimer.jsx';
 import ProductCardOffer from '../../Components/Common/ProductCardOffer.jsx';
 import ViewAllProducts from '../../Components/UI/Buttons/ViewAllProducts.jsx';
+import SectionHeader from '../../Components/Common/sectionheader.jsx';
 import { ArrowLeft, ArrowRight } from 'lucide-react'; 
 import '../../CSS/flashSale.css';
 import { Link } from 'react-router-dom';
@@ -77,31 +78,27 @@ function FlashSale() {
 
     return (
         <section className="flash-sales-section">
-            
             <div className="flash-header">
-                <div className="title-with-timer">
-                    <div className="header-left-side">
-                        <div className="section-tag">
-                            <span className="red-box"></span>
-                            <span className="tag-text">Today's</span>
-                        </div>
-                        <div className="main-title-timer">
-                            <h2>Flash Sales</h2>
-                            <Timer />
-                        </div>
-                    </div>
+    <div className="title-with-timer">
+        
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '80px' }}>
+            <SectionHeader tag="Today's" title="Flash Sales" />
+            <Timer />
+        </div>
 
-                
-                    <div className="flash-buttons">
-                        <button className="arrow-btn" aria-label="Previous">
-                            <ArrowLeft size={20} />
-                        </button>
-                        <button className="arrow-btn" aria-label="Next">
-                            <ArrowRight size={20} />
-                        </button>
-                    </div>
-                </div>
-            </div>
+       
+        <div className="flash-buttons">
+            <button className="arrow-btn" aria-label="Previous">
+                <ArrowLeft size={20} />
+            </button>
+            <button className="arrow-btn" aria-label="Next">
+                <ArrowRight size={20} />
+            </button>
+        </div>
+
+    </div>
+</div>
 
             <div className="flash-products-grid">
                 {products.map((product) => (
@@ -117,10 +114,10 @@ function FlashSale() {
                     />
                 ))}
             </div>
-<Link to="/products" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center',marginTop:'12px' }}>
-    <ViewAllProducts text="View All Products" />
-</Link>
 
+            <Link to="/products" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+                <ViewAllProducts text="View All Products" />
+            </Link>
         </section>
     );
 }

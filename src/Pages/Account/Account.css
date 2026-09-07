@@ -1,5 +1,5 @@
-.container {
-  max-width: 80%;
+.containerAc{
+  max-width: 84%;
   margin: 0 auto;
   padding: 1.5rem 1rem;
   font-family: "Poppins", "Segoe UI", sans-serif;
@@ -35,8 +35,8 @@
     gap: 1rem;
     padding: 0 1rem;
   }
-  .container {
-    max-width: 100%;
+  .containerAc {
+    max-width: 90%;
     padding: 1.5rem 1.25rem;
   }
 }

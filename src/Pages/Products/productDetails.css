@@ -1,4 +1,4 @@
-.container {
+.container_p {
   max-width: 80%;
   margin: 0 auto;
   padding: 1.5rem 1rem;
@@ -266,8 +266,9 @@
 
 /* ===== tablet :Responsive ===== */
 @media (max-width: 768px) {
-  .container {
+  .container_p {
     padding: 1rem .75rem;
+    max-width: 88%;
   }
   .product-main-section {
     gap: 1.25rem;

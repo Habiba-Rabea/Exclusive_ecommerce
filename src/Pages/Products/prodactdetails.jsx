@@ -18,7 +18,7 @@ export default function ProductDetails() {
   function decreaseQty () { setQuantity((q) => (q > 1 ? q - 1 : 1))};
 
   return (
-    <main className="container">
+    <main className="container_p">
       <Breadcrumb items={productDetails.breadcrumb} />
 
       <div className="product-main-section">

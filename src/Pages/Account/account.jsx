@@ -1,7 +1,7 @@
 import {useState} from "react";
 import Breadcrumb from "/src/Components/Common/Breadcrumb.jsx";
 import {mockUser} from "/src/data/MockData.js";
-import Sidebar from "./Account_components/Sidebar/Sidebar.jsx";
+import SideBar from "./Account_components/SideBar_acc/SideBar.jsx";
 import MyProfile from "./Account_components/MyProfile/MyProfile.jsx";
 import './Account.css';
 import AddressBook from "./Account_components/AddressBook/Addresses.jsx";
@@ -23,7 +23,7 @@ export default function Account() {
         }
     }
     return (
-        <div className="container">
+        <div className="containerAc">
             <div className="Breadcrumbs-welcome">
                 <Breadcrumb items={[
                     { name: "Home", link: "/Home" },
@@ -34,7 +34,7 @@ export default function Account() {
                 </p>
             </div>
             <main className="acc-container">
-                <Sidebar activeTab={activeTab} setActiveTab={setActiveTab}/>
+                <SideBar activeTab={activeTab} setActiveTab={setActiveTab}/>
                 <div className="acc-content">
                     {activeTab === "profile" && <MyProfile/>}
                     {activeTab === "address" && <AddressBook/>}

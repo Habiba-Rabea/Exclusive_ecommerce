@@ -1,6 +1,6 @@
-.breadcrumb {
+.breadCrumb {
   font-size: 14px;
-  margin-bottom: 32px;
+  margin: 2rem 0 3rem 0;
 }
 
 .breadcrumb-link {
@@ -15,7 +15,7 @@
 }
 
 .breadcrumb-separator {
-  margin: 0 4px;
+  margin: 0 6px;
   color: #6b7280;
 }
 

@@ -5,6 +5,8 @@ import ProductCard from "../../Components/Common/ProductCard.jsx";
 import { Heart, Truck, RotateCcw } from "lucide-react";
 import { productDetails } from "../../data/MockData.js";
 import "./productDetails.css";
+import '../../App.css';
+
 
 export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState(productDetails.images[0]);
@@ -50,9 +52,9 @@ export default function ProductDetails() {
             reviewsCount={productDetails.reviewsCount}
           />
 
-          <p className="in-stock">
+          <span className="inStock">
             {productDetails.inStock ? "In Stock" : "Out of Stock"}
-          </p>
+          </span>
         </div>
           <p className="product-price">${productDetails.price.toFixed(2)}</p>
 
@@ -98,7 +100,6 @@ export default function ProductDetails() {
 
           {/* quantity & buttons*/}
           <div className="action-row">
-            <div className="qty-heart-row"></div>
             <div className="quantity-box">
               <button className="qty-btn" onClick={decreaseQty}>−</button>
               <span>{quantity}</span>
@@ -138,7 +139,10 @@ export default function ProductDetails() {
 
       {/* related items */}
       <div className="related-items">
-        <h2 className="related-title">Related Item</h2>
+        <div className="related-title">
+          <span className="red-bar"></span>
+          <h2>Related Item</h2>
+          </div>
         <div className="related-grid">
           
             <ProductCard />

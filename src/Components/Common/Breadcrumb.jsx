@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Breadcrumb({ items }) {
   return (
-    <div className="breadcrumb">
+    <div className="breadCrumb">
       {items.map((item, index) => (
         <span key={index}>
           {item.link ? ( <Link to={item.link} className="breadcrumb-link">{item.name}</Link>) 

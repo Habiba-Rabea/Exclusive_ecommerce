@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Sidebar.css";
+import "./SideBar.css";
 
 const accountLinks = [
   { key: "profile", label: "My Profile" },
@@ -8,11 +8,11 @@ const accountLinks = [
 ];
 const orderLinks = ["My Returns", "My Cancellations"];
     
-export default function Sidebar({ activeTab, setActiveTab }) {
+export default function SideBar({ activeTab, setActiveTab }) {
   return (
-    <aside className="sidebar">
+    <aside className="SideBar">
         {/**mobile */}
-      <select className="sidebar-select" value={activeTab} onChange={(e) => setActiveTab(e.target.value)}>
+      <select className="SideBar-select" value={activeTab} onChange={(e) => setActiveTab(e.target.value)}>
         {accountLinks.map((item) => (
             <option key={item.key} value={item.key}>
               {item.label}
@@ -20,7 +20,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
         ))}
       </select>
         {/**account */}
-        <h3 className="sidebar-title">Manage My Account</h3>
+        <h3 className="SideBar-title">Manage My Account</h3>
         <ul>
         {accountLinks.map((item) => (
             <li key={item.key}>
@@ -34,7 +34,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
         ))}
         </ul>
         {/**orders */}
-        <h3 className="sidebar-title">My Orders</h3>
+        <h3 className="SideBar-title">My Orders</h3>
         <ul>
             {orderLinks.map((label) => (
             <li key={label}>
@@ -43,7 +43,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
             ))}
         </ul>
         {/**wishlist */}
-      <h3 className="sidebar-title">
+      <h3 className="SideBar-title">
         <Link to="/wishlist" className="wishlist-link">
           My WishList
         </Link>

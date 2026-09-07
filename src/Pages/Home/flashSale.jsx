@@ -3,6 +3,7 @@ import ProductCardOffer from '../../Components/Common/ProductCardOffer.jsx';
 import ViewAllProducts from '../../Components/UI/Buttons/ViewAllProducts.jsx';
 import { ArrowLeft, ArrowRight } from 'lucide-react'; 
 import '../../CSS/flashSale.css';
+import { Link } from 'react-router-dom';
 
 import card1 from '../../assets/Images/home/card1.jpg';
 import card2 from '../../assets/Images/home/card2.png';
@@ -116,8 +117,9 @@ function FlashSale() {
                     />
                 ))}
             </div>
-
-            <ViewAllProducts text="View All Products" />
+<Link to="/products" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center',marginTop:'12px' }}>
+    <ViewAllProducts text="View All Products" />
+</Link>
 
         </section>
     );

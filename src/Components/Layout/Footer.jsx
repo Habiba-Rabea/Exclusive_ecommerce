@@ -40,7 +40,9 @@ const Footer = () => {
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Terms Of Use</a></li>
             <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contact</a></li>
+            <li>
+                <Link to="/contact">Contact</Link>
+            </li>
           </ul>
         </div>
         <div className="footer-col">

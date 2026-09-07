@@ -1,5 +1,5 @@
 .new-arrival-wrapper {
-  max-width: 950px; 
+  max-width: 1170px; 
   margin: 40px auto;
   padding: 0 16px;
   box-sizing: border-box;
@@ -7,31 +7,33 @@
 .arrival-content {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px; 
+  gap: 30px; 
 }
 @media (min-width: 992px) {
   .arrival-content {
-    grid-template-columns: 440px 440px; 
-    height: 460px; 
-    justify-content: center;
+    grid-template-columns: 570px 570px; 
+    height: 600px; 
+    justify-content: space-between;
   }
 }
 .right-stack {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
   height: 100%;
 }
 .bottom-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 30px;
 }
+
 @media (min-width: 576px) {
   .bottom-row {
-    grid-template-columns: 210px 210px; 
+    grid-template-columns: 270px 270px; 
   }
 }
+
 .card {
   position: relative;
   background-color: #0d0d0d;
@@ -44,18 +46,19 @@
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   cursor: pointer;
 }
+
 @media (min-width: 992px) {
   .card-large {
-    width: 440px;
-    height: 460px;
+    width: 570px;
+    height: 600px;
   }
   .card-wide {
-    width: 440px;
-    height: 220px;
+    width: 570px;
+    height: 284px;
   }
   .bottom-row .card {
-    width: 210px;
-    height: 220px;
+    width: 270px;
+    height: 284px;
   }
 }
 .card img {
@@ -78,7 +81,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 16px; 
+  padding: 24px; 
   color: #ffffff;
   z-index: 2;
   background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
@@ -86,31 +89,27 @@
   box-sizing: border-box;
   transition: transform 0.4s ease, background 0.4s ease;
 }
-
 .card h3 {
-  font-size: 16px; 
+  font-size: 20px; 
   font-weight: 600;
-  margin: 0 0 4px 0;
+  margin: 0 0 8px 0;
+  line-height: 24px;
+}
+.card p {
+  font-size: 14px; 
+  color: #FAFAFA;
+  margin: 0 0 16px 0;
+  max-width: 250px;
   line-height: 20px;
 }
-
-.card p {
-  font-size: 12px; 
-  color: #FAFAFA;
-  margin: 0 0 10px 0;
-  max-width: 200px;
-  line-height: 16px;
-}
-
 .card a {
   color: #ffffff;
   font-weight: 500;
-  font-size: 13px; 
+  font-size: 16px; 
   display: inline-block;
   position: relative;
   text-decoration: none;
 }
-
 .card a::after {
   content: '';
   position: absolute;
@@ -123,21 +122,17 @@
   transform-origin: bottom left;
   transition: transform 0.3s ease;
 }
-
 .card:hover a::after {
   transform: scaleX(1);
 }
-
 .card h3, 
 .card p, 
 .card a {
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
 .card:hover figcaption h3 {
   transform: translateY(-3px);
 }
-
 .card:hover figcaption p {
   transform: translateY(-2px);
 }

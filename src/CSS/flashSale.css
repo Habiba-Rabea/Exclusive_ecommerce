@@ -1,0 +1,124 @@
+.flash-sales-section {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto 80px auto;
+    padding: 0 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.flash-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.title-with-timer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 30px; 
+}
+
+
+.flash-products-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: visible; 
+    padding-bottom: 20px;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.flash-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.arrow-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.arrow-btn:hover {
+    background-color: #E0E0E0;
+}
+
+.product-card { 
+    min-width: 20px; 
+    max-width: 230px;
+    flex-shrink: 0;   
+}
+
+
+
+/* ************************** */
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .flash-sales-section {
+        padding: 0 20px;
+        margin: 50px auto;
+    }
+
+    .title-with-timer {
+        gap: 20px;
+    }
+
+
+    .title-with-timer > div:first-child {
+        gap: 30px;
+    }
+
+    .flash-products-grid {
+        gap: 15px;
+        overflow-x: auto; 
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .flash-sales-section {
+        padding: 0 15px;
+        margin: 30px auto;
+    }
+
+
+    .title-with-timer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+  
+    .title-with-timer > div:first-child {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px ;
+        width: 100%;
+    }
+
+
+    .flash-buttons {
+        align-self: flex-end;
+        margin-top: -10px;
+    }
+
+    .flash-products-grid {
+        gap: 10px;
+        overflow-x: auto; 
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 15px;
+    }
+}

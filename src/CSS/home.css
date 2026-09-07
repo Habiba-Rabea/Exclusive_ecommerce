@@ -1,0 +1,30 @@
+
+.home-page{
+    display: flex;
+    flex-direction: column;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 15px;
+    gap: 80px; 
+}
+
+
+.top-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 45px;
+    width: 90%;
+}
+
+
+.bottom-section {
+    width: 100%;
+}
+
+.page-divider {
+    width: 85%;             
+    height: 1px;             
+    background-color: #b3b3b3; 
+    margin: 60px auto;     
+}

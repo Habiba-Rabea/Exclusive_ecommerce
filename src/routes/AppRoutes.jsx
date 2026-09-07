@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../Components/Layout/mainLayout';
 import Home from '../Pages/Home/home.jsx';
+import About from "../Pages/About/about.jsx";
 import Cart from '../Pages/Cart/Cart.jsx';
 import Login from '../Pages/Auth/login.jsx';
 import Signup from '../Pages/Auth/Signup.jsx';
@@ -15,6 +16,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="cart" element={<Cart />} />
         <Route path="contact" element={<Contact />} />
         <Route path="wishlist" element={<Wishlist />} />

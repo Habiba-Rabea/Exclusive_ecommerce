@@ -1,3 +1,12 @@
+:root {
+  --primaryRed:#DB4444;
+  --hoverRed:#E07575;
+  --green : #00FF66;
+  --secondary1: #F5F5F5;
+  --secondary2: #FEFAF1;
+  --gray : #7D8184;
+  --black1:#363738;
+}
 * {
   box-sizing: border-box;
   margin: 0;

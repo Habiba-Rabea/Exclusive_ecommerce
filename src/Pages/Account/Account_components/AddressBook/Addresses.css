@@ -1,0 +1,47 @@
+.address-book {
+  width: 100%;
+}
+.address-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.address-card{
+  transition: box-shadow .2s ease ,transform .2s ease;
+}
+.add-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--gray);
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--gray);
+  min-height: 160px;
+}
+.add-card:hover {
+  color: var(--hoverRed);
+  border-color: var(--hoverRed);
+}
+.address-card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+.add-icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+@media (max-width: 768px) {
+  .address-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+@media (max-width: 425px) {
+  .address-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+}

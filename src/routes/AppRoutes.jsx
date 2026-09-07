@@ -10,6 +10,7 @@ import Checkout from '../Pages/checkout/Checkout.jsx';
 import NotFound from '../Pages/Notfound/notfound.jsx';
 import Contact from '../Pages/Contact/contact.jsx';
 import ProductDetails from '../Pages/Products/prodactdetails.jsx';
+import Account from '../Pages/Account/Account.jsx'
 const AppRoutes = () => {
   return (
     <Routes>
@@ -22,8 +23,9 @@ const AppRoutes = () => {
         <Route path="checkout" element={<Checkout />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="/product" element={<ProductDetails />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

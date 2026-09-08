@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import './wishlist.css';
+import card1 from "../../assets/Images/Wishlist/card1.png";
+import card2 from "../../assets/Images/Wishlist/card2.png";
+import card3 from "../../assets/Images/Wishlist/card3.png";
+import card4 from "../../assets/Images/Wishlist/card4.png";
+import card5 from "../../assets/Images/Wishlist/card5.png";
+import card6 from "../../assets/Images/Wishlist/card6.png";
+import card7 from "../../assets/Images/Wishlist/card7.png";
+import card8 from "../../assets/Images/Wishlist/card8.png";
 
 const initialWishlist = [
   {
@@ -8,7 +16,7 @@ const initialWishlist = [
     price: 960,
     originalPrice: 1160,
     discount: '-35%',
-    image: 'https://pngimg.com/d/bag_PNG10672.png',
+    image: card1,
   },
   {
     id: 2,
@@ -16,7 +24,7 @@ const initialWishlist = [
     price: 1960,
     originalPrice: null,
     discount: null,
-    image: 'https://pngimg.com/d/cooler_PNG101569.png',
+    image: card2,
   },
   {
     id: 3,
@@ -24,7 +32,7 @@ const initialWishlist = [
     price: 550,
     originalPrice: null,
     discount: null,
-    image: 'https://pngimg.com/d/gamepad_PNG79.png',
+    image: card3,
   },
   {
     id: 4,
@@ -32,7 +40,7 @@ const initialWishlist = [
     price: 750,
     originalPrice: null,
     discount: null,
-    image: 'https://pngimg.com/d/jacket_PNG8050.png',
+    image: card4,
   },
 ];
 
@@ -45,7 +53,7 @@ const justForYou = [
     discount: '-35%',
     rating: 5,
     reviews: 65,
-    image: 'https://pngimg.com/d/laptop_PNG5940.png',
+    image: card5,
   },
   {
     id: 6,
@@ -55,7 +63,7 @@ const justForYou = [
     discount: null,
     rating: 5,
     reviews: 65,
-    image: 'https://pngimg.com/d/monitor_PNG101646.png',
+    image: card6,
   },
   {
     id: 7,
@@ -65,7 +73,7 @@ const justForYou = [
     badge: 'NEW',
     rating: 5,
     reviews: 65,
-    image: 'https://pngimg.com/d/gamepad_PNG87.png',
+    image: card7,
   },
   {
     id: 8,
@@ -75,7 +83,7 @@ const justForYou = [
     discount: null,
     rating: 5,
     reviews: 65,
-    image: 'https://pngimg.com/d/keyboard_PNG101838.png',
+    image: card8,
   },
 ];
 
@@ -88,7 +96,6 @@ export default function Wishlist() {
 
   return (
     <div className="wishlist-container">
-      {/* Top Section */}
       <div className="wishlist-header">
         <h2 className="section-title">Wishlist ({wishlistItems.length})</h2>
         <button className="outline-btn">Move All To Bag</button>
@@ -134,7 +141,6 @@ export default function Wishlist() {
         ))}
       </div>
 
-      {/* Just For You Section */}
       <div className="wishlist-header section-spacing">
         <div className="header-label">
           <span className="red-box"></span>

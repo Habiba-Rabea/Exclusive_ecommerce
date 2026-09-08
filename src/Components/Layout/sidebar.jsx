@@ -6,34 +6,34 @@ function Sidebar() {
         <aside className="sidebar">
             <ul className="sidebar-list">
                 <li className="sidebar-item-dropdown">
-                    <Link to="/products/Woman's Fashion" className="sidebar-link">Woman's Fashion<span className="arrow">&gt;</span></Link>
+                    <Link to="/products" className="sidebar-link">Woman's Fashion<span className="arrow">&gt;</span></Link>
                     <ul className="submenu">
-                        <li><Link to="/products/Woman's Fashion/Dresses">Dresses</Link></li>
-                        <li><Link to="/products/Woman's Fashion/Bags">Bags</Link></li>
-                        <li><Link to="/products/Woman's Fashion/Shoes">Shoes</Link></li>
+                        <li><Link to="/products">Dresses</Link></li>
+                        <li><Link to="/products">Bags</Link></li>
+                        <li><Link to="/products">Shoes</Link></li>
                     </ul>
                     </li>
 
                     <li className="sidebar-item-dropdown">
-                    <Link to="/products/Men's Fashion" className="sidebar-link">
+                    <Link to="/products" className="sidebar-link">
                         Men's Fashion <span className="arrow">&gt;</span>
                     </Link>
                     <ul className="submenu">
-                        <li><Link to="/products/Men's Fashion/Shirts">Shirts</Link></li>
-                        <li><Link to="/products/Men's Fashion/Pants">Pants</Link></li>
+                        <li><Link to="/products">Shirts</Link></li>
+                        <li><Link to="/products">Pants</Link></li>
                     </ul>
                 </li>
                 <li className="sidebar-item">
-                    <Link to="/products/Electronics">Electronics</Link>
+                    <Link to="/products">Electronics</Link>
                     </li>
 
                     <li className="sidebar-item">
-                    <Link to="/products/furniture">furniture</Link>
+                    <Link to="/products">furniture</Link>
                     </li>
 
 
                     <li className="sidebar-item">
-                    <Link to="/products/Sports">Sports</Link>
+                    <Link to="/products">Sports</Link>
                 </li>
 
                 </ul>

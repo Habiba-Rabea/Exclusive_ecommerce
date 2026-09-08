@@ -11,11 +11,14 @@ import NotFound from '../Pages/Notfound/notfound.jsx';
 import Contact from '../Pages/Contact/contact.jsx';
 import ProductDetails from '../Pages/Products/prodactdetails.jsx';
 import Account from '../Pages/Account/Account.jsx'
+import Category from '../Pages/Category/Category.jsx';
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
+        <Route path="products" element={<Category />} />
+        <Route path="category/:categorySlug" element={<Category />} />
         <Route path="/about" element={<About />} />
         <Route path="cart" element={<Cart />} />
         <Route path="contact" element={<Contact />} />

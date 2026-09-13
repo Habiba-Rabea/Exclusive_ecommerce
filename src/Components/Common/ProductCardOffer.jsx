@@ -2,8 +2,24 @@ import { Heart, Eye } from 'lucide-react';
 import '../../CSS/ProductCard.css';
 import AddToCart from '../UI/Buttons/cart.jsx';
 import RatingStars from '../UI/RatingStars.jsx';
+import { useWishlist } from '../../Context/WishlistContext.jsx'; 
 
-function ProductCardOffer({ image, discount, title, currentPrice, originalPrice, rating, reviewsCount }) {
+function ProductCardOffer({ product, image, discount, title, currentPrice, originalPrice, rating, reviewsCount }) {
+    
+    const { wishlistItems, toggleWishlist } = useWishlist();
+
+    const productData = product || {
+        id: title ? title.toLowerCase().replace(/\s+/g, '-') : Math.random(), 
+        name: title,
+        image,
+        price: currentPrice,
+        originalPrice,
+        rating,
+        reviewsCount
+    };
+
+    const isLiked = wishlistItems.some((item) => item.id === productData.id);
+
     return (
         <div className='product-card'>
             <div className='product-img'>
@@ -11,8 +27,16 @@ function ProductCardOffer({ image, discount, title, currentPrice, originalPrice,
                 <img src={image} alt={title} />
             
                 <div className='product-icons'>
-                    <button className='iconn-btn'>
-                        <Heart size={20} />
+                    <button 
+                        className={`iconn-btn ${isLiked ? 'liked' : ''}`} 
+                        onClick={() => toggleWishlist(productData)}
+                        title={isLiked ? "Remove from Wishlist" : "Add to Wishlist"}
+                    >
+                        <Heart 
+                            size={20} 
+                            fill={isLiked ? "red" : "none"} 
+                            color={isLiked ? "red" : "currentColor"} 
+                        />
                     </button>
                     <button className="iconn-btn">
                         <Eye size={20} />
@@ -32,9 +56,8 @@ function ProductCardOffer({ image, discount, title, currentPrice, originalPrice,
                 <div className="product-rating-area">
                   <RatingStars rating={rating} reviewsCount={reviewsCount} />
                 </div>
-                </div>
             </div>
-       
+        </div>
     );
 }
 

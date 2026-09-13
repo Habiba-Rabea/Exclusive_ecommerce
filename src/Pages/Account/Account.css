@@ -4,6 +4,7 @@
   padding: 1.5rem 1rem;
   font-family: "Poppins", "Segoe UI", sans-serif;
   color: var(--black1);
+  margin-top: 120px;
 }
 .Breadcrumbs-welcome{
     display:flex;

@@ -21,28 +21,6 @@
     margin: 0;
 }
 
-.slider-controls {
-    display: flex;
-    gap: 8px;
-}
-
-.control-btn {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background-color: #F5F5F5;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.control-btn:hover {
-    background-color: #E0E0E0;
-}
-
 .category-grid {
     display: flex;
     gap: 30px;

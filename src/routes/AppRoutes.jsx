@@ -13,13 +13,15 @@ import NotFound from '../Pages/Notfound/notfound.jsx';
 import Contact from '../Pages/Contact/contact.jsx';
 import ProductDetails from '../Pages/Products/prodactdetails.jsx';
 import Account from '../Pages/Account/Account.jsx';
-import Category from '../Pages/Category/Category.jsx';
+import Category from '../Pages/Category/CategoryPage.jsx';
+import CategoryProductsContextProvider from '../Context/CategoryProductsContext.jsx';
 
 const AppRoutes = () => {
   return (
     <>
       <ScrollToTop />
-      <Routes>
+      <CategoryProductsContextProvider>
+        <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="products" element={<Category />} />
@@ -57,6 +59,7 @@ const AppRoutes = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      </CategoryProductsContextProvider>
     </>
   );
 };

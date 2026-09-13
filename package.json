@@ -17,6 +17,7 @@
     "@hookform/resolvers": "^5.9.1",
     "@tailwindcss/vite": "^4.3.3",
     "bootstrap": "^5.3.8",
+    "daisyui": "^5.7.37",
     "lucide-react": "^1.39.0",
     "react": "^19.2.8",
     "react-bootstrap": "^2.10.10",

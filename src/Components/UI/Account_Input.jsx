@@ -1,13 +1,12 @@
 import "/src/CSS/Account_Input.css";
 
-export default function FormInput({ label, type = "text", defaultValue, placeholder }) {
+export default function FormInput({ label, type = "text", ...props }) {
   return (
     <div className="form-input">
-      {label &&<label>{label}</label>}
+      {label && <label>{label}</label>}
       <input
         type={type}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
+        {...props}
       />
     </div>
   );

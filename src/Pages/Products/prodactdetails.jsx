@@ -1,31 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Breadcrumb from "../../Components/Common/Breadcrumb.jsx";
 import RatingStars from "../../Components/UI/RatingStars.jsx";
-import ProductCard from "../../Components/Common/ProductCard.jsx";
+import ProductCardCategory from "../../Components/Category/ProductCardCategory.jsx";
 import { Heart, Truck, RotateCcw } from "lucide-react";
-import { productDetails } from "../../data/MockData.js";
+import { productsData ,productImagesMap,productStockMap } from "../../data/productsData.js";
+import {useParams} from 'react-router-dom';
 import "./productDetails.css";
 import '../../App.css';
 
-
+const staticColors = [
+  { name: "Black", hex: "#202020" },
+  { name: "White", hex: "#f5f5f5" },
+  { name: "Blue", hex: "#1e40af" },
+];
 export default function ProductDetails() {
-  const [selectedImage, setSelectedImage] = useState(productDetails.images[0]);
-  const [selectedColor, setSelectedColor] = useState(productDetails.colors[0].name);
-  const [selectedSize, setSelectedSize] = useState("M");
+  const {id} = useParams();
+  const Eproduct = productsData.find((p) => p.id === Number(id));
+
+    if(!Eproduct){
+      return <h1>Product not found</h1>
+    }
+  
+  const imgs =productImagesMap[Eproduct.id]
+  const IsInStock =productStockMap[Eproduct.id]
+  const [selectedImage, setSelectedImage] = useState(imgs[0]);
+  const [selectedColor, setSelectedColor] = useState("Black");
   const [quantity, setQuantity] = useState(1);
 
   function increaseQty (){ setQuantity((q) => q + 1)};
   function decreaseQty () { setQuantity((q) => (q > 1 ? q - 1 : 1))};
 
+  useEffect(() => {
+  setSelectedImage(imgs[0]);
+  setSelectedColor("Black");
+  setQuantity(1);
+  }, [id]);
+
   return (
     <main className="container_p">
-      <Breadcrumb items={productDetails.breadcrumb} />
+      <Breadcrumb
+        items={[
+          { name: "Home", link: "/" },
+          { name: "Products", link: "/products" },
+          { name: Eproduct.name },
+        ]}
+      />
 
       <div className="product-main-section">
         {/* images*/}
         <div className="product-gallery">
           <div className="thumbnail-list">
-            {productDetails.images.map((img, index) => (
+            {imgs.map((img, index) => (
               <button
                 key={index}
                 className={`thumbnail-item ${
@@ -45,20 +70,20 @@ export default function ProductDetails() {
 
         {/*info */}
         <div className="product_info">
-          <h1 className="product-name">{productDetails.name}</h1>
+          <h1 className="product-name">{Eproduct.name}</h1>
         <div className="rating-stock">
           <RatingStars
-            rating={productDetails.rating}
-            reviewsCount={productDetails.reviewsCount}
+            rating={Eproduct.rating}
+            reviewsCount={Eproduct.reviewsCount}
           />
 
-          <span className="inStock">
-            {productDetails.inStock ? "In Stock" : "Out of Stock"}
+          <span className={IsInStock?"inStock":"outOfStock"}>
+            {IsInStock ? "In Stock" : "Out of Stock"}
           </span>
         </div>
-          <p className="product-price">${productDetails.price.toFixed(2)}</p>
+          <p className="product-price">${Eproduct.price.toFixed(2)}</p>
 
-          <p className="product-description">{productDetails.description}</p>
+          <p className="product-description">{Eproduct.description}</p>
 
           <div className="divider"></div>
 
@@ -66,7 +91,7 @@ export default function ProductDetails() {
           <div className="colors-section">
             <span>Colours:</span>
             <div className="color-options">
-              {productDetails.colors.map((color) => (
+              {staticColors.map((color) => (
                 <button
                   key={color.name}
                   className={`color-circle ${
@@ -76,24 +101,6 @@ export default function ProductDetails() {
                   onClick={() => setSelectedColor(color.name)}
                   aria-label={color.name}
                 />
-              ))}
-            </div>
-          </div>
-
-          {/* sizes*/}
-          <div className="sizes-section">
-            <span>Size:</span>
-            <div className="size-options">
-              {productDetails.sizes.map((size) => (
-                <button
-                  key={size}
-                  className={`size-box ${
-                    selectedSize === size ? "size-active" : ""
-                  }`}
-                  onClick={() => setSelectedSize(size)}
-                >
-                  {size}
-                </button>
               ))}
             </div>
           </div>
@@ -143,13 +150,15 @@ export default function ProductDetails() {
           <span className="red-bar"></span>
           <h2>Related Item</h2>
           </div>
-        <div className="related-grid">
           
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-        </div>
+          <div className="related-grid">
+            {productsData
+              .filter((p) => p.category === Eproduct.category && p.id !== Eproduct.id)
+              .slice(0, 4)
+              .map((p) => (
+                <ProductCardCategory key={p.id} product={p} />
+              ))}
+          </div>
       </div>
     </main>
   );

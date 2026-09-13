@@ -1,10 +1,16 @@
 import { Eye, Heart, ShoppingCart } from 'lucide-react';
 import RatingStars from '../UI/RatingStars.jsx';
+import { useWishlist } from '../../Context/WishlistContext.jsx';
 
 export default function ProductCardCategory({ product }) {
+  const { wishlistItems, toggleWishlist } = useWishlist();
+
   const {
-    name, image, price, originalPrice, discountBadge, rating, reviewsCount, subtext, description,
+    id, name, image, price, originalPrice, discountBadge, rating, reviewsCount, subtext, description,
   } = product;
+
+  
+  const isLiked = wishlistItems.some((item) => item.id === id);
 
   return (
     <article className="category-product-card">
@@ -12,7 +18,18 @@ export default function ProductCardCategory({ product }) {
         {discountBadge ? <span className="category-product-badge">{discountBadge}</span> : null}
         <img src={image} alt={name} loading="lazy" />
         <div className="category-product-actions">
-          <button type="button" aria-label={`Add ${name} to wishlist`}><Heart size={19} /></button>
+          <button 
+            type="button" 
+            aria-label={`Add ${name} to wishlist`}
+            onClick={() => toggleWishlist(product)}
+            className={isLiked ? 'liked' : ''}
+          >
+            <Heart 
+              size={19} 
+              fill={isLiked ? "red" : "none"} 
+              color={isLiked ? "red" : "currentColor"} 
+            />
+          </button>
           <button type="button" aria-label={`Quick view ${name}`}><Eye size={19} /></button>
         </div>
         <button type="button" className="category-add-to-cart"><ShoppingCart size={15} /> Add To Cart</button>

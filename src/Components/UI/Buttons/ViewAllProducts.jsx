@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import '../../../CSS/Buttons.css';
 
-const ViewAllProducts = ({ text = "Back to Home Page", onClick }) => {
+const ViewAllProducts = ({ text = "View All", to = "/products", onClick }) => {
   return (
-    <button className="view-all-products-btn" onClick={onClick}>
+    <Link to={to} className="view-all-products-btn" onClick={onClick}>
       {text}
-    </button>
+    </Link>
   );
 };
 

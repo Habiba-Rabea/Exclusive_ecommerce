@@ -26,10 +26,16 @@
 .flash-products-grid {
     display: flex;
     gap: 12px;
-    overflow-x: visible; 
+    overflow-x: auto; 
     padding-bottom: 20px;
     width: 100%;
     flex-wrap: nowrap;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.flash-products-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .flash-buttons {

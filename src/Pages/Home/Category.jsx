@@ -1,4 +1,4 @@
-import { Smartphone, Monitor, Watch, Camera, Headphones, Gamepad2, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Smartphone, Monitor, Watch, Camera, Headphones, Gamepad2} from 'lucide-react';
 import CategoryCard from "../../Components/Common/CategoryCard";
 import '../../CSS/Categories.css';
 import SectionHeader from '../../Components/Common/sectionheader.jsx';
@@ -9,10 +9,7 @@ function Category() {
             <div className="header-sec">
                 <SectionHeader tag="Categories" title="Browse By Category" />
                 
-                <div className="slider-controls">
-                    <button className="control-btn"><ArrowLeft size={20} /></button>
-                    <button className="control-btn"><ArrowRight size={20} /></button>
-                </div>
+    
             </div>
 
             <div className="category-grid">

@@ -14,7 +14,7 @@ const NewArrivalSection = () => {
           <figcaption>
             <h3>PlayStation 5</h3>
             <p>Black and White version of the PS5 coming out on sale.</p>
-            <a href="#">Shop Now</a>
+            <a href="/products">Shop Now</a>
           </figcaption>
         </figure>
         <div className="right-stack">
@@ -23,7 +23,7 @@ const NewArrivalSection = () => {
             <figcaption>
               <h3>Women’s Collections</h3>
               <p>Featured woman collections that give you another vibe.</p>
-              <a href="#">Shop Now</a>
+              <a href="/products">Shop Now</a>
             </figcaption>
           </figure>
           <div className="bottom-row">
@@ -32,7 +32,7 @@ const NewArrivalSection = () => {
               <figcaption>
                 <h3>Speakers</h3>
                 <p>Amazon wireless speakers</p>
-                <a href="#">Shop Now</a>
+                <a href="/products">Shop Now</a>
               </figcaption>
             </figure>
             <figure className="card">
@@ -40,7 +40,7 @@ const NewArrivalSection = () => {
               <figcaption>
                 <h3>Perfume</h3>
                 <p>GUCCI INTENSE OUD EDP</p>
-                <a href="#">Shop Now</a>
+                <a href="/products">Shop Now</a>
               </figcaption>
             </figure>
           </div>

@@ -1,4 +1,4 @@
-.category-page { max-width: 1366px; margin: 0 auto; padding: 38px 32px 80px; color: #111; }
+.category-page { max-width: 1366px; margin: 0 auto; padding: 38px 32px 80px; color: #111; margin-top: 140px; }
 .category-page .breadCrumb { margin: 0 0 24px; }
 .category-navigation { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding: 5px; margin-bottom: 38px; border-bottom: 1px solid #ededed; scrollbar-width: thin; }
 .category-navigation-link { flex: 0 0 auto; padding: 10px 16px; border-radius: 6px 6px 0 0; color: #777; font-size: 13px; font-weight: 500; text-decoration: none; transition: color .2s ease, background-color .2s ease; }

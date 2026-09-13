@@ -1,12 +1,61 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import signupImg from '../../assets/Images/signup/Side Image.png';
 import InputField from '../../Components/UI/Inputs';  
-
+import * as zod from 'zod'
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 export default function Signup() {
+
+  let navigate = useNavigate()
+
+
+let signupSchema = zod.object({
+    name : zod.string().nonempty('Name is Required ').min(3, 'name must be at least 3 characters')
+    .max(20, 'name cannot exceed 20 characters'),
+
+    email : zod.string().nonempty('Email is required').email('Enter vaild email (e.g. alex@example.com)'),
+
+    password : zod.string().nonempty('Password is required').regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/ ,'Must be 8+ chars with uppercase, lowercase, number & special char'),
+})
+
+  
+const {register , handleSubmit , setError , formState} = useForm({
+  defaultValues : {
+  "name": "",
+  "email": "",
+  "password": "",
+},
+mode: 'onBlur',
+resolver :zodResolver(signupSchema)
+
+})
+
+function submitForm(userData){
+  console.log(userData);
+  
+
+  let usersList = [];
+  const savedUsers = localStorage.getItem('users');
+  
+  if (savedUsers) {
+    usersList = JSON.parse(savedUsers);
+  }
+
+  usersList.push(userData);
+
+  localStorage.setItem('users', JSON.stringify(usersList));
+
+  navigate('/login');
+}
+
+
+
+
+
   return (
     <section className="py-5 ">
-      <div className="container-fluid px-0 verflow-hidden">
+      <div className="container-fluid px-0 overflow-hidden">
         <div className="row g-0 align-items-center">
           
           <div className="col-12 col-md-6 d-none d-md-block ps-0">
@@ -20,30 +69,33 @@ export default function Signup() {
               <h2 className="fw-600 mb-2  ">Create an account</h2>
               <p className="mb-4 fs-6">Enter your details below</p>
 
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form onSubmit={handleSubmit(submitForm) }>
 
                 <div className="mb-4">
-                  <InputField 
+                  <InputField {...register('name')}
                     type="text" 
                     placeholder="Name" 
                     className="form-control border-0 border-bottom rounded-0 px-0 shadow-none bg-transparent" 
                   />
+                {formState.errors.name && formState.touchedFields.name ? <p className='text-danger text-center py-2'>{formState.errors.name?.message }</p> :null}
                 </div>
 
                 <div className="mb-4">
-                  <InputField 
+                  <InputField {...register('email')}
                     type="text" 
                     placeholder="Email or Phone Number" 
                     className="form-control border-0 border-bottom rounded-0 px-0 shadow-none bg-transparent" 
                   />
+                {formState.errors.email && formState.touchedFields.email ? <p className='text-danger text-center py-2'>{formState.errors.email?.message }</p> :null}
                 </div>
 
                 <div className="mb-4">
-                  <InputField 
+                  <InputField {...register('password')}
                     type="password" 
                     placeholder="Password" 
                     className="form-control border-0 border-bottom rounded-0 px-0 shadow-none bg-transparent" 
                   />
+                {formState.errors.password && formState.touchedFields.password ? <p className='text-danger text-center py-2'>{formState.errors.password?.message }</p> :null}
                 </div>
 
                 <button type="submit" className="btn text-white w-100 py-2 mb-3 rounded-1 fw-600"

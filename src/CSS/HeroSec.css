@@ -96,7 +96,8 @@
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .custom-hero-carousel {
         max-width: 100%; 
-        margin-top: 22px;
+        margin-top: 150px;
+        width: 820px;
     }
 
     .banner-slide-content {
@@ -121,14 +122,15 @@
 @media screen and (max-width: 767px) {
     .custom-hero-carousel {
         max-width: 100%;
-        margin-top: 12px;
-        border-radius: 0; 
+        width: 924px;
+        margin:160px auto 20px auto;
+        border-radius: 8px; 
     }
 
     .banner-slide-content {
         height: auto; 
         flex-direction: column-reverse; 
-        padding: 22px 34px;
+        padding: 25px 20px;
         text-align: center;
         gap: 15px;
         margin-bottom: 15px;

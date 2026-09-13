@@ -118,7 +118,7 @@ function FlashSale() {
         <section className="flash-sales-section">
             <div className="flash-header">
                 <div className="title-with-timer">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '80px' }}>
+                    <div className="flash-title-timer-group">
                         <SectionHeader tag="Today's" title="Flash Sales" />
                         <Timer />
                     </div>
@@ -136,18 +136,18 @@ function FlashSale() {
 
             <div className="flash-products-grid" ref={scrollRef}>
                 {products.map((product) => (
-    <ProductCardOffer 
-        key={product.id}
-        product={product} 
-        image={product.image}
-        discount={product.discount}
-        title={product.title}
-        currentPrice={product.currentPrice}
-        originalPrice={product.originalPrice}
-        rating={product.rating}
-        reviewsCount={product.reviewsCount}
-    />
-))}
+                    <ProductCardOffer 
+                        key={product.id}
+                        product={product} 
+                        image={product.image}
+                        discount={product.discount}
+                        title={product.title}
+                        currentPrice={product.currentPrice}
+                        originalPrice={product.originalPrice}
+                        rating={product.rating}
+                        reviewsCount={product.reviewsCount}
+                    />
+                ))}
             </div>
 
             <Link to="/products" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center', marginTop: '40px' }}>

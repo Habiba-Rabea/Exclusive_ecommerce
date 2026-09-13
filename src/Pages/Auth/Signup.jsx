@@ -67,7 +67,7 @@ export default function Sigup() {
   }
 
   return (
-    <section className="py-5">
+    <section className="py-5 mt-5">
       <div className="container-fluid px-0 overflow-hidden">
         <div className="row g-0 align-items-center">
           <div className="col-12 col-md-6 d-none d-md-block ps-0">

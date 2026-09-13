@@ -73,7 +73,7 @@ export default function Category() {
    
   },[query,sortOption, products]);
 
-  console.log(visibleProducts);
+
   
 
   if (selectedCategory && !meta) {

@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import ScrollToTop from '../Components/ScrollToTop.jsx';
 import MainLayout from '../Components/Layout/mainLayout';
 import Home from '../Pages/Home/home.jsx';
 import About from "../Pages/About/about.jsx";
@@ -14,23 +15,26 @@ import Account from '../Pages/Account/Account.jsx'
 import Category from '../Pages/Category/Category.jsx';
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="products" element={<Category />} />
-        <Route path="category/:categorySlug" element={<Category />} />
-        <Route path="/about" element={<About />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="wishlist" element={<Wishlist />} />
-        <Route path="checkout" element={<Checkout />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="/product" element={<ProductDetails />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="products" element={<Category />} />
+          <Route path="category/:categorySlug" element={<Category />} />
+          <Route path="/about" element={<About />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="wishlist" element={<Wishlist />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
 

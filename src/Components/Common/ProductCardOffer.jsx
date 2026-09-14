@@ -3,6 +3,7 @@ import '../../CSS/ProductCard.css';
 import AddToCart from '../UI/Buttons/cart.jsx';
 import RatingStars from '../UI/RatingStars.jsx';
 import { useWishlist } from '../../Context/WishlistContext.jsx'; 
+import { Link } from 'react-router-dom';
 
 function ProductCardOffer({ product, image, discount, title, currentPrice, originalPrice, rating, reviewsCount }) {
     const { wishlistItems, toggleWishlist } = useWishlist();
@@ -45,6 +46,7 @@ function ProductCardOffer({ product, image, discount, title, currentPrice, origi
                             color={isLiked ? "red" : "currentColor"} 
                         />
                     </button>
+<<<<<<< HEAD
                     <button 
                         type="button" 
                         className="iconn-btn"
@@ -52,9 +54,17 @@ function ProductCardOffer({ product, image, discount, title, currentPrice, origi
                             e.preventDefault();
                             e.stopPropagation();
                         }}
+=======
+                    
+                    <Link 
+                        to={`/product/${productData.id}`} 
+                        className="iconn-btn" 
+                        aria-label="View Details" 
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'inherit' }}
+>>>>>>> temp-branch
                     >
                         <Eye size={20} />
-                    </button>
+                    </Link>
                 </div>
                 <AddToCart product={productData} />
             </div>

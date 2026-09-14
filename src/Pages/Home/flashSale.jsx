@@ -20,7 +20,7 @@ function FlashSale() {
 
     const products = [
         {
-            id: "flash-1",
+            id: 91,
             image: img1,
             discount: "-13%",
             name: "Force Feedback Wheel",
@@ -32,19 +32,19 @@ function FlashSale() {
             reviewsCount: 43
         },
         {
-            id: "flash-2",
+            id: 75,
             image: img2,
-            discount: "-35%",
-            name: "Sonic Bass Pro Wireless",
-            title: "Sonic Bass Pro Wireless",
-            price: 199,
-            currentPrice: "$199",
-            originalPrice: 249,
+            discount: "-9%",
+            name: "Audiophile Reference 800",
+            title: "Audiophile Reference 800",
+            price: 499,
+            currentPrice: "$499",
+            originalPrice: "$549",
             rating: 5,
             reviewsCount: 142
         },
         {
-            id: "flash-3",
+            id: 25,
             image: img3,
             discount: "-13%",
             name: "Creator Pro Duo",
@@ -56,7 +56,7 @@ function FlashSale() {
             reviewsCount: 25
         },
         {
-            id: "flash-4",
+            id: 11,
             image: img4,
             discount: "-15%",
             name: "Quantum X Prime",
@@ -68,7 +68,7 @@ function FlashSale() {
             reviewsCount: 74
         },
         {
-            id: "flash-5",
+            id: 21,
             image: img5,
             discount: "-12%",
             name: "WorkStation Studio Z",
@@ -80,7 +80,7 @@ function FlashSale() {
             reviewsCount: 19
         },
         {
-            id: "flash-6",
+            id: 47,
             image: img6,
             discount: "-13%",
             name: "Ultra Adventure Watch",
@@ -92,7 +92,7 @@ function FlashSale() {
             reviewsCount: 79
         },
         {
-            id: "flash-7",
+            id: 50,
             image: img7,
             discount: "-14%",
             name: "Aperture FX DSLR",
@@ -104,7 +104,7 @@ function FlashSale() {
             reviewsCount: 51
         },
         {
-            id: "flash-8",
+            id: 4,
             image: img8,
             discount: "-14%",
             name: "Studio Fold Ultra",
@@ -154,6 +154,7 @@ function FlashSale() {
                     <ProductCardOffer 
                         key={product.id}
                         product={product} 
+                        id={product.id}
                         image={product.image}
                         discount={product.discount}
                         title={product.title}

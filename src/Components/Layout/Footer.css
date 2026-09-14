@@ -152,16 +152,12 @@
   .footer-container {
     gap: 32px 20px;
   }
-
-  /* استخدام max-width مع flex لضمان تقسيط الأعمدة لصفين */
   .footer-col {
     flex: 0 0 calc(50% - 20px);
     max-width: calc(50% - 20px);
     min-width: 200px;
   }
 }
-
-/* 2. لشاشات الموبايل (أقل من 576px) */
 @media (max-width: 576px) {
   .footer {
     padding: 40px 0 20px 0;

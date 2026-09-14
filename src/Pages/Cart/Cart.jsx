@@ -17,14 +17,8 @@ const Cart = () => {
       alert("Invalid Coupon Code");
     }
   };
-
-  // المجموع بعد تطبيق الكوبون
   const discountedSubtotal = subtotal - subtotal * discount;
-
-  // معادلة الشحن المعتمدة
   const shipping = subtotal === 0 || subtotal >= 500 ? 0 : 15;
-
-  // المجموع الكلي شامل الشحن والخصم
   const total = discountedSubtotal + shipping;
 
   return (

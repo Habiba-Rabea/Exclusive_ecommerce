@@ -7,14 +7,26 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useLocalStorage('currentUser', null);
   const [token, setToken] = useLocalStorage('user_token', null);
   const [usersList, setUsersList] = useLocalStorage('users', []);
+<<<<<<< HEAD
+=======
+
+>>>>>>> temp-branch
   const login = (userData, userToken = '') => {
     setCurrentUser(userData);
     if (userToken) setToken(userToken);
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> temp-branch
   const signup = (userData) => {
     setUsersList((prevUsers) => [...prevUsers, userData]);
     setCurrentUser(userData);
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> temp-branch
   const logout = () => {
     setCurrentUser(null);
     setToken(null);
@@ -27,7 +39,11 @@ export function AuthProvider({ children }) {
     setCurrentUser(updatedUser);
     setUsersList((prevUsers) =>
       prevUsers.map((user) =>
+<<<<<<< HEAD
         user.email === currentUser.email ? updatedUser : user
+=======
+        user.email.toLowerCase() === currentUser.email.toLowerCase() ? updatedUser : user
+>>>>>>> temp-branch
       )
     );
   };
@@ -35,6 +51,10 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     token,
+<<<<<<< HEAD
+=======
+    usersList, 
+>>>>>>> temp-branch
     isLoggedIn: !!currentUser,
     login,
     signup,

@@ -1,122 +1,208 @@
-import  { useState, useEffect } from 'react';
 import FormInput from "/src/Components/UI/Account_Input.jsx";
-import { useAuth } from "/src/Context/AuthContext";
+import {useState,useEffect} from "react";
+import { useAuth } from "/src/Context/AuthContext.jsx";
+import { 
+  PASSWORD_REGEX, PASSWORD_ERROR_MESSAGE,
+  NAME_REGEX, NAME_ERROR_MESSAGE,
+} from "/src/Utils/validation";
 import "./MyProfile.css";
+
 export default function EditProfileForm() {
-  const { currentUser, updateUser } = useAuth();
-  const getInitialNames = (user) => {
-    if (!user) return { firstName: '', lastName: '' };
-    if (user.firstName || user.lastName) {
-      return { firstName: user.firstName || '', lastName: user.lastName || '' };
-    }
-    const nameParts = (user.name || '').trim().split(' ');
-    return {
-      firstName: nameParts[0] || '',
-      lastName: nameParts.slice(1).join(' ') || '',
-    };
-  };
+  const {currentUser,updateUser}=useAuth();
 
-  const initialNames = getInitialNames(currentUser);
-
-  const [formData, setFormData] = useState({
-    firstName: initialNames.firstName,
-    lastName: initialNames.lastName,
-    email: currentUser?.email || '',
-    address: currentUser?.address || '',
+  const defaultAddress = currentUser?.addresses?.find((addr) => addr.isDefault);
+  const addressDisplay = defaultAddress
+  ? `${defaultAddress.city}, ${defaultAddress.zip}, ${defaultAddress.country}`
+  : " ";
+  const [profileData, setProfileData] = useState({
+    firstName: currentUser?.firstName || "",
+    lastName: currentUser?.lastName || "",
+    //email: currentUser?.email || "",
+    //address: currentUser?.address || ""
   });
-  useEffect(() => {
-    if (currentUser) {
-      const names = getInitialNames(currentUser);
-      setFormData({
-        firstName: names.firstName,
-        lastName: names.lastName,
-        email: currentUser.email || '',
-        address: currentUser.address || '',
-      });
-    }
-  }, [currentUser]);
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
+  
+  function handleProfileChange(e) {
+    const{name,value}=e.target;
+    setProfileData((prevProfile) => ({
+      ...prevProfile,
       [name]: value,
     }));
-  };
+  }
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const[PasswordError, setPasswordError] = useState("");
+  const[ProfileError, setProfileError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (updateUser) {
-      updateUser({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        name: `${formData.firstName} ${formData.lastName}`.trim(),
-        address: formData.address,
-      });
-      alert('Profile updated successfully!');
+  function handlePasswordChange(e) {
+    const{name,value}=e.target;
+    setPasswordData((prevPassword) => ({
+      ...prevPassword,
+      [name]: value,
+    }));
+  }
+
+  function handleSubmit(e) {
+  e.preventDefault();
+
+  if (!NAME_REGEX.test(profileData.firstName)) {
+    setProfileError("First name: " + NAME_ERROR_MESSAGE);
+    return;
+  }
+
+  if (profileData.lastName && !NAME_REGEX.test(profileData.lastName)) {
+    setProfileError("Last name: " + NAME_ERROR_MESSAGE);
+    return;
+  }
+
+  setProfileError("")
+
+  const wantsPasswordChange =
+    passwordData.currentPassword || passwordData.newPassword ||passwordData.confirmPassword;
+
+  if (wantsPasswordChange) {
+    if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
+      setPasswordError("Please fill in all password fields");
+      return;
     }
-  };
 
+    if (passwordData.currentPassword !== currentUser.password) {
+      setPasswordError("Current password is incorrect");
+      return;
+    }
+
+    if (!PASSWORD_REGEX.test(passwordData.newPassword)) {
+      setPasswordError(PASSWORD_ERROR_MESSAGE);
+      return;
+    }
+
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setPasswordError("New password and confirmation do not match");
+      return;
+    }
+
+    setPasswordError("");
+    updateUser({
+      firstName: profileData.firstName,
+      lastName: profileData.lastName,
+      // email: profileData.email,
+      //address: profileData.address,
+      password: passwordData.newPassword
+    })
+    alert("Password changed successfully");
+    setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
+  } else {
+    setPasswordError("");
+    updateUser({
+      firstName: profileData.firstName,
+      lastName: profileData.lastName,
+      // email: profileData.email,
+      //address: profileData.address
+    });
+    alert("Changes saved successfully");
+  }
+}
+  useEffect(() => {
+    if(currentUser){
+      setProfileData({
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        // email: currentUser.email,
+        //address: currentUser.address
+      },);
+    }
+  },[currentUser]);
+
+  function handleCancel() {
+  setProfileData({
+    firstName: currentUser?.firstName || "",
+    lastName: currentUser?.lastName || "",
+  });
+  setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
+  setProfileError("");
+  setPasswordError("");
+}
   return (
     <main className="edit-profile">
-      <h2 className="edit-profile-title text-danger fw-semibold mb-4">Edit Your Profile</h2>
+      <h2 className="edit-profile-title">Edit Your Profile</h2>
 
       <form onSubmit={handleSubmit}>
-        <div className="row g-3 mb-3">
-          <div className="col-md-6">
-            <FormInput 
-              label="First Name" 
-              name="firstName"
-              value={formData.firstName} 
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col-md-6">
-            <FormInput 
-              label="Last Name" 
-              name="lastName"
-              value={formData.lastName} 
-              onChange={handleChange}
-            />
-          </div>
+        {ProfileError && <p className="error-message">{ProfileError}</p>}
+        <div className="form-row">
+          <FormInput
+            label="First Name" 
+            name="firstName"
+            value={profileData.firstName} 
+            onChange={handleProfileChange}
+            placeholder="john"
+          />
+          <FormInput 
+            label="Last Name" 
+            name="lastName"
+            value={profileData.lastName}
+            onChange={handleProfileChange} 
+            placeholder="smith"
+          />
         </div>
 
-        <div className="row g-3 mb-4">
-          <div className="col-md-6">
-            <FormInput 
-              label="Email" 
-              name="email"
-              value={formData.email} 
-              onChange={handleChange}
-              disabled
-            />
-          </div>
-          <div className="col-md-6">
-            <FormInput 
-              label="Address" 
-              name="address"
-              value={formData.address} 
-              onChange={handleChange}
-              placeholder="Kingston, 5236, United States"
-            />
-          </div>
+        <div className="form-row">
+          <FormInput 
+            label="Email"
+            name="email" 
+            value={profileData.email}
+            onChange={handleProfileChange}
+            placeholder="example@gmail.com"
+            disabled
+          />
+          <FormInput 
+            label="Address" 
+            name="address"
+            value={addressDisplay}
+            placeholder="Kingston, 5236, United State"
+            disabled
+          />
         </div>
 
-        <div className="mb-3">
-          <label className="fw-semibold mb-3">Password Changes</label>
-          <div className="d-flex flex-column gap-3">
-            <FormInput type="password" placeholder="Current Password" />
-            <FormInput type="password" placeholder="New Password" />
-            <FormInput type="password" placeholder="Confirm New Password" />
-          </div>
+        <div className="form-row single">
+          <label className="section-label">Password Changes</label>
+          {PasswordError && <p className="error-message">{PasswordError}</p>}
         </div>
 
-        <div className="d-flex justify-content-end gap-3 mt-4">
-          <button type="button" className="btn btn-link text-decoration-none text-dark">
-            Cancel
-          </button>
-          <button type="submit" className="btn btn-danger px-4 py-2">
-            Save Changes
-          </button>
+        <div className="form-row single">
+          <FormInput 
+          type="password" 
+          name="currentPassword"
+          placeholder="Current Password" 
+          value={passwordData.currentPassword}
+          onChange={handlePasswordChange}
+          />
+        </div>
+
+        <div className="form-row single">
+          <FormInput 
+          type="password" 
+          name="newPassword"
+          placeholder="New Password" 
+          value={passwordData.newPassword}
+          onChange={handlePasswordChange}
+           />
+        </div>
+
+        <div className="form-row single">
+          <FormInput 
+          type="password" 
+          name="confirmPassword"
+          placeholder="Confirm New Password" 
+          value={passwordData.confirmPassword}
+          onChange={handlePasswordChange}
+          />
+        </div>
+
+        <div className="form-actions">
+          <button type="button" className="btn-cancel" onClick={handleCancel}>Cancel</button>
+          <button type="submit" className="btn-save">Save Changes</button>
         </div>
       </form>
     </main>

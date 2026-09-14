@@ -29,7 +29,16 @@ export default function ProductDetails() {
 
   function increaseQty (){ setQuantity((q) => q + 1)};
   function decreaseQty () { setQuantity((q) => (q > 1 ? q - 1 : 1))};
-
+  
+  function handleAddToCart() {
+  console.log({
+    id: Eproduct.id,
+    name: Eproduct.name,
+    price: Eproduct.price,
+    image: imgs[0],
+    quantity: quantity,
+  });
+}
   useEffect(() => {
   setSelectedImage(imgs[0]);
   setSelectedColor("Black");
@@ -113,7 +122,7 @@ export default function ProductDetails() {
               <button className="qty-btn" onClick={increaseQty}>+</button>
             </div>
 
-            <button className="buy-now-btn">Buy Now</button>
+            <button className="buy-now-btn" onClick={handleAddToCart} disabled={!IsInStock}>{IsInStock?"Buy Now":"Out of Stock"}</button>
 
             <button className="wishlist-btn" aria-label="add to favorite">
               <Heart size={20} />

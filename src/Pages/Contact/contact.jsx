@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import InputField from '../../Components/UI/inputs.jsx'; 
+import InputField from '../../Components/UI/Inputs.jsx'; 
 import { FaPhoneAlt, FaRegEnvelope } from 'react-icons/fa';
 import './Contact.css';
 const Contact = () => {

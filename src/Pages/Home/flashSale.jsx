@@ -21,7 +21,7 @@ function FlashSale() {
 
     const products = [
         {
-            id: 1,
+            id: 91,
             image: img1,
             discount: "-13%",
             title: "Force Feedback Wheel",
@@ -31,17 +31,17 @@ function FlashSale() {
             reviewsCount: 43
         },
         {
-            id: 2,
+            id: 75,
             image: img2,
-            discount: "-35%",
-            title: "Sonic Bass Pro Wireless",
-            currentPrice: "$199",
-            originalPrice: "$249",
+            discount: "-9%",
+            title: "Audiophile Reference 800",
+            currentPrice: "$499",
+            originalPrice: "$549",
             rating: 5,
             reviewsCount: 142
         },
         {
-            id: 3,
+            id: 25,
             image: img3,
             discount: "-13%",
             title: "Creator Pro Duo",
@@ -51,7 +51,7 @@ function FlashSale() {
             reviewsCount: 25
         },
         {
-            id: 4,
+            id: 11,
             image: img4,
             discount: "-15%",
             title: "Quantum X Prime",
@@ -61,7 +61,7 @@ function FlashSale() {
             reviewsCount: 74
         },
         {
-            id: 5,
+            id: 21,
             image: img5,
             discount: "-12%",
             title: "WorkStation Studio Z",
@@ -71,7 +71,7 @@ function FlashSale() {
             reviewsCount: 19
         },
         {
-            id: 6,
+            id: 47,
             image: img6,
             discount: "-13%",
             title: "Ultra Adventure Watch",
@@ -81,7 +81,7 @@ function FlashSale() {
             reviewsCount: 79
         },
          {
-            id: 7,
+            id: 50,
             image: img7,
             discount: "-14%",
             title: "Aperture FX DSLR",
@@ -91,7 +91,7 @@ function FlashSale() {
             reviewsCount: 51
         },
          {
-            id: 8,
+            id: 4,
             image: img8,
             discount: "-14%",
             title: "Studio Fold Ultra",

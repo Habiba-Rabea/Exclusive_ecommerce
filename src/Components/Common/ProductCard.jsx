@@ -1,12 +1,15 @@
 import { Heart, Eye } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../CSS/ProductCard.css';
 import RatingStars from '../UI/RatingStars.jsx';
 import AddToCart from '../UI/Buttons/cart.jsx';
 import { useWishlist } from '../../Context/WishlistContext.jsx';
+import { useCart } from '../../Context/CartContext.jsx';
 
 export default function ProductCard({ product }) {
   const { wishlistItems, toggleWishlist } = useWishlist();
+  const { addToCart } = useCart();
+  const navigate = useNavigate();
   
   if (!product) return null;
 
@@ -14,7 +17,22 @@ export default function ProductCard({ product }) {
   const productName = product.name || product.title || "Product";
   const { price, originalPrice, rating, reviewsCount, image } = product;
 
-  const isLiked = wishlistItems.some((item) => (item.id || item._id) === id);
+  const isLiked = wishlistItems ? wishlistItems.some((item) => (item.id || item._id) === id) : false;
+
+  const handleAddToCartAndNavigate = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    
+    addToCart({
+      id: id,
+      title: productName,
+      name: productName,
+      price: price,
+      image: image,
+      quantity: 1
+    });
+    
+    navigate('/cart');
+  };
 
   return (
     <div className="product-card">
@@ -39,31 +57,17 @@ export default function ProductCard({ product }) {
             />
           </button>
           
-<<<<<<< HEAD
-          <button 
-            type="button" 
-            className="iconn-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-=======
           <Link 
             to={`/product/${id}`} 
             className="iconn-btn" 
             aria-label="View Details"
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'inherit' }}
->>>>>>> temp-branch
           >
             <Eye size={20} />
           </Link>
         </div>
-<<<<<<< HEAD
 
-        {/* تمرير المنتج بالكامل إلى زر الإضافة */}
-=======
->>>>>>> temp-branch
-        <AddToCart product={product} />
+        <AddToCart product={product} onClick={handleAddToCartAndNavigate} />
       </div>
 
       <div className="product-info">

@@ -1,22 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, Heart, ShoppingCart } from 'lucide-react';
 import RatingStars from '../UI/RatingStars.jsx';
 import { useWishlist } from '../../Context/WishlistContext.jsx';
 import { useCart } from '../../Context/CartContext.jsx';
+
 export default function ProductCardCategory({ product }) {
   const { wishlistItems, toggleWishlist } = useWishlist();
   const { addToCart } = useCart(); 
+  const navigate = useNavigate();
+
   if (!product) return null;
+
   const {
     id, name, image, price, originalPrice, discountBadge, rating, reviewsCount, subtext, description,
   } = product;
 
-  const isLiked = wishlistItems.some((item) => (item.id || item._id) === id);
+  const isLiked = wishlistItems ? wishlistItems.some((item) => (item.id || item._id) === id) : false;
 
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    
     addToCart(product);
+    navigate('/cart');
   };
 
   return (

@@ -2,9 +2,11 @@ import '../../../CSS/Buttons.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../../../Context/CartContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
-function AddToCart({ product, item }) {
+function AddToCart({ product, item, onClick }) {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
   const currentProduct = product || item;
 
   const handleCartClick = (e) => {
@@ -22,14 +24,19 @@ function AddToCart({ product, item }) {
       console.error("AddToCart: Product exists but lacks an ID!", currentProduct);
       return;
     }
-
     addToCart({
       id: productId,
       title: currentProduct.title || currentProduct.name || "Product",
+      name: currentProduct.title || currentProduct.name || "Product",
       price: Number(currentProduct.price) || 0,
       image: currentProduct.image || currentProduct.img || "",
+      quantity: 1,
       ...currentProduct
     });
+    if (onClick) {
+      onClick(e);
+    }
+    navigate('/cart');
   };
 
   return (

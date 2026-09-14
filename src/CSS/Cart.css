@@ -34,11 +34,8 @@
   font-size: 16px;
   margin-bottom: 24px;
 }
-<<<<<<< HEAD
 
 /* Cart Item Row */
-=======
->>>>>>> temp-branch
 .cart-item-row {
   display: grid;
   grid-template-columns: 2.5fr 1.5fr 1.5fr 1fr;
@@ -115,11 +112,8 @@
   text-align: center;
   font-size: 16px;
 }
-<<<<<<< HEAD
 
 /* Actions Row */
-=======
->>>>>>> temp-branch
 .cart-actions-row {
   display: flex;
   justify-content: space-between;
@@ -209,12 +203,12 @@
   width: 100%;
   margin-top: 16px;
   text-align: center;
+  display: block;
+  text-decoration: none;
+  box-sizing: border-box;
 }
-<<<<<<< HEAD
 
 /* Empty Cart State */
-=======
->>>>>>> temp-branch
 .empty-cart-container {
   text-align: center;
   padding: 80px 20px;

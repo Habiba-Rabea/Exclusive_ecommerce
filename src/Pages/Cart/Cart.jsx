@@ -17,6 +17,7 @@ const Cart = () => {
       alert("Invalid Coupon Code");
     }
   };
+
   const discountedSubtotal = subtotal - subtotal * discount;
   const shipping = subtotal === 0 || subtotal >= 500 ? 0 : 15;
   const total = discountedSubtotal + shipping;
@@ -28,10 +29,26 @@ const Cart = () => {
       </div>
 
       {cartItems.length === 0 ? (
-        <div className="empty-cart-container">
-          <h2>Your Cart is Empty</h2>
-          <p>Looks like you haven't added any products to your cart yet.</p>
-          <Link to="/products" className="btn-red" style={{ textDecoration: 'none' }}>
+        <div 
+          className="empty-cart-container"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            padding: '60px 20px',
+            margin: '40px auto',
+            width: '100%'
+          }}
+        >
+          <h2 style={{ fontSize: '32px', fontWeight: '600', marginBottom: '16px' }}>
+            Your Cart is Empty
+          </h2>
+          <p style={{ color: '#555', fontSize: '16px', marginBottom: '24px' }}>
+            Looks like you haven't added any products to your cart yet.
+          </p>
+          <Link to="/products" className="btn-red" style={{ textDecoration: 'none', padding: '16px 48px', display: 'inline-block' }}>
             Go Shopping
           </Link>
         </div>

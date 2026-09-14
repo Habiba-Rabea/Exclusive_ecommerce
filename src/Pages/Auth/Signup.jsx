@@ -167,7 +167,6 @@ export default function Signup() {
             Create Account
           </button>
         </form>
-
         <div style={{ marginTop: '24px', textAlign: 'center', color: '#555', fontSize: '15px' }}>
           <span>Already have account? </span>
           <Link to="/login" style={{ color: '#DB4444', textDecoration: 'none', fontWeight: '600', marginLeft: '6px' }}>

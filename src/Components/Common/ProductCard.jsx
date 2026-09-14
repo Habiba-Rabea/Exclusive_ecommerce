@@ -1,4 +1,5 @@
 import { Heart, Eye } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import '../../CSS/ProductCard.css';
 import RatingStars from '../UI/RatingStars.jsx';
 import AddToCart from '../UI/Buttons/cart.jsx';
@@ -30,12 +31,16 @@ export default function ProductCard({ product }) {
             />
           </button>
           
-          <button type="button" className="iconn-btn">
+          <Link 
+            to={`/product/${id}`} 
+            className="iconn-btn" 
+            aria-label="View Details"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'inherit' }}
+          >
             <Eye size={20} />
-          </button>
+          </Link>
         </div>
 
-       
         <AddToCart />
       </div>
 

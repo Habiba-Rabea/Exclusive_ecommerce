@@ -139,6 +139,7 @@ function FlashSale() {
                     <ProductCardOffer 
                         key={product.id}
                         product={product} 
+                        id={product.id}
                         image={product.image}
                         discount={product.discount}
                         title={product.title}

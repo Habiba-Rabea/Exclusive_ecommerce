@@ -12,7 +12,7 @@ import Checkout from '../Pages/checkout/Checkout.jsx';
 import NotFound from '../Pages/Notfound/notfound.jsx';
 import Contact from '../Pages/Contact/contact.jsx';
 import ProductDetails from '../Pages/Products/prodactdetails.jsx';
-import Account from '../Pages/Account/Account.jsx';
+import Account from '../Pages/Account/account.jsx';
 import Category from '../Pages/Category/CategoryPage.jsx';
 import CategoryProductsContextProvider from '../Context/CategoryProductsContext.jsx';
 

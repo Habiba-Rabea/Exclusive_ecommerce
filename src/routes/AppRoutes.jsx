@@ -6,7 +6,7 @@ import Home from '../Pages/Home/home.jsx';
 import About from '../Pages/About/about.jsx';
 import Cart from '../Pages/Cart/Cart.jsx';
 import Login from '../Pages/Auth/login.jsx';
-import SignUp from '../Pages/Auth/signup.jsx';
+import Signup from '../Pages/Auth/Signup.jsx';
 import Wishlist from '../Pages/Wishlist/wishlist.jsx';
 import Checkout from '../Pages/checkout/Checkout.jsx'; 
 import NotFound from '../Pages/Notfound/notfound.jsx';

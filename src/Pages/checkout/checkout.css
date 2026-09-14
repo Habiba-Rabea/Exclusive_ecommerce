@@ -1,14 +1,14 @@
 .checkout-container {
-  max-width: 1170px;
-  margin: 40px auto 100px auto;
+  max-width: 1000px; 
+  margin: 20px auto 60px auto;
   padding: 0 20px;
   font-family: 'Poppins', sans-serif, system-ui;
 }
 
 .breadcrumbs {
-  font-size: 14px;
+  font-size: 13px;
   color: #7d8184;
-  margin-bottom: 50px;
+  margin-bottom: 25px; 
 }
 
 .breadcrumbs span {
@@ -17,34 +17,34 @@
 }
 
 .main-title {
-  font-size: 36px;
+  font-size: 28px; 
   font-weight: 500;
   letter-spacing: 0.5px;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
   color: #000;
 }
 
 .checkout-content {
   display: grid;
-  grid-template-columns: 470px 1fr;
-  gap: 130px;
+  grid-template-columns: 420px 1fr; 
+  gap: 60px; 
   align-items: flex-start;
 }
 
 .billing-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px; 
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .input-group label {
-  font-size: 14px;
+  font-size: 13px;
   color: #7d8184;
 }
 
@@ -53,47 +53,46 @@
 }
 
 .input-group input {
-  height: 50px;
+  height: 40px; 
   background-color: #f5f5f5;
   border: none;
   border-radius: 4px;
-  padding: 0 16px;
-  font-size: 15px;
+  padding: 0 12px;
+  font-size: 14px;
   outline: none;
 }
 
 .checkbox-group {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 5px;
 }
 
 .checkbox-group input {
   accent-color: #db4444;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }
 
 .checkbox-group label {
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   color: #000;
 }
 
-/* Right Column */
 .order-summary {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 425px;
+  gap: 18px;
+  max-width: 380px;
 }
 
 .order-items-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .order-item {
@@ -105,26 +104,26 @@
 .item-info {
   display: flex;
   align-items: center;
-  gap: 20px;
-  font-size: 15px;
+  gap: 12px;
+  font-size: 14px;
   color: #000;
 }
 
 .item-info img {
-  width: 50px;
-  height: 40px;
+  width: 40px;
+  height: 35px;
   object-fit: contain;
 }
 
 .item-price {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
 }
 
 .calc-row {
   display: flex;
   justify-content: space-between;
-  font-size: 15px;
+  font-size: 14px;
   color: #000;
 }
 
@@ -141,8 +140,8 @@ hr {
 .payment-options {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin: 10px 0;
+  gap: 12px;
+  margin: 5px 0;
 }
 
 .payment-option {
@@ -154,56 +153,45 @@ hr {
 .radio-label {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .payment-option input {
   accent-color: #000;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }
 
 .payment-option label {
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
-}
-
-.card-logos {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.card-logos img {
-  height: 18px;
-  object-fit: contain;
 }
 
 .coupon-box {
   display: flex;
-  gap: 16px;
+  gap: 12px;
 }
 
 .coupon-box input {
   flex: 1;
-  height: 52px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 44px; 
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 4px;
-  padding: 0 20px;
-  font-size: 14px;
+  padding: 0 14px;
+  font-size: 13px;
   outline: none;
 }
 
 .btn-coupon {
-  padding: 0 36px;
+  padding: 0 24px;
   background-color: #db4444;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   transition: opacity 0.2s ease;
 }
 
@@ -213,22 +201,22 @@ hr {
 }
 
 .btn-order {
-  height: 52px;
-  width: 190px;
+  height: 46px; 
+  width: 170px;
   background-color: #db4444;
   color: #fff;
   border: none;
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 5px;
   transition: opacity 0.2s ease;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .checkout-content {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 40px;
   }
 }

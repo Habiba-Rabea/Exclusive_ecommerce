@@ -8,20 +8,28 @@ import { useWishlist } from '../../Context/WishlistContext.jsx';
 export default function ProductCard({ product }) {
   const { wishlistItems, toggleWishlist } = useWishlist();
   
-  const { id, name, price, originalPrice, rating, reviewsCount, image } = product || {};
+  if (!product) return null;
 
-  const isLiked = wishlistItems.some((item) => item.id === id);
+  const id = product.id || product._id;
+  const productName = product.name || product.title || "Product";
+  const { price, originalPrice, rating, reviewsCount, image } = product;
+
+  const isLiked = wishlistItems.some((item) => (item.id || item._id) === id);
 
   return (
     <div className="product-card">
       <div className="product-img">
-        <img src={image} alt={name} />
+        <img src={image} alt={productName} />
         
         <div className="product-icons">
           <button 
             type="button"
             className={`iconn-btn ${isLiked ? 'liked' : ''}`}
-            onClick={() => toggleWishlist(product)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleWishlist(product);
+            }}
             title={isLiked ? "Remove from Wishlist" : "Add to Wishlist"}
           >
             <Heart 
@@ -41,14 +49,19 @@ export default function ProductCard({ product }) {
           </Link>
         </div>
 
-        <AddToCart />
+        {/* تمرير المنتج بالكامل إلى زر الإضافة لضمان عمل السلة */}
+        <AddToCart product={product} />
       </div>
 
       <div className="product-info">
-        <h3 className="product-title">{name}</h3>
+        <h3 className="product-title">{productName}</h3>
         <div className="product-price">
           <span className="current-price">${price}</span>
-          {originalPrice && <span className="original-price"><del>${originalPrice}</del></span>}
+          {originalPrice && (
+            <span className="original-price">
+              <del>${originalPrice}</del>
+            </span>
+          )}
         </div>
         
         <div className="product-rating-area">

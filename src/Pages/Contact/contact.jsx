@@ -1,8 +1,51 @@
+import { useState } from 'react';
 import InputField from '../../Components/UI/inputs.jsx'; 
-import ViewAllProducts from '../../Components/UI/Buttons/ViewAllProducts.jsx';
 import { FaPhoneAlt, FaRegEnvelope } from 'react-icons/fa';
 import './Contact.css';
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [alertInfo, setAlertInfo] = useState({ show: false, message: '', type: '' });
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setAlertInfo({
+        show: true,
+        message: 'Please fill in all required fields (*)',
+        type: 'error'
+      });
+      return;
+    }
+
+    setLoading(true);
+    setAlertInfo({ show: false, message: '', type: '' });
+    setTimeout(() => {
+      setLoading(false);
+      setAlertInfo({
+        show: true,
+        message: 'Your message has been sent successfully!',
+        type: 'success'
+      });
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+    }, 1200);
+  };
+
   return (
     <div className="contact">
       <div className="contact-info">
@@ -25,16 +68,46 @@ const Contact = () => {
         <p>Emails: customer@exclusive.com</p>
         <p>Emails: support@exclusive.com</p>
       </div>
-      <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+
+      <form className="contact-form" onSubmit={handleSubmit}>
+        {alertInfo.show && (
+          <div className={`status-alert ${alertInfo.type}`}>
+            {alertInfo.message}
+          </div>
+        )}
+
         <div className="row">
-          <InputField placeholder="Your Name *" />
-          <InputField type="email" placeholder="Your Email *" />
-          <InputField type="tel" placeholder="Your Phone *" />
+          <InputField 
+            placeholder="Your Name *" 
+            value={formData.name}
+            onChange={(e) => handleChange('name', e.target.value)}
+          />
+          <InputField 
+            type="email" 
+            placeholder="Your Email *" 
+            value={formData.email}
+            onChange={(e) => handleChange('email', e.target.value)}
+          />
+          <InputField 
+            type="tel" 
+            placeholder="Your Phone *" 
+            value={formData.phone}
+            onChange={(e) => handleChange('phone', e.target.value)}
+          />
         </div>
-        <InputField placeholder="Your Massage" isTextArea={true} />
+        
+        <InputField 
+          placeholder="Your Message *" 
+          isTextArea={true} 
+          value={formData.message}
+          onChange={(e) => handleChange('message', e.target.value)}
+        />
+        
         <div className="btn-wrapper">
-          <ViewAllProducts text="Send Massage" />
-        </div>
+  <button type="submit" className="view-all-products-btn" disabled={loading}>
+    {loading ? "Sending..." : "Send Message"}
+  </button>
+</div>
       </form>
     </div>
   );

@@ -76,8 +76,6 @@ export default function ProductDetails() {
             <img src={selectedImage} alt="main_image" />
           </div>
         </div>
-
-        {/*info */}
         <div className="product_info">
           <h1 className="product-name">{Eproduct.name}</h1>
         <div className="rating-stock">
@@ -95,8 +93,6 @@ export default function ProductDetails() {
           <p className="product-description">{Eproduct.description}</p>
 
           <div className="divider"></div>
-
-          {/*colors*/}
           <div className="colors-section">
             <span>Colours:</span>
             <div className="color-options">
@@ -128,8 +124,6 @@ export default function ProductDetails() {
               <Heart size={20} />
             </button>
           </div>
-
-          {/* delivery*/}
           <div className="delivery-box">
             <div className="delivery-row">
               <Truck size={24} />
@@ -152,8 +146,6 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
-
-      {/* related items */}
       <div className="related-items">
         <div className="related-title">
           <span className="red-bar"></span>

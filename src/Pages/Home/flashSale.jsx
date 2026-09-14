@@ -5,7 +5,6 @@ import ViewAllProducts from '../../Components/UI/Buttons/ViewAllProducts.jsx';
 import SectionHeader from '../../Components/Common/sectionheader.jsx';
 import { ArrowLeft, ArrowRight } from 'lucide-react'; 
 import '../../CSS/flashSale.css';
-import { Link } from 'react-router-dom';
 
 import img1 from '../../assets/Images/home/img1.jpg';
 import img2 from '../../assets/Images/home/img2.jpg';
@@ -24,7 +23,9 @@ function FlashSale() {
             id: 91,
             image: img1,
             discount: "-13%",
+            name: "Force Feedback Wheel",
             title: "Force Feedback Wheel",
+            price: 349,
             currentPrice: "$349",
             originalPrice: "$399",
             rating: 5,
@@ -34,7 +35,9 @@ function FlashSale() {
             id: 75,
             image: img2,
             discount: "-9%",
+            name: "Audiophile Reference 800",
             title: "Audiophile Reference 800",
+            price: 499,
             currentPrice: "$499",
             originalPrice: "$549",
             rating: 5,
@@ -44,7 +47,9 @@ function FlashSale() {
             id: 25,
             image: img3,
             discount: "-13%",
+            name: "Creator Pro Duo",
             title: "Creator Pro Duo",
+            price: 1999,
             currentPrice: "$1,999",
             originalPrice: "$2,999",
             rating: 5,
@@ -54,7 +59,9 @@ function FlashSale() {
             id: 11,
             image: img4,
             discount: "-15%",
+            name: "Quantum X Prime",
             title: "Quantum X Prime",
+            price: 849,
             currentPrice: "$849",
             originalPrice: "$999",
             rating: 4,
@@ -64,7 +71,9 @@ function FlashSale() {
             id: 21,
             image: img5,
             discount: "-12%",
+            name: "WorkStation Studio Z",
             title: "WorkStation Studio Z",
+            price: 2199,
             currentPrice: "$2,199",
             originalPrice: "$2,499",
             rating: 4,
@@ -74,27 +83,33 @@ function FlashSale() {
             id: 47,
             image: img6,
             discount: "-13%",
+            name: "Ultra Adventure Watch",
             title: "Ultra Adventure Watch",
+            price: 699,
             currentPrice: "$699",
             originalPrice: "$799",
             rating: 4.5,
             reviewsCount: 79
         },
-         {
+        {
             id: 50,
             image: img7,
             discount: "-14%",
+            name: "Aperture FX DSLR",
             title: "Aperture FX DSLR",
+            price: 1199,
             currentPrice: "$1,199",
             originalPrice: "$1,399",
             rating: 4,
             reviewsCount: 51
         },
-         {
+        {
             id: 4,
             image: img8,
             discount: "-14%",
+            name: "Studio Fold Ultra",
             title: "Studio Fold Ultra",
+            price: 1199,
             currentPrice: "$1,199",
             originalPrice: "$1,399",
             rating: 5,
@@ -151,9 +166,9 @@ function FlashSale() {
                 ))}
             </div>
 
-            <Link to="/products" style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
                 <ViewAllProducts text="View All Products" />
-            </Link>
+            </div>
         </section>
     );
 }

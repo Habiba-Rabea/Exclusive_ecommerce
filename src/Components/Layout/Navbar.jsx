@@ -1,10 +1,6 @@
 import { useState } from "react"; 
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { Search, Heart, ShoppingCart, Menu, X, User, Package, LogOut } from 'lucide-react';
-<<<<<<< HEAD
-=======
-// import LanguageSelector from '../LanguageSelector/LanguageSelector';
->>>>>>> 2aa553b (feat(cart,checkout): implement cart management and checkout workflow)
 import '../../CSS/Navbar.css';
 import { productsData } from '../../data/productsData.js';
 import { useWishlist } from '../../Context/WishlistContext.jsx';

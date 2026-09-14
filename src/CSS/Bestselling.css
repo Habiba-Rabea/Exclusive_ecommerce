@@ -4,8 +4,6 @@
   padding: 0 16px;
   box-sizing: border-box;
 }
-
-/* الشارة الحمراء والعنوان الصغير */
 .section-badge {
   display: flex;
   align-items: center;
@@ -26,7 +24,6 @@
   font-size: 16px;
 }
 
-/* الهيدر والعنوان مع الزر */
 .bestselling-header {
   display: flex;
   justify-content: space-between;
@@ -42,7 +39,6 @@
   letter-spacing: 0.04em;
 }
 
-/* شبكة عرض الكروت 4 أعمدة Responsive */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

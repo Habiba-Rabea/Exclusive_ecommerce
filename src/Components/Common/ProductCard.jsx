@@ -48,8 +48,6 @@ export default function ProductCard({ product }) {
             <Eye size={20} />
           </Link>
         </div>
-
-        {/* تمرير المنتج بالكامل إلى زر الإضافة لضمان عمل السلة */}
         <AddToCart product={product} />
       </div>
 

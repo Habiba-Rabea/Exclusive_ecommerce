@@ -4,6 +4,32 @@
   padding: 0 16px;
   box-sizing: border-box;
 }
+.new-arrival-wrapper .card {
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+}
+.new-arrival-wrapper .card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; 
+  object-position: center !important; 
+  display: block;
+}
+.new-arrival-wrapper .card figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  color: #fff;
+  z-index: 2;
+}
 .arrival-content {
   display: grid;
   grid-template-columns: 1fr;

@@ -39,30 +39,16 @@ export default function ProductCard({ product }) {
             />
           </button>
           
-<<<<<<< HEAD
-          <button 
-            type="button" 
-            className="iconn-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-=======
           <Link 
             to={`/product/${id}`} 
             className="iconn-btn" 
             aria-label="View Details"
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'inherit' }}
->>>>>>> temp-branch
           >
             <Eye size={20} />
           </Link>
         </div>
-<<<<<<< HEAD
 
-        {/* تمرير المنتج بالكامل إلى زر الإضافة */}
-=======
->>>>>>> temp-branch
         <AddToCart product={product} />
       </div>
 

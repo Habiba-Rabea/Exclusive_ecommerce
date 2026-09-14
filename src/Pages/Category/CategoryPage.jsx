@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { productsData } from '../../data/productsData.js';
 import Breadcrumb from '../../Components/Common/Breadcrumb.jsx';
@@ -7,6 +7,7 @@ import CategorySearchBar from '../../Components/Category/CategorySearchBar.jsx';
 import ProductCardCategory from '../../Components/Category/ProductCardCategory.jsx';
 import '../../CSS/Tailwind.css';
 import '../../CSS/CategoryProducts.css';
+import { CategoryProductsContext } from '../../Context/CategoryProductsContext.jsx';
 
 const categoryMeta = {
   phones: {
@@ -45,6 +46,7 @@ const categoryLinks = [
 ];
 
 export default function Category() {
+  let {query,sortOption} = useContext(CategoryProductsContext);
   const { categorySlug } = useParams();
   const selectedCategory = categorySlug?.toLowerCase();
   const meta = selectedCategory ? categoryMeta[selectedCategory] : null;
@@ -56,6 +58,24 @@ export default function Category() {
     [selectedCategory],
   );
 
+  const visibleProducts = useMemo(()=>{
+   const filtered = products.filter((item)=>{
+    return item.name.toLowerCase().includes(query.toLowerCase().trim())
+   })
+   return [...filtered].sort((a,b)=>{
+    switch(sortOption){
+      case "az" : return a.name.localeCompare(b.name);
+      case "za" : return b.name.localeCompare(a.name);
+      case "lowHigh" : return a.price - b.price;
+      case "highLow" : return b.price - a.price;
+    }
+   })
+   
+  },[query,sortOption, products]);
+
+
+  
+
   if (selectedCategory && !meta) {
     return (
       <main className="category-page category-page--empty">
@@ -64,6 +84,8 @@ export default function Category() {
       </main>
     );
   }
+
+
 
   return (
     <main className="category-page">
@@ -91,11 +113,11 @@ export default function Category() {
       <CategoryHeader
         title={meta?.title || 'ALL PRODUCTS'}
         description={meta?.description || 'Explore our complete collection of selected essentials.'}
-        productCount={products.length}
+        productCount={visibleProducts.length}
       />
-      <CategorySearchBar productCount={products.length} />
+      <CategorySearchBar productCount={visibleProducts.length} />
       <section className="category-products-grid" aria-label={`${meta?.title || 'All'} products`}>
-        {products.map((product) => (
+        {visibleProducts.map((product) => (
           <ProductCardCategory key={product.id} product={product} />
         ))}
       </section>

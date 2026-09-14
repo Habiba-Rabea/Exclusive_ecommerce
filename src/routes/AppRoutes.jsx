@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import ScrollToTop from '../Components/ScrollToTop.jsx';
-import MainLayout from '../Components/Layout/mainLayout';
+import MainLayout from '../Components/Layout/mainLayout'; // تحققي هل المجلد اسمه Layout أم layout
 import Home from '../Pages/Home/home.jsx';
-import About from "../Pages/About/about.jsx";
+import About from '../Pages/About/about.jsx';
 import Cart from '../Pages/Cart/Cart.jsx';
 import Login from '../Pages/Auth/login.jsx';
-import Signup from '../Pages/Auth/Signup.jsx';
+import SignUp from '../Pages/Auth/signup.jsx';
 import Wishlist from '../Pages/Wishlist/wishlist.jsx';
-import Checkout from '../Pages/checkout/Checkout.jsx';
+import Checkout from '../Pages/checkout/Checkout.jsx'; 
 import NotFound from '../Pages/Notfound/notfound.jsx';
 import Contact from '../Pages/Contact/contact.jsx';
 import ProductDetails from '../Pages/Products/prodactdetails.jsx';

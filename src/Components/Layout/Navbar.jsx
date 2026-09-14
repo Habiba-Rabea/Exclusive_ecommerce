@@ -1,7 +1,6 @@
 import { useState } from "react"; 
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { Search, Heart, ShoppingCart, Menu, X, User, Package, LogOut } from 'lucide-react';
-import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import '../../CSS/Navbar.css';
 import { productsData } from '../../data/productsData.js';
 import { useWishlist } from '../../Context/WishlistContext.jsx';
@@ -64,7 +63,6 @@ function Navbar() {
             <div className="top-banner">
                 <span>Up to 50% OFF on All Electronics with Free Express Delivery!</span>
                 <Link to="/products" className="banner-link">ShopNow</Link>
-                <LanguageSelector />
             </div>
             
             <nav className="main-nav">

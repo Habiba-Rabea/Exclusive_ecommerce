@@ -63,11 +63,6 @@ function Navbar() {
 
     return (
         <header className="navbar-header">
-            <div className="top-banner">
-                <span>Up to 50% OFF on All Electronics with Free Express Delivery!</span>
-                <Link to="/products" className="banner-link">ShopNow</Link>
-            </div>
-            
             <nav className="main-nav">
                 <div className="nav-logo">
                     <Link to="/">Exclusive</Link> 

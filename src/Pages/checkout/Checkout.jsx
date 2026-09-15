@@ -1,108 +1,179 @@
-import React, { useState } from 'react';
-import './checkout.css';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../../Context/CartContext";
+import "./checkout.css";
 
-const orderItems = [
-  {
-    id: 1,
-    name: 'LCD Monitor',
-    price: 650,
-    image: 'https://pngimg.com/d/monitor_PNG101646.png',
-  },
-  {
-    id: 2,
-    name: 'H1 Gamepad',
-    price: 1100,
-    image: 'https://pngimg.com/d/gamepad_PNG79.png',
-  },
-];
+const Checkout = () => {
+  const { cartItems, subtotal, clearCart } = useCart();
+  const navigate = useNavigate();
 
-export default function Checkout() {
-  const [paymentMethod, setPaymentMethod] = useState('cod');
+  const [paymentMethod, setPaymentMethod] = useState("cash");
 
-  const subtotal = orderItems.reduce((acc, item) => acc + item.price, 0);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    companyName: "",
+    streetAddress: "",
+    apartment: "",
+    townCity: "",
+    phoneNumber: "",
+    emailAddress: "",
+    saveInfo: false
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({ 
+      ...formData, 
+      [name]: type === "checkbox" ? checked : value 
+    });
+  };
+  const shipping = subtotal === 0 || subtotal >= 500 ? 0 : 15;
+  const total = subtotal + shipping;
+
+  const handlePlaceOrder = (e) => {
+    e.preventDefault();
+    
+    if (cartItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    alert("Order Placed Successfully!");
+    clearCart();
+    navigate("/");
+  };
 
   return (
     <div className="checkout-container">
       <div className="breadcrumbs">
-        Account / My Account / Product / View Cart / <span>CheckOut</span>
+        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>Home</Link> / {" "}
+        <Link to="/cart" style={{ color: "inherit", textDecoration: "none" }}>Cart</Link> / {" "}
+        <span>Checkout</span>
       </div>
 
       <h1 className="main-title">Billing Details</h1>
 
       <div className="checkout-content">
-        {/* Left Column: Form */}
-        <form className="billing-form" onSubmit={(e) => e.preventDefault()}>
+        <form id="checkout-form" className="billing-form" onSubmit={handlePlaceOrder}>
           <div className="input-group">
             <label>First Name<span>*</span></label>
-            <input type="text" required />
+            <input
+              type="text"
+              name="firstName"
+              required
+              value={formData.firstName}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="input-group">
             <label>Company Name</label>
-            <input type="text" />
+            <input
+              type="text"
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="input-group">
             <label>Street Address<span>*</span></label>
-            <input type="text" required />
+            <input
+              type="text"
+              name="streetAddress"
+              required
+              value={formData.streetAddress}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="input-group">
             <label>Apartment, floor, etc. (optional)</label>
-            <input type="text" />
+            <input
+              type="text"
+              name="apartment"
+              value={formData.apartment}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="input-group">
             <label>Town/City<span>*</span></label>
-            <input type="text" required />
+            <input
+              type="text"
+              name="townCity"
+              required
+              value={formData.townCity}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="input-group">
             <label>Phone Number<span>*</span></label>
-            <input type="tel" required />
+            <input
+              type="tel"
+              name="phoneNumber"
+              required
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="input-group">
             <label>Email Address<span>*</span></label>
-            <input type="email" required />
+            <input
+              type="email"
+              name="emailAddress"
+              required
+              value={formData.emailAddress}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="checkbox-group">
-            <input type="checkbox" id="saveInfo" defaultChecked />
+            <input
+              type="checkbox"
+              id="saveInfo"
+              name="saveInfo"
+              checked={formData.saveInfo}
+              onChange={handleInputChange}
+            />
             <label htmlFor="saveInfo">Save this information for faster check-out next time</label>
           </div>
         </form>
-
-        {/* Right Column: Order Summary */}
         <div className="order-summary">
           <div className="order-items-list">
-            {orderItems.map((item) => (
-              <div key={item.id} className="order-item">
-                <div className="item-info">
-                  <img src={item.image} alt={item.name} />
-                  <span>{item.name}</span>
+            {cartItems.length === 0 ? (
+              <p>No products in cart.</p>
+            ) : (
+              cartItems.map((item) => (
+                <div className="order-item" key={item.id}>
+                  <div className="item-info">
+                    {item.image && <img src={item.image} alt={item.title || item.name} />}
+                    <span>{item.title || item.name} (x{item.quantity})</span>
+                  </div>
+                  <span className="item-price">${((item.price || 0) * (item.quantity || 1)).toFixed(2)}</span>
                 </div>
-                <span className="item-price">${item.price}</span>
-              </div>
-            ))}
+              ))
+            )}
           </div>
 
           <div className="calc-row">
             <span>Subtotal:</span>
-            <span>${subtotal}</span>
+            <span>${subtotal.toFixed(2)}</span>
           </div>
           <hr />
+
           <div className="calc-row">
             <span>Shipping:</span>
-            <span>Free</span>
+            <span>{shipping === 0 ? "Free" : `$${shipping}`}</span>
           </div>
           <hr />
+
           <div className="calc-row total">
             <span>Total:</span>
-            <span>${subtotal}</span>
+            <span>${total.toFixed(2)}</span>
           </div>
-
-          {/* Payment Selection */}
           <div className="payment-options">
             <div className="payment-option">
               <div className="radio-label">
@@ -111,14 +182,10 @@ export default function Checkout() {
                   id="bank"
                   name="payment"
                   value="bank"
-                  checked={paymentMethod === 'bank'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  checked={paymentMethod === "bank"}
+                  onChange={() => setPaymentMethod("bank")}
                 />
                 <label htmlFor="bank">Bank</label>
-              </div>
-              <div className="card-logos">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" />
               </div>
             </div>
 
@@ -126,27 +193,23 @@ export default function Checkout() {
               <div className="radio-label">
                 <input
                   type="radio"
-                  id="cod"
+                  id="cash"
                   name="payment"
-                  value="cod"
-                  checked={paymentMethod === 'cod'}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  value="cash"
+                  checked={paymentMethod === "cash"}
+                  onChange={() => setPaymentMethod("cash")}
                 />
-                <label htmlFor="cod">Cash on delivery</label>
+                <label htmlFor="cash">Cash on delivery</label>
               </div>
             </div>
           </div>
 
-          {/* Coupon */}
-          <div className="coupon-box">
-            <input type="text" placeholder="Coupon Code" />
-            <button className="btn-coupon">Apply Coupon</button>
-          </div>
-
-          {/* Submit */}
-          <button className="btn-order">Place Order</button>
+          <button type="submit" form="checkout-form" className="btn-order">
+            Place Order
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
+export default Checkout;

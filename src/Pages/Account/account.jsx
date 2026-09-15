@@ -23,11 +23,11 @@ export default function Account() {
             <div className="Breadcrumbs-welcome">
                 <Breadcrumb items={[
                     { name: "Home", link: "/" },
-                    { name: "Account", link: "null" }]} />
+                    { name: "Account", link: null }]} />
     
-                <p className="welcome-txt">
+                <span className="welcome-txt">
                     Welcome ! <span className="my-name">{displayName}</span>
-                </p>
+                </span>
             </div>
             <main className="acc-container">
                 <SideBar activeTab={activeTab} setActiveTab={setActiveTab}

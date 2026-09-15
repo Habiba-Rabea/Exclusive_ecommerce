@@ -1,11 +1,11 @@
 import { useState } from "react"; 
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { Search, Heart, ShoppingCart, Menu, X, User, Package, LogOut } from 'lucide-react';
-import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import '../../CSS/Navbar.css';
 import { productsData } from '../../data/productsData.js';
 import { useWishlist } from '../../Context/WishlistContext.jsx';
 import { useAuth } from '../../Context/AuthContext.jsx';
+import { useCart } from '../../Context/CartContext.jsx';
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,9 +14,11 @@ function Navbar() {
 
     const { currentUser, logout } = useAuth();
     const { wishlistItems } = useWishlist();
-    const wishlistCount = wishlistItems.length;
-
-    const [cartCount, setCartCount] = useState(0);
+    const wishlistCount = wishlistItems ? wishlistItems.length : 0;
+    const { cartItems } = useCart();
+    const cartCount = cartItems 
+        ? cartItems.reduce((total, item) => total + (item.quantity || 1), 0) 
+        : 0;
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -61,12 +63,6 @@ function Navbar() {
 
     return (
         <header className="navbar-header">
-            <div className="top-banner">
-                <span>Up to 50% OFF on All Electronics with Free Express Delivery!</span>
-                <Link to="/products" className="banner-link">ShopNow</Link>
-                <LanguageSelector />
-            </div>
-            
             <nav className="main-nav">
                 <div className="nav-logo">
                     <Link to="/">Exclusive</Link> 

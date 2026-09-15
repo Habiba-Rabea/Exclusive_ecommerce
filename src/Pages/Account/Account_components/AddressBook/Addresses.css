@@ -34,23 +34,23 @@
   margin-bottom: 0.3rem;
 }
 .address-modal-overlay {
-  z-index: 9999;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
 }
 .address-modal {
   background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 400px;
+  border-radius: 12px;
+  padding: 1.8rem;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 .address-modal form {
   display: flex;

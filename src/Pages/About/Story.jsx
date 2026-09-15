@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import hero_about from "../../assets/images/hero_about.jpg";
+import hero_about from "../../assets/Images/hero_about.jpg";
 
 function Story() {
     return (

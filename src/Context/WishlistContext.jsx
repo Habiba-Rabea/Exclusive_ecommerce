@@ -1,6 +1,5 @@
 import { createContext, useContext } from 'react';
 import { useLocalStorage } from '../Hooks/useLocalStorage';
-
 const WishlistContext = createContext();
 
 export function WishlistProvider({ children }) {

@@ -1,8 +1,4 @@
 import { createContext, useState } from "react"
-
-
-
-
 export const CategoryProductsContext = createContext();
 
 export default function CategoryProductsContextProvider(props) {

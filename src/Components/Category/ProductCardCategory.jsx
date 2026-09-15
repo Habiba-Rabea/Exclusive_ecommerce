@@ -29,8 +29,7 @@ export default function ProductCardCategory({ product }) {
     <article className="category-product-card">
       <div className="category-product-visual">
         {discountBadge ? <span className="category-product-badge">{discountBadge}</span> : null}
-        <img src={image} alt={name} loading="lazy" />
-
+          <img src={image} alt={name} loading="lazy" />
         <div className="category-product-actions">
           <button 
             type="button" 
@@ -48,17 +47,11 @@ export default function ProductCardCategory({ product }) {
               color={isLiked ? "red" : "currentColor"} 
             />
           </button>
-
-          <Link 
-            to={`/product/${id}`} 
-            aria-label={`Quick view ${name}`}  
-            className="grid place-items-center size-7.75 border-0 rounded-full bg-white text-black shadow-[0_3px_10px_rgba(0,0,0,0.08)] transition-colors duration-200 hover:bg-[#DB4444]! hover:text-white!"
-          >
-            <Eye size={19} />
-          </Link>        
+       <Link to={`/product/${id}`} aria-label={`Quick view ${name}`}  className="grid place-items-center size-7.75 border-0 rounded-full bg-white text-black shadow-[0_3px_10px_rgba(0,0,0,0.08)] transition-colors duration-200 hover:bg-[#DB4444]! hover:text-white!">
+      <Eye size={19} />
+     </Link>        
         </div>
-
-        <button 
+       <button 
           type="button" 
           className="category-add-to-cart"
           onClick={handleAddToCart}
@@ -67,18 +60,17 @@ export default function ProductCardCategory({ product }) {
         </button>
       </div>
 
-      <div className="category-product-info">
-        <p className="category-product-subtext">{subtext}</p>
-        <Link to={`/product/${id}`}>
+        <div className="category-product-info">
+          <p className="category-product-subtext">{subtext}</p>
           <h2>{name}</h2>
-        </Link>
-        <p className="category-product-description">{description}</p>
-        <div className="category-product-price">
-          <strong>${price ? price.toLocaleString() : price}</strong>
-          {originalPrice ? <del>${originalPrice.toLocaleString()}</del> : null}
+          <p className="category-product-description">{description}</p>
+          <div className="category-product-price">
+            <strong>${price.toLocaleString()}</strong>
+            {originalPrice ? <del>${originalPrice.toLocaleString()}</del> : null}
+          </div>
+          <RatingStars rating={rating} reviewsCount={reviewsCount} />
         </div>
-        <RatingStars rating={rating} reviewsCount={reviewsCount} />
-      </div>
     </article>
+    
   );
 }

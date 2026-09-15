@@ -1,6 +1,9 @@
 .breadCrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   font-size: 14px;
-  margin: 2rem 0 3rem 0;
+  margin: 3rem 0 ;
 }
 
 .breadcrumb-link {
@@ -20,6 +23,12 @@
 }
 
 .breadcrumb-current {
-  color: #1c1c1c;
+  color: #000;
   font-weight: 500;
+}
+
+@media (max-width:425px) {
+  .breadCrumb {
+   margin: 1rem;
+  }
 }

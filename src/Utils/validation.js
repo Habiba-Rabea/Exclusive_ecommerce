@@ -16,16 +16,16 @@ export const PHONE_ERROR_MESSAGE = "Enter a valid Egyptian phone number (e.g. 01
 
 // Zip / Postal Code - digits only, 3 to 10
 export const ZIP_REGEX = /^[0-9]{3,10}$/;
-export const ZIP_ERROR_MESSAGE = "Enter a valid zip code";
+export const ZIP_ERROR_MESSAGE = "Enter a valid zip code(digits only 3 to 10";
 
 // Card Holder Name - same rule as Name
 export const CARD_HOLDER_REGEX = NAME_REGEX;
 export const CARD_HOLDER_ERROR_MESSAGE = "Enter a valid cardholder name";
 
-// Expiry Date - MM/YY format only (does not check if still valid/future)
+// Expiry Date - MM/YY format only 
 export const EXPIRY_REGEX = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
 export const EXPIRY_ERROR_MESSAGE = "Use MM/YY format";
 
 // Card Number - 13 to 19 digits
 export const CARD_NUMBER_REGEX = /^[0-9]{13,19}$/;
-export const CARD_NUMBER_ERROR_MESSAGE = "Enter a valid card number";
+export const CARD_NUMBER_ERROR_MESSAGE = "Enter a valid card number(13 to 19)";

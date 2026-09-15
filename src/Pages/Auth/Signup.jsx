@@ -134,7 +134,10 @@ export default function Signup() {
               placeholder="Enter your password"
               {...register('password', { 
                 required: 'Password is required',
-                minLength: { value: 6, message: 'Password must be at least 6 characters' }
+                pattern: {
+                  value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+                  message: 'Must be 8+ chars with uppercase, lowercase, number & special char'
+                }
               })}
               style={{ 
                 width: '100%', 

@@ -15,19 +15,14 @@ export default function Login() {
       navigate('/account');
     }
   }, [currentUser, navigate]);
-
   const loginSchema = zod.object({
     email: zod
       .string()
-      .nonempty('Email is required')
+      .min(1, 'Email is required')
       .email('Enter valid email (e.g. alex@example.com)'),
     password: zod
       .string()
-      .nonempty('Password is required')
-      .regex(
-        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-        'Must be 8+ chars with uppercase, lowercase, number & special char'
-      ),
+      .min(1, 'Password is required'), 
   });
 
   const { register, handleSubmit, setError, formState } = useForm({

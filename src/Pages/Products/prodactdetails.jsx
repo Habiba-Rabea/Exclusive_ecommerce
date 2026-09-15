@@ -25,7 +25,7 @@ export default function ProductDetails() {
   const Eproduct = productsData.find((p) => p.id === Number(id));
 
   if (!Eproduct) {
-    return <h1>Product not found</h1>;
+    return <h1 className="text-not-found">Product not found</h1>;
   }
 
   const imgs = productImagesMap[Eproduct.id] || [];

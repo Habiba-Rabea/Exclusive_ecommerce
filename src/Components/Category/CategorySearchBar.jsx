@@ -33,7 +33,7 @@ export default function CategorySearchBar({ productCount }) {
 
 {/* sorting by select tag */}
 
-<div className="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-1.5 shadow-sm hover:border-gray-300 transition-all">
+<div className="selectCard inline-flex items-center gap-2 bg-white border border-gray-200 rounded-lg  px-0.75 py-1.5 shadow-sm hover:border-gray-300 transition-all">
   {/* Label */}
   <span className="text-xs font-medium text-gray-500 whitespace-nowrap flex gap-1">
     <ArrowUpDown className="category-search-bar__sort-icon" />
@@ -44,7 +44,7 @@ export default function CategorySearchBar({ productCount }) {
   <div className="h-4 w-px bg-gray-200" />
 
   {/* Select / Dropdown Component */}
-   <select value={sortOption} className="select outline-0 border-0 shadow-none w-30" onChange={(e)=>setSortOption(e.target.value)}>
+   <select value={sortOption} className="selectOptions select outline-0 border-0 shadow-none w-8.5  " onChange={(e)=>setSortOption(e.target.value)}>
         <option value="az">A-Z</option>
         <option value="za">Z-A</option>
         <option value="lowHigh">Low to High</option>

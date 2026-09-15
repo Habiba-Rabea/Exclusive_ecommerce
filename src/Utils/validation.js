@@ -29,3 +29,7 @@ export const EXPIRY_ERROR_MESSAGE = "Use MM/YY format";
 // Card Number - 13 to 19 digits
 export const CARD_NUMBER_REGEX = /^[0-9]{13,19}$/;
 export const CARD_NUMBER_ERROR_MESSAGE = "Enter a valid card number(13 to 19)";
+
+// Email
+export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const EMAIL_ERROR_MESSAGE = "Enter a valid email, e.g. name@example.com";

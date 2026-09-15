@@ -51,6 +51,13 @@
     font-size: 1.25rem;
   }
   .Breadcrumbs-welcome{
-    margin:14px 18px 12px 0px;
+    margin:1rem 0;
+    gap:1rem;
   }
+  .welcome-txt{
+    text-align: right;
+  }
+      .breadCrumb {
+        margin: 0;
+    }
 }

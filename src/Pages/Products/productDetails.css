@@ -1,7 +1,7 @@
 .container_p {
   max-width: 85%;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: var(--nav-height) 1rem;
   font-family: "Poppins", "Segoe UI", sans-serif;
   color: var(--black1);
 }
@@ -255,7 +255,7 @@
 /* ===== tablet :Responsive ===== */
 @media (max-width: 768px) {
   .container_p {
-    padding: 1rem .75rem;
+    padding: var(--nav-height) .75rem;
     max-width: 88%;
   }
   .product-main-section {
@@ -311,12 +311,17 @@
 .thumbnail-item {
   width: 4.4rem;
   height: 4.4rem;
+  flex-shrink: 1;
+  aspect-ratio: 1/1;
 }
 .product-gallery{
   flex-direction: column-reverse;
+  flex: 1 1 100%;
+  width: 100%;
 }
 .thumbnail-list{
   flex-direction: row;
+  width: 100%;
 }
 .product_info{
   height: auto;
@@ -347,5 +352,11 @@
   flex-shrink: 0;
   width: 2.5rem;
 }
+  .main-image {
+    flex: none;
+    height: 20rem;
+    width:100%;
+    max-width: 100%;
+  }
 }
 

@@ -4,19 +4,22 @@ import { useAuth } from "/src/Context/AuthContext.jsx";
 import { 
   PASSWORD_REGEX, PASSWORD_ERROR_MESSAGE,
   NAME_REGEX, NAME_ERROR_MESSAGE,
+  EMAIL_REGEX, EMAIL_ERROR_MESSAGE,
 } from "/src/Utils/validation";
 import "./MyProfile.css";
 
 export default function EditProfileForm() {
-  const {currentUser,updateUser}=useAuth();
+  const {currentUser,updateUser,usersList}=useAuth();
 
   const defaultAddress = currentUser?.addresses?.find((addr) => addr.isDefault);
   const addressDisplay = defaultAddress
   ? `${defaultAddress.city}, ${defaultAddress.zip}, Egypt`
   : "No address added yet";
+
   const [profileData, setProfileData] = useState({
     firstName: currentUser?.firstName || "",
     lastName: currentUser?.lastName || "",
+    email: currentUser?.email || "",
   });
   
   function handleProfileChange(e) {
@@ -55,6 +58,22 @@ export default function EditProfileForm() {
     return;
   }
 
+  if(!EMAIL_REGEX.test(profileData.email)) {
+    setProfileError("Email: " + EMAIL_ERROR_MESSAGE);
+    return;
+  }
+
+  const isEmailTaken = usersList.some(
+  (user) =>
+    user.email.toLowerCase() === profileData.email.toLowerCase() &&
+    user.email.toLowerCase() !== currentUser.email.toLowerCase()
+  );
+
+  if (isEmailTaken) {
+    setProfileError("This email is already registered to another account");
+    return;
+  }
+
   setProfileError("")
 
   const wantsPasswordChange =
@@ -85,7 +104,8 @@ export default function EditProfileForm() {
     updateUser({
       firstName: profileData.firstName,
       lastName: profileData.lastName,
-      password: passwordData.newPassword
+      password: passwordData.newPassword,
+      email:profileData.email,
     })
     alert("Password changed successfully");
     setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
@@ -94,6 +114,7 @@ export default function EditProfileForm() {
     updateUser({
       firstName: profileData.firstName,
       lastName: profileData.lastName,
+      email: profileData.email
     });
     alert("Changes saved successfully");
   }
@@ -103,6 +124,7 @@ export default function EditProfileForm() {
       setProfileData({
         firstName: currentUser.firstName,
         lastName: currentUser.lastName,
+        email: currentUser.email
       },);
     }
   },[currentUser]);
@@ -111,6 +133,7 @@ export default function EditProfileForm() {
   setProfileData({
     firstName: currentUser?.firstName || "",
     lastName: currentUser?.lastName || "",
+    email: currentUser?.email || "",
   });
   setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
   setProfileError("");
@@ -140,10 +163,14 @@ export default function EditProfileForm() {
         </div>
 
         <div className="form-row">
-          <div className="info-display">
-            <label>Email</label>
-            <p>{currentUser?.email || "Not set"}</p>
-          </div>
+          <FormInput 
+            label="Email" 
+            name="email"
+            type="email"
+            value={profileData.email}
+            onChange={handleProfileChange} 
+            placeholder="example@gmail.com"
+          />
           <div className="info-display">
             <label>Default Address</label>
             <p>{addressDisplay || "No address added yet"}</p>

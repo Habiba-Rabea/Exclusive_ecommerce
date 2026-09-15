@@ -6,6 +6,7 @@ import { Heart, Truck, RotateCcw } from "lucide-react";
 import { productsData, productImagesMap, productStockMap } from "../../data/productsData.js";
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from "../../Context/CartContext.jsx";
+import { useWishlist } from "../../Context/WishlistContext.jsx";
 import "./productDetails.css";
 import '../../App.css';
 
@@ -19,6 +20,7 @@ export default function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { wishlistItems, toggleWishlist } = useWishlist();
 
   const Eproduct = productsData.find((p) => p.id === Number(id));
 
@@ -32,6 +34,7 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState(imgs[0]);
   const [selectedColor, setSelectedColor] = useState("Black");
   const [quantity, setQuantity] = useState(1);
+  const isWishlisted = wishlistItems.some((item) => item.id === Eproduct.id);
 
   function increaseQty() { setQuantity((q) => q + 1); }
   function decreaseQty() { setQuantity((q) => (q > 1 ? q - 1 : 1)); }
@@ -139,8 +142,17 @@ export default function ProductDetails() {
               {IsInStock ? "Buy Now" : "Out of Stock"}
             </button>
 
-            <button type="button" className="wishlist-btn" aria-label="add to favorite">
-              <Heart size={20} />
+            <button 
+              type="button" 
+              className="wishlist-btn" 
+              aria-label="add to favorite"
+              onClick={() => toggleWishlist(Eproduct)}
+            >
+              <Heart 
+                size={20} 
+                fill={isWishlisted ? "#db4444" : "none"} 
+                color={isWishlisted ? "#db4444" : "currentColor"} 
+              />
             </button>
           </div>
 

@@ -1,5 +1,5 @@
 import "/src/CSS/AddressCard.css"
-import { MoreVertical, Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 export default function AddressCard ({address ,onSetDefault,onEdit,onDelete}){
   const { id,label, isDefault, fullName, city, zip, country, phone } = address;
   
@@ -16,10 +16,8 @@ export default function AddressCard ({address ,onSetDefault,onEdit,onDelete}){
   return (
     <div className={`address-card ${isDefault ? "selected" : ""}`} onClick={handleCardClick}>
       <div className="address-card-header">
-        <span className="address-label">
-          {label} {isDefault && <span className="default-text">(Default)</span>}
-        </span>
-        <MoreVertical size={18} className="menu-icon" />
+        <span className="address-label"> {label} </span>
+        {isDefault && <span className="default-text">(Default)</span>}
       </div>
 
       <p className="address-name">{fullName}</p>

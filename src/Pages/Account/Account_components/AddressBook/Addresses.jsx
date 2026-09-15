@@ -28,7 +28,6 @@ const [newAddress, setNewAddress] = useState({
   fullName: "",
   city: "",
   zip: "",
-  country: "",
   phone: "",
 });
 const handleFormChange = (e) => {
@@ -41,7 +40,7 @@ const handleFormChange = (e) => {
 const closeModal = () => {
   setIsModalOpen(false);
   setEditingId(null);
-  setNewAddress({ label: "", fullName: "", city: "", zip: "", country: "", phone: "" });
+  setNewAddress({ label: "", fullName: "", city: "", zip: "", phone: "" });
 };
 
 const handleSaveAddress = (e) => {
@@ -84,7 +83,6 @@ const handleEditClick = (address) => {
     fullName: address.fullName,
     city: address.city,
     zip: address.zip,
-    country: address.country,
     phone: address.phone,
   });
   setEditingId(address.id);
@@ -126,12 +124,11 @@ const handleDeleteAddress = (id) => {
             <h3>{editingId ? "Edit Address" : "Add New Address"}</h3>
             {formError && <p className="error-message">{formError}</p>}
             <form onSubmit={handleSaveAddress}>
-              <FormInput name="label" placeholder="Label (e.g. Home, Work)" value={newAddress.label} onChange={handleFormChange} required />
-              <FormInput name="fullName" placeholder="Full Name" value={newAddress.fullName} onChange={handleFormChange} required />
-              <FormInput name="city" placeholder="City" value={newAddress.city} onChange={handleFormChange} required />
-              <FormInput name="zip" placeholder="ZIP Code" value={newAddress.zip} onChange={handleFormChange} required />
-              <FormInput name="country" placeholder="Country" value={newAddress.country} onChange={handleFormChange} required />
-              <FormInput name="phone" placeholder="Phone" value={newAddress.phone} onChange={handleFormChange} required />
+              <FormInput label="Label" name="label" placeholder="Label (e.g. Home, Work)" value={newAddress.label} onChange={handleFormChange} required />
+              <FormInput label="full name" name="fullName" placeholder="john smith" value={newAddress.fullName} onChange={handleFormChange} required />
+              <FormInput label="city" name="city" placeholder="cairo" value={newAddress.city} onChange={handleFormChange} required />
+              <FormInput label="ZIP Code" name="zip" placeholder="12345" value={newAddress.zip} onChange={handleFormChange} required />
+              <FormInput label="Phone" name="phone" placeholder="01*********" value={newAddress.phone} onChange={handleFormChange} required />
 
               <div className="form-actions">
                 <button type="button" className="btn-cancel" onClick={closeModal}>Cancel</button>

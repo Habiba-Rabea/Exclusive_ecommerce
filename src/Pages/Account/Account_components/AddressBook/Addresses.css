@@ -62,7 +62,7 @@
   font-size: 0.9rem;
 }
 .address-card.selected {
-  border: 2px solid var(--primaryRed);
+  border: 2px solid var(--hoverRed);
 }
 @media (max-width: 768px) {
   .address-grid {

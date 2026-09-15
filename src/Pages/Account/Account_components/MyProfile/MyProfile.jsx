@@ -12,13 +12,11 @@ export default function EditProfileForm() {
 
   const defaultAddress = currentUser?.addresses?.find((addr) => addr.isDefault);
   const addressDisplay = defaultAddress
-  ? `${defaultAddress.city}, ${defaultAddress.zip}, ${defaultAddress.country}`
-  : " ";
+  ? `${defaultAddress.city}, ${defaultAddress.zip}, Egypt`
+  : "No address added yet";
   const [profileData, setProfileData] = useState({
     firstName: currentUser?.firstName || "",
     lastName: currentUser?.lastName || "",
-    //email: currentUser?.email || "",
-    //address: currentUser?.address || ""
   });
   
   function handleProfileChange(e) {
@@ -87,8 +85,6 @@ export default function EditProfileForm() {
     updateUser({
       firstName: profileData.firstName,
       lastName: profileData.lastName,
-      // email: profileData.email,
-      //address: profileData.address,
       password: passwordData.newPassword
     })
     alert("Password changed successfully");
@@ -98,8 +94,6 @@ export default function EditProfileForm() {
     updateUser({
       firstName: profileData.firstName,
       lastName: profileData.lastName,
-      // email: profileData.email,
-      //address: profileData.address
     });
     alert("Changes saved successfully");
   }
@@ -109,8 +103,6 @@ export default function EditProfileForm() {
       setProfileData({
         firstName: currentUser.firstName,
         lastName: currentUser.lastName,
-        // email: currentUser.email,
-        //address: currentUser.address
       },);
     }
   },[currentUser]);
@@ -148,21 +140,14 @@ export default function EditProfileForm() {
         </div>
 
         <div className="form-row">
-          <FormInput 
-            label="Email"
-            name="email" 
-            value={profileData.email}
-            onChange={handleProfileChange}
-            placeholder="example@gmail.com"
-            disabled
-          />
-          <FormInput 
-            label="Address" 
-            name="address"
-            value={addressDisplay}
-            placeholder="Kingston, 5236, United State"
-            disabled
-          />
+          <div className="info-display">
+            <label>Email</label>
+            <p>{currentUser?.email || "Not set"}</p>
+          </div>
+          <div className="info-display">
+            <label>Default Address</label>
+            <p>{addressDisplay || "No address added yet"}</p>
+          </div>
         </div>
 
         <div className="form-row single">

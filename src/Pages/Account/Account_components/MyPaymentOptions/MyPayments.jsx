@@ -117,22 +117,25 @@ export default function PaymentOptions() {
               </div>
 
               <FormInput
+                label ="Card Holder Name"
                 name="holder"
-                placeholder="Card Holder Name"
+                placeholder="john smith"
                 value={newCard.holder}
                 onChange={handleFormChange}
                 required
               />
 
               <FormInput
+                label="Card Number"
                 name="cardNumber"
-                placeholder="Card Number"
+                placeholder="XXXX XXXX XXXX XXXX"
                 value={newCard.cardNumber}
                 onChange={handleFormChange}
                 required
               />
 
               <FormInput
+                label="Expiry Date"
                 name="expiry"
                 placeholder="MM/YY"
                 value={newCard.expiry}

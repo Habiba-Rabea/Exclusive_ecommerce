@@ -36,7 +36,7 @@ const {
      
         <div className="category-product-info">
           <p className="category-product-subtext">{subtext}</p>
-          <h2>{name}</h2>
+      <h2>{name}</h2>
           <p className="category-product-description">{description}</p>
           <div className="category-product-price">
             <strong>${price.toLocaleString()}</strong>

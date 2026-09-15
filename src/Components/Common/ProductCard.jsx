@@ -1,26 +1,53 @@
 import { Heart, Eye } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../CSS/ProductCard.css';
 import RatingStars from '../UI/RatingStars.jsx';
 import AddToCart from '../UI/Buttons/cart.jsx';
 import { useWishlist } from '../../Context/WishlistContext.jsx';
+import { useCart } from '../../Context/CartContext.jsx';
 
 export default function ProductCard({ product }) {
   const { wishlistItems, toggleWishlist } = useWishlist();
+  const { addToCart } = useCart();
+  const navigate = useNavigate();
   
-  const { id, name, price, originalPrice, rating, reviewsCount, image } = product || {};
+  if (!product) return null;
 
-  const isLiked = wishlistItems.some((item) => item.id === id);
+  const id = product.id || product._id;
+  const productName = product.name || product.title || "Product";
+  const { price, originalPrice, rating, reviewsCount, image } = product;
+
+  const isLiked = wishlistItems ? wishlistItems.some((item) => (item.id || item._id) === id) : false;
+
+  const handleAddToCartAndNavigate = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    
+    addToCart({
+      id: id,
+      title: productName,
+      name: productName,
+      price: price,
+      image: image,
+      quantity: 1
+    });
+    
+    navigate('/cart');
+  };
 
   return (
     <div className="product-card">
       <div className="product-img">
-        <img src={image} alt={name} />
+        <img src={image} alt={productName} />
         
         <div className="product-icons">
           <button 
             type="button"
             className={`iconn-btn ${isLiked ? 'liked' : ''}`}
-            onClick={() => toggleWishlist(product)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleWishlist(product);
+            }}
             title={isLiked ? "Remove from Wishlist" : "Add to Wishlist"}
           >
             <Heart 
@@ -30,20 +57,28 @@ export default function ProductCard({ product }) {
             />
           </button>
           
-          <button type="button" className="iconn-btn">
+          <Link 
+            to={`/product/${id}`} 
+            className="iconn-btn" 
+            aria-label="View Details"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'inherit' }}
+          >
             <Eye size={20} />
-          </button>
+          </Link>
         </div>
 
-       
-        <AddToCart />
+        <AddToCart product={product} onClick={handleAddToCartAndNavigate} />
       </div>
 
       <div className="product-info">
-        <h3 className="product-title">{name}</h3>
+        <h3 className="product-title">{productName}</h3>
         <div className="product-price">
           <span className="current-price">${price}</span>
-          {originalPrice && <span className="original-price"><del>${originalPrice}</del></span>}
+          {originalPrice && (
+            <span className="original-price">
+              <del>${originalPrice}</del>
+            </span>
+          )}
         </div>
         
         <div className="product-rating-area">

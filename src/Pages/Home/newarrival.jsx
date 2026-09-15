@@ -1,9 +1,9 @@
 import SectionHeader from '../../Components/Common/sectionheader'; 
 import '../../CSS/Newarrival.css';
 import ps5Img from '../../assets/Images/home/playstation_large 1.png';
-import womanImg from '../../assets/Images/home/attractive-woman-wearing-hat.png';
+import lapImg from '../../assets/Images/home/Newarrival2.jpg';
 import speakersImg from '../../assets/Images/home/transparent.png';
-import perfumeImg from '../../assets/Images/home/perfume.png';
+import smartImg from '../../assets/Images/home/smartwatch.jpg';
 const NewArrivalSection = () => {
   return (
     <article className="new-arrival-wrapper">
@@ -19,10 +19,10 @@ const NewArrivalSection = () => {
         </figure>
         <div className="right-stack">
           <figure className="card card-wide">
-            <img src={womanImg} alt="Women's Collections" />
+            <img src={lapImg} alt="lap's Collections" />
             <figcaption>
-              <h3>Women’s Collections</h3>
-              <p>Featured woman collections that give you another vibe.</p>
+              <h3>Laptops Collections</h3>
+              <p>Featured Laptops collections that give you another vibe.</p>
               <a href="/products">Shop Now</a>
             </figcaption>
           </figure>
@@ -36,9 +36,9 @@ const NewArrivalSection = () => {
               </figcaption>
             </figure>
             <figure className="card">
-              <img src={perfumeImg} alt="Gucci Intense Oud Perfume" />
+              <img src={smartImg} alt="Gucci Intense Oud Perfume" />
               <figcaption>
-                <h3>Perfume</h3>
+                <h3>Smart watch</h3>
                 <p>GUCCI INTENSE OUD EDP</p>
                 <a href="/products">Shop Now</a>
               </figcaption>

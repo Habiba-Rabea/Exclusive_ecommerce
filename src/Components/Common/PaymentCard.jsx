@@ -1,9 +1,16 @@
-import "/src//CSS/AddressCard.css"
-import { MoreVertical } from "lucide-react";
+import "/src/CSS/AddressCard.css";
 import "/src/CSS/PaymentCard.css";
+import { CreditCard, Trash2 } from "lucide-react";
+import { getCardLogo } from "/src/data/cardLogos.js";
 
-export default function PaymentCard({ card, isSelected, onSelect }) {
-  const { type, logo, last4, expiry, holder } = card;
+export default function PaymentCard({ card, isSelected, onSelect, onDelete }) {
+  const { type, last4, expiry, holder } = card;
+  const logoSrc = getCardLogo(type);
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    onDelete(card.id);
+  };
 
   return (
     <div
@@ -11,11 +18,14 @@ export default function PaymentCard({ card, isSelected, onSelect }) {
       onClick={onSelect}
     >
       <div className="payment-card-header">
-        <img src={logo} alt={type} className="card-logo-img" />
+        {logoSrc ? (
+          <img src={logoSrc} alt={type} className="card-logo-img" />
+        ) : (
+          <CreditCard size={28} className="card-logo-icon" />
+        )}
         <span className="card-number">
           {type} **** **** **** {last4}
         </span>
-        <MoreVertical size={18} className="menu-icon" />
       </div>
 
       <div className="card-info-row">
@@ -29,14 +39,17 @@ export default function PaymentCard({ card, isSelected, onSelect }) {
         </div>
       </div>
 
-      {isSelected && (
-        <>
-          <hr className="card-divider" />
+     <hr className="card-divider" />
+      <div className="card-bottom-row">
+        {isSelected && (
           <div className="default-indicator">
             <span className="default-dot"></span> Default
           </div>
-        </>
-      )}
+        )}
+        <button type="button" className="delete-btn" onClick={handleDeleteClick}>
+          <Trash2 size={14} /> Delete
+        </button>
+      </div>
     </div>
   );
 }

@@ -8,43 +8,37 @@ import PaymentOptions from "./Account_components/MyPaymentOptions/MyPayments.jsx
 import { useAuth } from "../../Context/AuthContext"; 
 import './Account.css';
 export default function Account() {
-    const [activeTab, setActiveTab] = useState("profile");
+    const [activeTab, setActiveTab] =useState("profile");
+
     const { currentUser, logout } = useAuth();
     const navigate = useNavigate();
     const handleLogout = () => {
         logout();
         navigate("/login", { replace: true });
     };
-    const displayName = currentUser 
-        ? (currentUser.firstName ? `${currentUser.firstName} ${currentUser.lastName || ''}`.trim() : currentUser.name || "User")
-        : "User";
+    
+    const displayName = currentUser?.firstName || "User";
     return (
         <div className="containerAc">
-            <div className="Breadcrumbs-welcome d-flex justify-content-between align-items-center">
+            <div className="Breadcrumbs-welcome">
                 <Breadcrumb items={[
                     { name: "Home", link: "/" },
-                    { name: "Account", link: null }
-                ]} />
-                <div className="d-flex align-items-center gap-3">
-                    <p className="welcome-txt mb-0">
-                        Welcome ! <span className="my-name" style={{ color: '#DB4444', fontWeight: '600' }}>
-                            {displayName}
-                        </span>
-                    </p>
-                </div>
+                    { name: "Account", link: null }]} />
+    
+                <span className="welcome-txt">
+                    Welcome ! <span className="my-name">{displayName}</span>
+                </span>
             </div>
             <main className="acc-container">
-                <SideBar 
-                    activeTab={activeTab} 
-                    setActiveTab={setActiveTab} 
-                    onLogout={handleLogout} 
-                />
+                <SideBar activeTab={activeTab} setActiveTab={setActiveTab}
+                onLogout={handleLogout}/>
                 <div className="acc-content">
-                    {activeTab === "profile" && <MyProfile currentUser={currentUser} />}
-                    {activeTab === "address" && <AddressBook />}
-                    {activeTab === "payment" && <PaymentOptions />}
+                    {activeTab === "profile" && <MyProfile/>}
+                    {activeTab === "address" && <AddressBook/>}
+                    {activeTab === "payment" && <PaymentOptions/>}
                 </div>
             </main>
         </div>
+        
     );
 }

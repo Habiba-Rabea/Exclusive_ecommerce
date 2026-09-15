@@ -54,6 +54,24 @@
 .btn-save:hover {
   opacity: 0.9;
 }
+.info-display {
+  width: 100%;
+}
+.info-display label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+.info-display p {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px dashed var(--gray);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  margin: 0;
+  box-sizing: border-box;
+}
 @media (max-width: 768px) {
   .edit-profile {
     padding: 1.5rem 1.25rem;

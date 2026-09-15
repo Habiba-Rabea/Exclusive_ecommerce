@@ -6,6 +6,17 @@
   --secondary2: #FEFAF1;
   --gray : #7D8184;
   --black1:#363738;
+   --nav-height :70px
+}
+@media (max-width: 768px) {
+  :root {
+  --nav-height :60px
+  }
+}
+@media (max-width: 425px) {
+  :root {
+  --nav-height :70px
+  }
 }
 * {
   box-sizing: border-box;

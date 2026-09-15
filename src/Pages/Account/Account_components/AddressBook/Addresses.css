@@ -33,6 +33,37 @@
   line-height: 1;
   margin-bottom: 0.3rem;
 }
+.address-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+.address-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.address-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.address-modal .form-input input {
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+}
+.address-card.selected {
+  border: 2px solid var(--hoverRed);
+}
 @media (max-width: 768px) {
   .address-grid {
     grid-template-columns: repeat(2, 1fr);

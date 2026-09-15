@@ -4,11 +4,9 @@
     background-color: #000;
     border-radius: 4px;
     overflow: hidden;
-    margin-top:140px;
-     z-index: 1;
-
+    margin-top: 140px;
+    z-index: 1;
 }
-
 
 .banner-slide-content {
     display: flex;
@@ -43,8 +41,7 @@
     margin-bottom: 20px;
 }
 
-
-.textt{
+.textt {
     font-size: 20px;
 }
 
@@ -60,7 +57,7 @@
     padding-bottom: 4px;
 }
 
-.arrow{
+.arrow {
     font-size: 20px;
 }
 
@@ -70,102 +67,120 @@
     object-fit: contain;
 }
 
-
 .custom-hero-carousel .carousel-indicators [data-bs-target] {
     width: 10px;
     height: 10px;
-    border-radius: 50%;     
+    border-radius: 50%;
     border: none;
-    background-color: #808080; 
+    background-color: #808080;
     opacity: 0.5;
     transition: all 0.3s ease;
 }
 
-
 .custom-hero-carousel .carousel-indicators .active,
 .custom-hero-carousel .carousel-indicators [data-bs-target]:hover {
-    background-color: #DB4444; 
+    background-color: #DB4444;
     border: 1px solid #fff;
     opacity: 1;
 }
 
 
-
-/* ************* */
-
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+
     .custom-hero-carousel {
-        max-width: 100%; 
-        margin-top: 150px;
-        width: 820px;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 80px;
     }
 
     .banner-slide-content {
-        height: 290px;
-        padding: 0 30px;
+        height: 320px;
+        padding: 0 35px;
+        gap: 25px;
+    }
+
+    .banner-text-box {
+        max-width: 50%;
+    }
+
+    .banner-top-title {
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .logo-icon {
+        font-size: 28px;
+    }
+
+    .textt {
+        font-size: 17px;
     }
 
     .banner-text-box h2 {
-        font-size: 32px; 
+        font-size: 32px;
+        line-height: 1.2;
+        margin-bottom: 20px;
     }
 
-    .textt, .shop-now-link {
-        font-size: 16px;
+    .shop-now-link {
+        font-size: 17px;
+    }
+
+    .banner-img-box {
+        width: 50%;
+        display: flex;
+        justify-content: center;
     }
 
     .banner-img-box img {
-        max-width: 320px; 
+        max-width: 300px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
     }
 }
 
 
 @media screen and (max-width: 767px) {
+
     .custom-hero-carousel {
+        width: 100%;
         max-width: 100%;
-        width: 924px;
-        margin:160px auto 20px auto;
-        border-radius: 8px; 
+        margin: 30px 0 20px;
     }
 
     .banner-slide-content {
-        height: auto; 
-        flex-direction: column-reverse; 
+        height: auto;
+        flex-direction: column-reverse;
         padding: 25px 20px;
         text-align: center;
         gap: 15px;
-        margin-bottom: 15px;
     }
 
     .banner-text-box {
         max-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
 
     .banner-top-title {
         justify-content: center;
-        gap: 10px;
-        font-size: 14px;
-        margin-bottom: 12px;
     }
 
     .banner-text-box h2 {
-        font-size: 24px; 
-        margin-bottom: 15px;
+        font-size: 24px;
     }
 
     .textt {
         font-size: 14px;
-        margin-bottom: 15px;
     }
 
     .shop-now-link {
         font-size: 16px;
-        margin: 0 auto; 
+        margin: auto;
     }
 
     .banner-img-box img {
-        max-width: 240px; 
+        max-width: 220px;
+        height: auto;
     }
 }
+

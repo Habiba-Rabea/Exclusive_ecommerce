@@ -6,6 +6,7 @@ import MyProfile from "./Account_components/MyProfile/MyProfile.jsx";
 import AddressBook from "./Account_components/AddressBook/Addresses.jsx";
 import PaymentOptions from "./Account_components/MyPaymentOptions/MyPayments.jsx";
 import { useAuth } from "../../Context/AuthContext"; 
+import { updateProfile } from "../../APIs/authservice";
 import './Account.css';
 export default function Account() {
     const [activeTab, setActiveTab] =useState("profile");

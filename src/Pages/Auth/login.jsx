@@ -5,16 +5,18 @@ import * as zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '../../Context/AuthContext';
+import { loginUser } from '../../APIs/authservice'; 
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login, currentUser, usersList = [] } = useAuth();
+  const { login, currentUser } = useAuth();
 
   useEffect(() => {
     if (currentUser) {
       navigate('/account');
     }
   }, [currentUser, navigate]);
+
   const loginSchema = zod.object({
     email: zod
       .string()
@@ -34,20 +36,37 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
-  function submitForm(userData) {
-    const enteredEmail = userData.email.trim().toLowerCase();
+  async function submitForm(userData) {
+  try {
+    const responseData = await loginUser({
+      email: userData.email.trim(),
+      password: userData.password,
+    });
 
-    const foundUser = usersList.find(
-      (user) => user.email?.trim().toLowerCase() === enteredEmail && user.password === userData.password
-    );
+    console.log("Full Login Response:", responseData);
 
-    if (foundUser) {
-      login(foundUser);
-      navigate('/account');
-    } else {
-      setError('root', { message: 'Invalid email or password' });
+    // استخراج التوكن والـ ID بجميع المسارات الممكنة
+    const token = responseData?.token || responseData?.access || responseData?.key;
+    const userId = responseData?.user?.id || responseData?.id || responseData?.user_id;
+
+    const user = {
+      id: userId,
+      email: userData.email.trim(),
+      ...(responseData?.user || {})
+    };
+
+    if (login) {
+      login(user, token);
     }
+
+    navigate('/account');
+
+  } catch (error) {
+    setError('root', { 
+      message: error.message || 'Invalid email or password' 
+    });
   }
+}
 
   return (
     <section 
@@ -58,7 +77,6 @@ export default function Login() {
         backgroundColor: '#f9f9f9'
       }}
     >
-      {/* Box with Red Shadow */}
       <div 
         style={{ 
           width: '100%', 
@@ -85,7 +103,7 @@ export default function Login() {
             <InputField
               {...register('email')}
               type="text"
-              placeholder="Email or Phone Number"
+              placeholder="Email"
               className="form-control border-0 border-bottom rounded-0 px-0 shadow-none bg-transparent"
             />
             {formState.errors.email && formState.touchedFields.email && (
@@ -112,13 +130,14 @@ export default function Login() {
           <div className="d-flex align-items-center justify-content-between mb-3 mt-4">
             <button
               type="submit"
+              disabled={formState.isSubmitting} 
               className="btn text-white py-2 px-4 rounded-2 fw-600"
               style={{ 
                 backgroundColor: '#DB4444', 
                 boxShadow: '0 4px 12px rgba(219, 68, 68, 0.3)' 
               }}
             >
-              Log In
+              {formState.isSubmitting ? 'Logging in...' : 'Log In'}
             </button>
             
             <Link

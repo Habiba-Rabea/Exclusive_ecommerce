@@ -1,43 +1,34 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../Context/AuthContext.jsx';
 import { useForm } from 'react-hook-form';
+import { registerUser } from '../../APIs/authservice'; // 1. استدعاء دالة الـ API
 
 export default function Signup() {
   const navigate = useNavigate();
-  const { signup, usersList = [] } = useAuth();
 
-  const { register, handleSubmit, setError, formState: { errors } } = useForm({
+  const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm({
     defaultValues: { name: '', email: '', password: '' },
   });
 
-  function submitForm(userData) {
-    const enteredEmail = userData.email.trim().toLowerCase();
-    const isEmailExists = usersList.some(
-      (user) => user.email?.trim().toLowerCase() === enteredEmail
-    );
+  // 2. تحويل الدالة لـ async لاستدعاء الـ API
+  async function submitForm(userData) {
+    try {
+      // إرسال البيانات للـ API بدلاً من الـ Local Context
+      await registerUser({
+        name: userData.name,
+        email: userData.email,
+        password: userData.password,
+      });
 
-    if (isEmailExists) {
+      // التحويل لصفحة الـ Login بعد نجاح التسجيل
+      navigate('/login');
+
+    } catch (error) {
+      // إظهار الخطأ الراجع من السيرفر تحت إدخال الإيميل
       setError('email', { 
         type: 'manual',
-        message: 'This email is already registered' 
+        message: error.message || 'Registration failed, please try again' 
       });
-      return; 
     }
-
-    const nameParts = userData.name.trim().split(' ');
-    const formattedUser = {
-      id: Date.now(),
-      name: userData.name,
-      email: enteredEmail,
-      firstName: nameParts[0] || '',
-      lastName: nameParts.slice(1).join(' ') || '',
-      password: userData.password, 
-      address: '',
-      addresses: [],
-    };
-
-    signup(formattedUser);
-    navigate('/account');
   }
 
   return (
@@ -103,7 +94,7 @@ export default function Signup() {
 
           <div>
             <label style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '6px', display: 'block' }}>
-              Email or Phone Number
+              Email
             </label>
             <input
               type="email"
@@ -154,22 +145,25 @@ export default function Signup() {
 
           <button
             type="submit"
+            disabled={isSubmitting}
             style={{
               backgroundColor: '#DB4444',
               color: '#fff',
               padding: '14px',
               border: 'none',
               borderRadius: '8px',
-              cursor: 'pointer',
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
               fontWeight: '600',
               fontSize: '16px',
               marginTop: '10px',
+              opacity: isSubmitting ? 0.7 : 1,
               boxShadow: '0 4px 12px rgba(219, 68, 68, 0.3)'
             }}
           >
-            Create Account
+            {isSubmitting ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
+
         <div style={{ marginTop: '24px', textAlign: 'center', color: '#555', fontSize: '15px' }}>
           <span>Already have account? </span>
           <Link to="/login" style={{ color: '#DB4444', textDecoration: 'none', fontWeight: '600', marginLeft: '6px' }}>

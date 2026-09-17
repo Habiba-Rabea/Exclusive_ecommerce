@@ -5,7 +5,6 @@ import * as zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '../../Context/AuthContext';
-import { loginUser } from '../../APIs/authservice'; 
 
 export default function Login() {
   const navigate = useNavigate();
@@ -37,36 +36,15 @@ export default function Login() {
   });
 
   async function submitForm(userData) {
-  try {
-    const responseData = await loginUser({
-      email: userData.email.trim(),
-      password: userData.password,
-    });
-
-    console.log("Full Login Response:", responseData);
-
-    // استخراج التوكن والـ ID بجميع المسارات الممكنة
-    const token = responseData?.token || responseData?.access || responseData?.key;
-    const userId = responseData?.user?.id || responseData?.id || responseData?.user_id;
-
-    const user = {
-      id: userId,
-      email: userData.email.trim(),
-      ...(responseData?.user || {})
-    };
-
-    if (login) {
-      login(user, token);
+    try {
+      await login(userData.email.trim(), userData.password);
+      navigate('/account');
+    } catch (error) {
+      setError('root', {
+        message: error.message || 'Invalid email or password',
+      });
     }
-
-    navigate('/account');
-
-  } catch (error) {
-    setError('root', { 
-      message: error.message || 'Invalid email or password' 
-    });
   }
-}
 
   return (
     <section 

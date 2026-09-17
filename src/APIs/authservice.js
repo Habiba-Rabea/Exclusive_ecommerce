@@ -2,34 +2,30 @@ const BASE_URL = 'https://gig-program-apis-production.up.railway.app/api';
 export const registerUser = async (userData) => {
   const response = await fetch(`${BASE_URL}/register/`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email: userData.email.trim(),
       password: userData.password,
       profile_data: {
-        project_name: userData.name || 'Exclusive', 
-        role: 'landlord',                          
-        phone: '+20123456789'
-      }
+        name: userData.name || '',
+        role: 'customer',
+      },
     }),
   });
 
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.email?.[0] || data.detail || 'Registration failed');
+    throw new Error(data.email?.[0] || data.password?.[0] || data.detail || 'Registration failed');
   }
 
   return data;
 };
+
 export const loginUser = async (credentials) => {
   const response = await fetch(`${BASE_URL}/login/`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email: credentials.email,
       password: credentials.password,
@@ -42,26 +38,50 @@ export const loginUser = async (credentials) => {
     throw new Error(data.detail || 'Data incorrect');
   }
 
-  if (data.access) {
-    localStorage.setItem('accessToken', data.access);
-    localStorage.setItem('refreshToken', data.refresh);
+  return data; // { access, refresh }
+};
+
+export const refreshAccessToken = async (refreshToken) => {
+  if (!refreshToken) throw new Error('No refresh token available');
+
+  const response = await fetch(`${BASE_URL}/token/refresh/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ refresh: refreshToken }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error('Session expired, please log in again');
+
+  return data.access;
+};
+
+// بتاخد التوكن كـ argument بدل ما تقراه من localStorage بنفسها
+export const getProfile = async (accessToken) => {
+  const response = await fetch(`${BASE_URL}/api/me/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch profile');
   }
 
-  return data;
+  return await response.json();
 };
-export const updateProfile = async (profileId, updateData) => {
-  const token = localStorage.getItem('token');
 
-  const response = await fetch(`${BASE_URL}/api/profiles/${profileId}/`, {
+export const updateProfile = async (profileId, updateData, accessToken) => {
+  const response = await fetch(`${BASE_URL}/profiles/${profileId}/`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
     body: JSON.stringify({
-      first_name: updateData.firstName,
-      last_name: updateData.lastName,
-      email: updateData.email
+      name: [updateData.firstName, updateData.lastName].filter(Boolean).join(' '),
     }),
   });
 
@@ -73,23 +93,3 @@ export const updateProfile = async (profileId, updateData) => {
 
   return data;
 };
-
-import axios from 'axios';
-
-export async function getProfile() {
-  const token = localStorage.getItem('user_token');
-  
-  const response = await fetch('YOUR_API_BASE_URL/api/profiles/me/', { 
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch profile');
-  }
-
-  return await response.json();
-}

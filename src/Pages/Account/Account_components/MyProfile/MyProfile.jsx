@@ -1,7 +1,6 @@
 import FormInput from "/src/Components/UI/Account_Input.jsx";
 import { useState, useEffect } from "react";
 import { useAuth } from "/src/Context/AuthContext.jsx";
-import { updateProfile, getProfile } from "/src/APIs/authservice";
 import { 
   PASSWORD_REGEX, PASSWORD_ERROR_MESSAGE,
   NAME_REGEX, NAME_ERROR_MESSAGE,
@@ -10,7 +9,10 @@ import {
 import "./MyProfile.css";
 
 export default function EditProfileForm() {
-  const { currentUser, updateUser, usersList = [] } = useAuth();
+  // مبقاش بنستورد getProfile/updateProfile من authservice خالص هنا -
+  // refreshProfile و updateProfile دلوقتي جايين من الـ Context وهو اللي
+  // متكفل بالتوكن صح.
+  const { currentUser, updateUser, usersList = [], refreshProfile, updateProfile } = useAuth();
 
   const defaultAddress = currentUser?.addresses?.find((addr) => addr.isDefault);
   const addressDisplay = defaultAddress
@@ -33,40 +35,44 @@ export default function EditProfileForm() {
   const [ProfileError, setProfileError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // بيجيب أحدث نسخة من البروفايل من السيرفر مرة واحدة لما الصفحة تفتح.
+  // refreshProfile بتستخدم التوكن الصح من جوه الـ Context، فمفيش احتمال
+  // نبعت حاجة غلط في الـ Authorization header زي ما كان بيحصل قبل كده.
   useEffect(() => {
-    async function fetchProfileData() {
+    async function loadProfile() {
       if (!currentUser) return;
-
       try {
         setLoading(true);
-        const userId = currentUser.id || currentUser.user_id || currentUser.profile_id;
-        const response = await getProfile(userId); 
-        console.log("Profile API Response in Component:", response);
-
-        const data = response?.data || response?.user || response || {};
-        const firstName = data.first_name || data.firstName || (data.name ? data.name.split(" ")[0] : "") || currentUser.firstName || "";
-        const lastName = data.last_name || data.lastName || (data.name ? data.name.split(" ").slice(1).join(" ") : "") || currentUser.lastName || "";
-        const email = data.email || currentUser.email || "";
-
-        setProfileData({
-          firstName,
-          lastName,
-          email,
-        });
-
+        await refreshProfile();
       } catch (error) {
         console.error("Failed to fetch profile:", error);
-        setProfileData({
-          firstName: currentUser?.firstName || currentUser?.first_name || "",
-          lastName: currentUser?.lastName || currentUser?.last_name || "",
-          email: currentUser?.email || "",
-        });
       } finally {
         setLoading(false);
       }
     }
 
-    fetchProfileData();
+    loadProfile();
+    // من غير currentUser في الـ deps عشان مانعملش لوب لا نهائي -
+    // refreshProfile نفسها بتحدث currentUser.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // كل ما currentUser يتحدث (بعد refreshProfile أو أي حتة تانية)، حدّث
+  // الفورم المحلي منه.
+  useEffect(() => {
+    setProfileData({
+      firstName:
+        currentUser?.firstName ||
+        currentUser?.first_name ||
+        (currentUser?.name ? currentUser.name.split(" ")[0] : "") ||
+        "",
+      lastName:
+        currentUser?.lastName ||
+        currentUser?.last_name ||
+        (currentUser?.name ? currentUser.name.split(" ").slice(1).join(" ") : "") ||
+        "",
+      email: currentUser?.email || "",
+    });
   }, [currentUser]);
 
   function handleProfileChange(e) {
@@ -144,19 +150,18 @@ export default function EditProfileForm() {
 
     try {
       setLoading(true);
-      const profileId = currentUser?.id || currentUser?.profile_id;
 
-      await updateProfile(profileId, {
+      // ملحوظة: الـ Profile schema الحقيقي في الـ API فيه "name" بس، مفيهوش
+      // email منفصل - يعني الإيميل مش هيتحدث فعليًا على السيرفر، بس هيفضل
+      // متسجل محليًا عشان العرض. لو محتاج تغيير الإيميل فعليًا لازم endpoint
+      // تاني مش موجود في السبك دلوقتي.
+      await updateProfile({
         firstName: profileData.firstName,
         lastName: profileData.lastName,
-        email: profileData.email,
       });
 
       if (updateUser) {
         updateUser({
-          ...currentUser,
-          firstName: profileData.firstName,
-          lastName: profileData.lastName,
           email: profileData.email,
           ...(wantsPasswordChange && { password: passwordData.newPassword }),
         });

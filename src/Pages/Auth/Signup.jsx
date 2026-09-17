@@ -1,29 +1,27 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { registerUser } from '../../APIs/authservice'; // 1. استدعاء دالة الـ API
+import { useAuth } from '../../Context/AuthContext';
 
 export default function Signup() {
   const navigate = useNavigate();
+  const { signup } = useAuth();
 
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm({
-    defaultValues: { name: '', email: '', password: '' },
+    defaultValues: { firstName: '', lastName: '', email: '', password: '' },
   });
 
-  // 2. تحويل الدالة لـ async لاستدعاء الـ API
   async function submitForm(userData) {
     try {
-      // إرسال البيانات للـ API بدلاً من الـ Local Context
-      await registerUser({
-        name: userData.name,
+      await signup({
+        firstName: userData.firstName,
+        lastName: userData.lastName,
         email: userData.email,
         password: userData.password,
       });
 
-      // التحويل لصفحة الـ Login بعد نجاح التسجيل
       navigate('/login');
 
     } catch (error) {
-      // إظهار الخطأ الراجع من السيرفر تحت إدخال الإيميل
       setError('email', { 
         type: 'manual',
         message: error.message || 'Registration failed, please try again' 
@@ -73,23 +71,44 @@ export default function Signup() {
         <form onSubmit={handleSubmit(submitForm)} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div>
             <label style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '6px', display: 'block' }}>
-              Full Name
+              First Name
             </label>
             <input
               type="text"
-              placeholder="Enter your name"
-              {...register('name', { required: 'Name is required' })}
+              placeholder="Enter your first name"
+              {...register('firstName', { required: 'First name is required' })}
               style={{ 
                 width: '100%', 
                 padding: '12px 14px', 
-                border: errors.name ? '1px solid #DB4444' : '1px solid #ccc', 
+                border: errors.firstName ? '1px solid #DB4444' : '1px solid #ccc', 
                 borderRadius: '8px',
                 outline: 'none',
                 fontSize: '15px',
                 boxSizing: 'border-box'
               }}
             />
-            {errors.name && <span style={{ color: '#DB4444', fontSize: '12px', marginTop: '4px', display: 'block' }}>{errors.name.message}</span>}
+            {errors.firstName && <span style={{ color: '#DB4444', fontSize: '12px', marginTop: '4px', display: 'block' }}>{errors.firstName.message}</span>}
+          </div>
+
+          <div>
+            <label style={{ fontSize: '14px', fontWeight: '500', color: '#333', marginBottom: '6px', display: 'block' }}>
+              Last Name
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your last name"
+              {...register('lastName', { required: 'Last name is required' })}
+              style={{ 
+                width: '100%', 
+                padding: '12px 14px', 
+                border: errors.lastName ? '1px solid #DB4444' : '1px solid #ccc', 
+                borderRadius: '8px',
+                outline: 'none',
+                fontSize: '15px',
+                boxSizing: 'border-box'
+              }}
+            />
+            {errors.lastName && <span style={{ color: '#DB4444', fontSize: '12px', marginTop: '4px', display: 'block' }}>{errors.lastName.message}</span>}
           </div>
 
           <div>

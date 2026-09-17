@@ -1,72 +1,67 @@
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext } from 'react';
 import { useLocalStorage } from '../Hooks/useLocalStorage';
-import { getProfile } from '../APIs/authservice';
+import {
+  loginUser,
+  registerUser,
+  refreshAccessToken,
+  getProfile,
+  updateProfile as updateProfileApi,
+} from '../APIs/authservice';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useLocalStorage('currentUser', null);
   const [token, setToken] = useLocalStorage('user_token', null);
+  const [refreshToken, setRefreshToken] = useLocalStorage('refresh_token', null);
   const [usersList, setUsersList] = useLocalStorage('users', []);
 
- useEffect(() => {
-  let isMounted = true;
-
-  async function fetchLatestUserData() {
-    if (!token) return;
-
-    const userId = currentUser?.id || currentUser?.profile_id;
-    if (!userId) return;
-
+  // بيحاول يجيب البروفايل بالتوكن الحالي، ولو منتهي بيجدده تلقائيًا مرة واحدة
+  async function fetchProfile(accessToken) {
     try {
-      const profileData = await getProfile(userId);
-      const normalizedUser = profileData?.user || profileData?.data || profileData;
-
-      if (isMounted) {
-        setCurrentUser(normalizedUser);
-      }
+      return await getProfile(accessToken);
     } catch (error) {
-      console.error("Failed to fetch fresh user profile:", error);
+      if (refreshToken) {
+        const newAccess = await refreshAccessToken(refreshToken);
+        setToken(newAccess);
+        return await getProfile(newAccess);
+      }
+      throw error;
     }
   }
 
-  fetchLatestUserData();
-
-  return () => {
-    isMounted = false;
-  };
-}, [token]);
-
-  const login = (userData, userToken = null) => {
-  if (!userData) return;
-  const userObj = userData?.user || userData?.data?.user || userData?.data || userData;
-  const extractedToken = 
-    userToken || 
-    userData?.token || 
-    userData?.access || 
-    userData?.key || 
-    userData?.data?.token;
-
-  setCurrentUser(userObj);
-  localStorage.setItem('currentUser', JSON.stringify(userObj));
-
-  if (extractedToken) {
-    setToken(extractedToken);
-    localStorage.setItem('user_token', extractedToken);
+  function flattenProfile(profileData) {
+    const base = profileData?.user || profileData?.data || profileData || {};
+    return { ...base, ...(base.profile_data || {}) };
   }
-};
 
-  const signup = (userData) => {
-    const userObj = userData?.user || userData;
-    setUsersList((prevUsers) => [...prevUsers, userObj]);
+  const login = async (email, password) => {
+    const data = await loginUser({ email, password }); // { access, refresh }
+    setToken(data.access);
+    setRefreshToken(data.refresh);
+
+    let profileData = {};
+    try {
+      profileData = await fetchProfile(data.access);
+    } catch (error) {
+      // مش هنوقف عملية تسجيل الدخول عشان البروفايل فشل، بس نسجل الخطأ
+      console.error('Logged in, but failed to load profile:', error);
+    }
+
+    const userObj = { email, ...flattenProfile(profileData) };
     setCurrentUser(userObj);
+    return userObj;
+  };
+
+  const signup = async ({ firstName, lastName, name, email, password }) => {
+    const fullName = name || [firstName, lastName].filter(Boolean).join(' ');
+    return await registerUser({ name: fullName, email, password });
   };
 
   const logout = () => {
     setCurrentUser(null);
     setToken(null);
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('user_token');
+    setRefreshToken(null);
   };
 
   const updateUser = (updatedInfo) => {
@@ -81,6 +76,21 @@ export function AuthProvider({ children }) {
     );
   };
 
+  const updateProfile = async (updateData) => {
+    const profileId = currentUser?.id || currentUser?.profile_id;
+    const data = await updateProfileApi(profileId, updateData, token);
+    updateUser(updateData);
+    return data;
+  };
+
+  const refreshProfile = async () => {
+    if (!token) return;
+    const profileData = await fetchProfile(token);
+    console.log('RAW /api/api/me/ response:', profileData); // مؤقت للتشخيص - هنشيله بعدين
+    const normalized = flattenProfile(profileData);
+    if (normalized) setCurrentUser((prev) => ({ ...prev, ...normalized }));
+  };
+
   const value = {
     currentUser,
     token,
@@ -90,6 +100,8 @@ export function AuthProvider({ children }) {
     signup,
     logout,
     updateUser,
+    updateProfile,
+    refreshProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -80,3 +80,13 @@
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 425px) {
+  .avatar-row {
+  flex-direction: column;
+  text-align: center;
+}
+.avatar-field {
+  width: 100%;
+  text-align: center;
+}
+}

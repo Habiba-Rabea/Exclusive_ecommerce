@@ -1,4 +1,5 @@
 const BASE_URL = 'https://gig-program-apis-production.up.railway.app/api';
+
 export const registerUser = async (userData) => {
   const response = await fetch(`${BASE_URL}/register/`, {
     method: 'POST',
@@ -17,7 +18,9 @@ export const registerUser = async (userData) => {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.email?.[0] || data.password?.[0] || data.detail || 'Registration failed');
+    throw new Error(
+      data.email?.[0] || data.password?.[0] || data.detail || 'Registration failed'
+    );
   }
 
   return data;
@@ -36,10 +39,10 @@ export const loginUser = async (credentials) => {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.detail || 'Data incorrect');
+    throw new Error(data.detail || 'Invalid email or password');
   }
 
-  return data; // { access, refresh }
+  return data;
 };
 
 export const refreshAccessToken = async (refreshToken) => {
@@ -72,7 +75,13 @@ export const getProfile = async (accessToken) => {
     throw error;
   }
 
-  return await response.json();
+  const text = await response.text();
+  if (!text) return {};
+  try {
+    return JSON.parse(text);
+  } catch {
+    return {};
+  }
 };
 
 export function decodeToken(token) {
@@ -83,15 +92,16 @@ export function decodeToken(token) {
     console.error('Failed to decode token:', error);
     return null;
   }
-}
+};
 
-export const listProfiles = async (accessToken) => {
+/**
+ * List profiles — endpoint is public (no auth).
+ * Sending an expired Bearer token causes 401, so we never attach Authorization here.
+ */
+export const listProfiles = async () => {
   const response = await fetch(`${BASE_URL}/profiles/`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-    },
+    headers: { 'Content-Type': 'application/json' },
   });
 
   if (!response.ok) {
@@ -100,7 +110,7 @@ export const listProfiles = async (accessToken) => {
     throw error;
   }
 
-  return await response.json(); // array of Profile
+  return await response.json();
 };
 
 export const createProfile = async (profileData, accessToken) => {
@@ -132,29 +142,34 @@ export const createProfile = async (profileData, accessToken) => {
 };
 
 export const updateProfile = async (profileId, updateData, accessToken) => {
+  if (!profileId) {
+    const error = new Error('Profile ID is missing. Please log out and log in again.');
+    error.status = 400;
+    throw error;
+  }
+
   const response = await fetch(`${BASE_URL}/profiles/${profileId}/`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
     },
-    body: JSON.stringify({
-      name: [updateData.firstName, updateData.lastName].filter(Boolean).join(' '),
-      ...(updateData.image !== undefined ? { image: updateData.image } : {}),
-    }),
+    body: JSON.stringify(updateData),
   });
 
-  const data = await response.json();
+  const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    console.error('updateProfile validation error:', data);
-    const message =
-      data && typeof data === 'object'
+    console.error('updateProfile error:', response.status, data);
+    const detail =
+      data.detail ||
+      (data && typeof data === 'object'
         ? Object.entries(data)
             .map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(', ') : msgs}`)
             .join(' | ')
-        : 'Failed to update profile';
-    const error = new Error(message || 'Failed to update profile');
+        : null);
+
+    const error = new Error(detail || 'Failed to update profile');
     error.status = response.status;
     throw error;
   }

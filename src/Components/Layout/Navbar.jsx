@@ -33,7 +33,7 @@ function Navbar() {
         e.preventDefault();
         logout();
         setIsAccountMenuOpen(false);
-        navigate('/login');
+        navigate('/',{replace : true});
     };
 
     const handleSearchSubmit = (e) => {

@@ -8,8 +8,7 @@ import { useCart } from '../../Context/CartContext.jsx';
 
 function ProductCardOffer({ product, image, discount, title, currentPrice, originalPrice, rating, reviewsCount }) {
     const { wishlistItems, toggleWishlist } = useWishlist();
-    const { addToCart } = useCart();
-    const navigate = useNavigate();
+    const { cartItems } = useCart(); 
 
     const rawPrice = currentPrice ? String(currentPrice).replace(/[^0-9.]/g, '') : "0";
     const numericPrice = Number(rawPrice) || 0;
@@ -30,12 +29,7 @@ function ProductCardOffer({ product, image, discount, title, currentPrice, origi
     const handleAddToCartClick = (e) => {
         if (e && e.stopPropagation) e.stopPropagation();
         
-        const success = addToCart(productData);
-        
-        if (!success) {
-           navigate('/login');
-            return;
-        }
+    
     };
 
     return (

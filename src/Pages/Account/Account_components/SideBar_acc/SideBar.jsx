@@ -16,18 +16,6 @@ export default function SideBar({ activeTab, setActiveTab, onLogout }) {
 
   return (
     <aside className="SideBar">
-      <select 
-        className="SideBar-select" 
-        value={activeTab} 
-        onChange={handleSelectChange}
-      >
-        {accountLinks.map((item) => (
-          <option key={item.key} value={item.key}>
-            {item.label}
-          </option>
-        ))}
-        <option value="logout">Log Out</option>
-      </select>
       <h3 className="SideBar-title">Manage My Account</h3>
       <ul>
         {accountLinks.map((item) => (

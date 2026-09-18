@@ -1,73 +1,99 @@
 .SideBar {
   width: 25%;
+  max-width: 240px;
   flex-shrink: 0;
   font-size: 0.95rem;
 }
+
 .SideBar-title {
   font-size: 1rem;
   font-weight: 600;
-  margin: 1.5rem 0 1rem;
+  margin: 1.25rem 0 0.85rem;
   color: #000;
 }
+
+.SideBar-title:first-child {
+  margin-top: 0;
+}
+
 .SideBar ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 .SideBar li {
-  margin:0 0 0.9rem 2rem;
+  margin: 0 0 0.75rem 1.5rem;
 }
-.SideBar button, .static-Link{
+
+.SideBar button,
+.static-Link {
   background: none;
   border: none;
   padding: 0;
   color: var(--gray);
   cursor: pointer;
+  font-size: 0.95rem;
 }
+
 .SideBar button.active {
   color: var(--primaryRed);
+  font-weight: 500;
 }
+
 .wishlist-link {
   text-decoration: none;
   color: #000;
 }
+
 .SideBar button:hover,
 .wishlist-link:hover,
-.static-Link:hover{
-  color: var(--hoverRed);
+.static-Link:hover {
+  color: var(--hoverRed, #c93a3a);
 }
+
+.logout-btn {
+  font-size: 0.95rem;
+}
+
 .SideBar-select {
   display: none;
 }
+
 @media (max-width: 768px) {
   .SideBar {
     width: 100%;
+    max-width: none;
   }
+
   .SideBar-select {
     display: block;
     width: 100%;
-    padding: 0.7rem 0.9rem;
-    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
     border: 1px solid #ddd;
     font-size: 0.95rem;
     color: var(--black1);
     background: #fff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    appearance: auto;
   }
-    .SideBar-select option {
-      background-color: #4a4a4a;
-      color: #fff;
-      font-size: 0.9rem;
-      padding: .5rem;
-    }
+
   .SideBar-title,
-  .SideBar > ul {
+  .SideBar > ul,
+  .SideBar > h3 {
     display: none;
   }
+
+  /* Keep select visible; hide static desktop titles */
+  .SideBar .SideBar-select {
+    display: block;
+  }
 }
+
 @media (max-width: 425px) {
-  .SideBar-select option {
-      font-size: 0.8rem;
-      padding: .5rem;
-    } 
+  .SideBar-select {
+    font-size: 0.9rem;
+    padding: 0.7rem 0.9rem;
+  }
 }

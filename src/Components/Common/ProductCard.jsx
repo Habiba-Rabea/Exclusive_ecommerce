@@ -8,7 +8,7 @@ import { useCart } from '../../Context/CartContext.jsx';
 
 export default function ProductCard({ product }) {
   const { wishlistItems, toggleWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { cartItems } = useCart(); 
   const navigate = useNavigate();
   
   if (!product) return null;
@@ -19,22 +19,11 @@ export default function ProductCard({ product }) {
 
   const isLiked = wishlistItems ? wishlistItems.some((item) => (item.id || item._id) === id) : false;
 
+ 
   const handleAddToCartAndNavigate = (e) => {
     if (e && e.stopPropagation) e.stopPropagation();
     
-    const success = addToCart({
-      id: id,
-      title: productName,
-      name: productName,
-      price: price,
-      image: image,
-      quantity: 1
-    });
     
-    if (!success) {
-      navigate('/login');
-      return;
-    }
   };
 
   return (

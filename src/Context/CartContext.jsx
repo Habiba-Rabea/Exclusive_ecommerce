@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {
     const productId = product.id || product._id || product.productId;
     if (!productId) return true;
     
-    const quantityToAdd = Math.max(1, Number(product.quantity) || 1);
+    const quantityToAdd = 1;
 
     setCartItems((prev) => {
       const existingIndex = prev.findIndex((item) => (item.id || item._id) === productId);
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
           price: Number(product.price) || 0,
           image: product.image || product.img || "",
           color: product.color || "",
-          quantity: quantityToAdd,
+          quantity: 1,
         },
       ];
     });

@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import InputField from '../../Components/UI/Inputs.jsx'; 
 import { FaPhoneAlt, FaRegEnvelope } from 'react-icons/fa';
+import axios from 'axios'; 
 import './Contact.css';
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    subject: '',
     message: ''
   });
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ const Contact = () => {
       [field]: value
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setAlertInfo({
@@ -27,10 +29,21 @@ const Contact = () => {
       });
       return;
     }
-
     setLoading(true);
     setAlertInfo({ show: false, message: '', type: '' });
-    setTimeout(() => {
+    try {
+      const apiPayload = {
+        email: formData.email,
+        subject: formData.subject || "New Contact Form Submission",
+        fields: {
+          name: formData.name,
+          phone: formData.phone,
+          message: formData.message
+        }
+      };
+
+     await axios.post('https://gig-program-apis-production.up.railway.app/api/contact/', apiPayload);
+
       setLoading(false);
       setAlertInfo({
         show: true,
@@ -41,9 +54,19 @@ const Contact = () => {
         name: '',
         email: '',
         phone: '',
+        subject: '',
         message: ''
       });
-    }, 1200);
+
+    } catch (error) {
+      setLoading(false);
+      console.error("Error submitting contact form:", error);
+      setAlertInfo({
+        show: true,
+        message: error.response?.data?.message || 'Something went wrong, please try again.',
+        type: 'error'
+      });
+    }
   };
 
   return (
@@ -89,10 +112,18 @@ const Contact = () => {
             onChange={(e) => handleChange('email', e.target.value)}
           />
           <InputField 
-            type="tel" 
-            placeholder="Your Phone *" 
+            type="tel"  جوه 
+            placeholder="Your Phone" 
             value={formData.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
+          />
+        </div>
+
+        <div className="row">
+          <InputField 
+            placeholder="Subject" 
+            value={formData.subject}
+            onChange={(e) => handleChange('subject', e.target.value)}
           />
         </div>
         
@@ -104,10 +135,10 @@ const Contact = () => {
         />
         
         <div className="btn-wrapper">
-  <button type="submit" className="view-all-products-btn" disabled={loading}>
-    {loading ? "Sending..." : "Send Message"}
-  </button>
-</div>
+          <button type="submit" className="view-all-products-btn" disabled={loading}>
+            {loading ? "Sending..." : "Send Message"}
+          </button>
+        </div>
       </form>
     </div>
   );

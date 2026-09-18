@@ -1,5 +1,6 @@
 import FormInput from "/src/Components/UI/Account_Input.jsx";
 import { useState, useEffect } from "react";
+import { User as UserIcon } from "lucide-react";
 import { useAuth } from "/src/Context/AuthContext.jsx";
 import { 
   PASSWORD_REGEX, PASSWORD_ERROR_MESSAGE,
@@ -9,9 +10,6 @@ import {
 import "./MyProfile.css";
 
 export default function EditProfileForm() {
-  // مبقاش بنستورد getProfile/updateProfile من authservice خالص هنا -
-  // refreshProfile و updateProfile دلوقتي جايين من الـ Context وهو اللي
-  // متكفل بالتوكن صح.
   const { currentUser, updateUser, usersList = [], refreshProfile, updateProfile } = useAuth();
 
   const defaultAddress = currentUser?.addresses?.find((addr) => addr.isDefault);
@@ -23,6 +21,7 @@ export default function EditProfileForm() {
     firstName: currentUser?.firstName || currentUser?.first_name || "",
     lastName: currentUser?.lastName || currentUser?.last_name || "",
     email: currentUser?.email || "",
+    image: currentUser?.image || "",
   });
   
   const [passwordData, setPasswordData] = useState({
@@ -35,9 +34,6 @@ export default function EditProfileForm() {
   const [ProfileError, setProfileError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // بيجيب أحدث نسخة من البروفايل من السيرفر مرة واحدة لما الصفحة تفتح.
-  // refreshProfile بتستخدم التوكن الصح من جوه الـ Context، فمفيش احتمال
-  // نبعت حاجة غلط في الـ Authorization header زي ما كان بيحصل قبل كده.
   useEffect(() => {
     async function loadProfile() {
       if (!currentUser) return;
@@ -52,13 +48,8 @@ export default function EditProfileForm() {
     }
 
     loadProfile();
-    // من غير currentUser في الـ deps عشان مانعملش لوب لا نهائي -
-    // refreshProfile نفسها بتحدث currentUser.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // كل ما currentUser يتحدث (بعد refreshProfile أو أي حتة تانية)، حدّث
-  // الفورم المحلي منه.
   useEffect(() => {
     setProfileData({
       firstName:
@@ -72,6 +63,7 @@ export default function EditProfileForm() {
         (currentUser?.name ? currentUser.name.split(" ").slice(1).join(" ") : "") ||
         "",
       email: currentUser?.email || "",
+      image: currentUser?.image || "",
     });
   }, [currentUser]);
 
@@ -107,6 +99,11 @@ export default function EditProfileForm() {
 
     if (!EMAIL_REGEX.test(profileData.email)) {
       setProfileError("Email: " + EMAIL_ERROR_MESSAGE);
+      return;
+    }
+
+    if (profileData.image && profileData.image.length > 500) {
+      setProfileError("Photo URL is too long (max 500 characters)");
       return;
     }
 
@@ -151,13 +148,10 @@ export default function EditProfileForm() {
     try {
       setLoading(true);
 
-      // ملحوظة: الـ Profile schema الحقيقي في الـ API فيه "name" بس، مفيهوش
-      // email منفصل - يعني الإيميل مش هيتحدث فعليًا على السيرفر، بس هيفضل
-      // متسجل محليًا عشان العرض. لو محتاج تغيير الإيميل فعليًا لازم endpoint
-      // تاني مش موجود في السبك دلوقتي.
       await updateProfile({
         firstName: profileData.firstName,
         lastName: profileData.lastName,
+        image: profileData.image,
       });
 
       if (updateUser) {
@@ -181,6 +175,7 @@ export default function EditProfileForm() {
       firstName: currentUser?.firstName || currentUser?.first_name || "",
       lastName: currentUser?.lastName || currentUser?.last_name || "",
       email: currentUser?.email || "",
+      image: currentUser?.image || "",
     });
     setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
     setProfileError("");
@@ -193,6 +188,52 @@ export default function EditProfileForm() {
 
       <form onSubmit={handleSubmit}>
         {ProfileError && <p className="error-message">{ProfileError}</p>}
+
+        <div className="form-row single avatar-row" style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          {profileData.image ? (
+            <img
+              src={profileData.image}
+              alt="Profile avatar"
+              onError={(e) => { e.currentTarget.style.display = "none"; }}
+              style={{
+                width: "72px",
+                height: "72px",
+                borderRadius: "50%",
+                objectFit: "cover",
+                border: "1px solid #ddd",
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                width: "72px",
+                height: "72px",
+                borderRadius: "50%",
+                backgroundColor: "#f2f2f2",
+                border: "1px solid #ddd",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#aaa",
+                flexShrink: 0,
+              }}
+            >
+              <UserIcon size={32} />
+            </div>
+          )}
+          <div className="avatar-field" style={{ flex: 1 }}>
+            <FormInput
+              label="Photo URL"
+              name="image"
+              value={profileData.image}
+              onChange={handleProfileChange}
+              placeholder="https://example.com/my-photo.jpg"
+            />
+            <p style={{ fontSize: "12px", color: "#888", margin: "4px 0 0" }}>
+              Paste a link to an image you already have online
+            </p>
+          </div>
+        </div>
         
         <div className="form-row">
           <FormInput

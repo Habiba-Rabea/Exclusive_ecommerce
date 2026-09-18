@@ -8,6 +8,7 @@ export const registerUser = async (userData) => {
       password: userData.password,
       profile_data: {
         name: userData.name || '',
+        username: userData.email.trim(),
         role: 'customer',
       },
     }),
@@ -56,7 +57,6 @@ export const refreshAccessToken = async (refreshToken) => {
   return data.access;
 };
 
-// بتاخد التوكن كـ argument بدل ما تقراه من localStorage بنفسها
 export const getProfile = async (accessToken) => {
   const response = await fetch(`${BASE_URL}/api/me/`, {
     method: 'GET',
@@ -67,10 +67,68 @@ export const getProfile = async (accessToken) => {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch profile');
+    const error = new Error('Failed to fetch profile');
+    error.status = response.status;
+    throw error;
   }
 
   return await response.json();
+};
+
+export function decodeToken(token) {
+  try {
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+  } catch (error) {
+    console.error('Failed to decode token:', error);
+    return null;
+  }
+}
+
+export const listProfiles = async (accessToken) => {
+  const response = await fetch(`${BASE_URL}/profiles/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+    },
+  });
+
+  if (!response.ok) {
+    const error = new Error('Failed to list profiles');
+    error.status = response.status;
+    throw error;
+  }
+
+  return await response.json(); // array of Profile
+};
+
+export const createProfile = async (profileData, accessToken) => {
+  const response = await fetch(`${BASE_URL}/profiles/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+    },
+    body: JSON.stringify(profileData),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error('createProfile validation error:', data);
+    const message =
+      data && typeof data === 'object'
+        ? Object.entries(data)
+            .map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(', ') : msgs}`)
+            .join(' | ')
+        : 'Failed to create profile';
+    const error = new Error(message || 'Failed to create profile');
+    error.status = response.status;
+    throw error;
+  }
+
+  return data;
 };
 
 export const updateProfile = async (profileId, updateData, accessToken) => {
@@ -82,13 +140,23 @@ export const updateProfile = async (profileId, updateData, accessToken) => {
     },
     body: JSON.stringify({
       name: [updateData.firstName, updateData.lastName].filter(Boolean).join(' '),
+      ...(updateData.image !== undefined ? { image: updateData.image } : {}),
     }),
   });
 
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.detail || 'Failed to update profile');
+    console.error('updateProfile validation error:', data);
+    const message =
+      data && typeof data === 'object'
+        ? Object.entries(data)
+            .map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(', ') : msgs}`)
+            .join(' | ')
+        : 'Failed to update profile';
+    const error = new Error(message || 'Failed to update profile');
+    error.status = response.status;
+    throw error;
   }
 
   return data;

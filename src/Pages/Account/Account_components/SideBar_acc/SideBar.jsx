@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import "./SideBar.css";
 const accountLinks = [
   { key: "profile", label: "My Profile" },
-  { key: "address", label: "Address Book" },
-  { key: "payment", label: "My Payment Options" },
 ];
 const orderLinks = ["My Returns", "My Cancellations"];
 export default function SideBar({ activeTab, setActiveTab, onLogout }) {

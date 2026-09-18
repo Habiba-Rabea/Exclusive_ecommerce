@@ -5,6 +5,8 @@ import {
   registerUser,
   refreshAccessToken,
   getProfile,
+  listProfiles,
+  createProfile,
   updateProfile as updateProfileApi,
 } from '../APIs/authservice';
 
@@ -16,7 +18,6 @@ export function AuthProvider({ children }) {
   const [refreshToken, setRefreshToken] = useLocalStorage('refresh_token', null);
   const [usersList, setUsersList] = useLocalStorage('users', []);
 
-  // بيحاول يجيب البروفايل بالتوكن الحالي، ولو منتهي بيجدده تلقائيًا مرة واحدة
   async function fetchProfile(accessToken) {
     try {
       return await getProfile(accessToken);
@@ -44,7 +45,6 @@ export function AuthProvider({ children }) {
     try {
       profileData = await fetchProfile(data.access);
     } catch (error) {
-      // مش هنوقف عملية تسجيل الدخول عشان البروفايل فشل، بس نسجل الخطأ
       console.error('Logged in, but failed to load profile:', error);
     }
 
@@ -76,11 +76,57 @@ export function AuthProvider({ children }) {
     );
   };
 
+  async function resolveProfileId(accessToken) {
+    if (currentUser?.profile_id) return currentUser.profile_id;
+
+    try {
+      const all = await listProfiles(accessToken);
+      const mine = Array.isArray(all)
+        ? all.find((p) => p.username === currentUser?.email)
+        : null;
+      if (mine?.id) {
+        setCurrentUser((prev) => ({ ...prev, profile_id: mine.id }));
+        return mine.id;
+      }
+    } catch (error) {
+      console.error('Failed to list profiles, will try creating one:', error);
+    }
+
+    const created = await createProfile(
+      {
+        name: currentUser?.name || currentUser?.email || 'New User',
+        username: currentUser?.email || '',
+        role: 'customer',
+      },
+      accessToken
+    );
+    setCurrentUser((prev) => ({ ...prev, profile_id: created.id }));
+    return created.id;
+  }
+
   const updateProfile = async (updateData) => {
-    const profileId = currentUser?.id || currentUser?.profile_id;
-    const data = await updateProfileApi(profileId, updateData, token);
-    updateUser(updateData);
-    return data;
+    const attempt = async (accessToken) => {
+      const profileId = await resolveProfileId(accessToken);
+      const data = await updateProfileApi(profileId, updateData, accessToken);
+      updateUser(updateData);
+      return data;
+    };
+
+    try {
+      return await attempt(token);
+    } catch (error) {
+      if (error.status === 401 && refreshToken) {
+        try {
+          const newAccess = await refreshAccessToken(refreshToken);
+          setToken(newAccess);
+          return await attempt(newAccess);
+        } catch (refreshError) {
+          logout();
+          throw new Error('Your session has expired, please log in again');
+        }
+      }
+      throw error;
+    }
   };
 
   const refreshProfile = async () => {

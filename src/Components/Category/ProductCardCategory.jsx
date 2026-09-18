@@ -21,8 +21,12 @@ export default function ProductCardCategory({ product }) {
     e.preventDefault();
     e.stopPropagation();
     
-    addToCart(product);
-    navigate('/cart');
+    const success = addToCart(product);
+    
+    if (!success) {
+      navigate('/login');
+      return;
+    }
   };
 
   return (
@@ -71,6 +75,5 @@ export default function ProductCardCategory({ product }) {
           <RatingStars rating={rating} reviewsCount={reviewsCount} />
         </div>
     </article>
-    
   );
 }

@@ -1,12 +1,16 @@
 import { Heart, Eye } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../CSS/ProductCard.css';
 import AddToCart from '../UI/Buttons/cart.jsx';
 import RatingStars from '../UI/RatingStars.jsx';
 import { useWishlist } from '../../Context/WishlistContext.jsx'; 
-import { Link } from 'react-router-dom';
+import { useCart } from '../../Context/CartContext.jsx';
 
 function ProductCardOffer({ product, image, discount, title, currentPrice, originalPrice, rating, reviewsCount }) {
     const { wishlistItems, toggleWishlist } = useWishlist();
+    const { addToCart } = useCart();
+    const navigate = useNavigate();
+
     const rawPrice = currentPrice ? String(currentPrice).replace(/[^0-9.]/g, '') : "0";
     const numericPrice = Number(rawPrice) || 0;
     const productData = {
@@ -22,6 +26,17 @@ function ProductCardOffer({ product, image, discount, title, currentPrice, origi
     };
 
     const isLiked = wishlistItems ? wishlistItems.some((item) => (item.id || item._id) === productData.id) : false;
+
+    const handleAddToCartClick = (e) => {
+        if (e && e.stopPropagation) e.stopPropagation();
+        
+        const success = addToCart(productData);
+        
+        if (!success) {
+           navigate('/login');
+            return;
+        }
+    };
 
     return (
         <div className='product-card'>
@@ -56,7 +71,7 @@ function ProductCardOffer({ product, image, discount, title, currentPrice, origi
                         <Eye size={20} />
                     </Link>
                 </div>
-                <AddToCart product={productData} />
+                <AddToCart product={productData} onClick={handleAddToCartClick} />
             </div>
 
             <div className="product-info">

@@ -14,17 +14,16 @@ function AddToCart({ product, item, onClick }) {
     e.stopPropagation();
 
     if (!currentProduct) {
-      console.error("AddToCart: No product passed to cart button!");
       return;
     }
 
     const productId = currentProduct.id || currentProduct._id || currentProduct.productId;
 
     if (!productId) {
-      console.error("AddToCart: Product exists but lacks an ID!", currentProduct);
       return;
     }
-    addToCart({
+
+    const success = addToCart({
       id: productId,
       title: currentProduct.title || currentProduct.name || "Product",
       name: currentProduct.title || currentProduct.name || "Product",
@@ -33,10 +32,15 @@ function AddToCart({ product, item, onClick }) {
       quantity: 1,
       ...currentProduct
     });
+
+    if (!success) {
+      navigate('/login');
+      return;
+    }
+
     if (onClick) {
       onClick(e);
     }
-    navigate('/cart');
   };
 
   return (

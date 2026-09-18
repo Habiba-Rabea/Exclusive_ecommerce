@@ -31,20 +31,18 @@ export const CartProvider = ({ children }) => {
     try {
       localStorage.setItem(cartKey, JSON.stringify(cartItems));
     } catch {
-     
     }
   }, [cartItems, cartKey]);
 
   const addToCart = (product) => {
     const activeUser = currentUser || user;
     if (!activeUser) {
-      window.location.href = "/login";
-      return;
+      return false;
     }
 
-    if (!product) return;
+    if (!product) return true;
     const productId = product.id || product._id || product.productId;
-    if (!productId) return;
+    if (!productId) return true;
     
     const quantityToAdd = Math.max(1, Number(product.quantity) || 1);
 
@@ -70,6 +68,8 @@ export const CartProvider = ({ children }) => {
         },
       ];
     });
+
+    return true;
   };
 
   const removeFromCart = (id) => {

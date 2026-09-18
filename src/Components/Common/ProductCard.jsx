@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
   const handleAddToCartAndNavigate = (e) => {
     if (e && e.stopPropagation) e.stopPropagation();
     
-    addToCart({
+    const success = addToCart({
       id: id,
       title: productName,
       name: productName,
@@ -31,7 +31,10 @@ export default function ProductCard({ product }) {
       quantity: 1
     });
     
-    navigate('/cart');
+    if (!success) {
+      navigate('/login');
+      return;
+    }
   };
 
   return (

@@ -15,6 +15,7 @@ export default function Account() {
         navigate("/", { replace: true });
     };
     
+
     const displayName =
   currentUser?.firstName ||
   currentUser?.first_name ||

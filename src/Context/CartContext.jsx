@@ -13,8 +13,7 @@ export const CartProvider = ({ children }) => {
     try {
       const savedCart = localStorage.getItem(cartKey);
       return savedCart ? JSON.parse(savedCart) : [];
-    } catch (e) {
-      console.error("Failed to load initial cart", e);
+    } catch {
       return [];
     }
   });
@@ -23,8 +22,7 @@ export const CartProvider = ({ children }) => {
     try {
       const savedCart = localStorage.getItem(cartKey);
       setCartItems(savedCart ? JSON.parse(savedCart) : []);
-    } catch (e) {
-      console.error("Failed to load cart on key change", e);
+    } catch {
       setCartItems([]);
     }
   }, [cartKey]);
@@ -32,18 +30,22 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     try {
       localStorage.setItem(cartKey, JSON.stringify(cartItems));
-    } catch (e) {
-      console.error("Failed to save cart to localStorage", e);
+    } catch {
+     
     }
   }, [cartItems, cartKey]);
 
   const addToCart = (product) => {
-    if (!product) return;
-    const productId = product.id || product._id || product.productId;
-    if (!productId) {
-      console.error("addToCart Error: Product lacks a valid ID", product);
+    const activeUser = currentUser || user;
+    if (!activeUser) {
+      window.location.href = "/login";
       return;
     }
+
+    if (!product) return;
+    const productId = product.id || product._id || product.productId;
+    if (!productId) return;
+    
     const quantityToAdd = Math.max(1, Number(product.quantity) || 1);
 
     setCartItems((prev) => {

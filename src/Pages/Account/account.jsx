@@ -18,7 +18,8 @@ export default function Account() {
         navigate("/login", { replace: true });
     };
     
-    const displayName = currentUser?.firstName || "User";
+  const rawName = currentUser?.profile_data?.name || currentUser?.name || "";
+    const displayName = rawName ? rawName.charAt(0).toUpperCase() + rawName.split(" ")[0].slice(1) : "User";
     return (
         <div className="containerAc">
             <div className="Breadcrumbs-welcome">
